@@ -8,6 +8,7 @@ import Detail from './pages/Detail/detail';
 import Admin from './pages/Admin/admin';
 import About from './pages/About/about';
 import Error404 from './pages/Error404/error404';
+import Register from './pages/Register/register';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
               <Route index element={<Home/>} />
               <Route path='detalle/:id' element={<Detail/>} />
               <Route path='admin' element={<Admin/>} />
+              <Route path='register' element={<Register/>} />
               <Route path='about' element={<About/>} />
               <Route path='404' element={<Error404/>} />
             </Route>
