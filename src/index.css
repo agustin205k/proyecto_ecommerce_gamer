@@ -1,3 +1,34 @@
+:root {
+/* Fondos */
+--color-fondo: #0B0B0B;
+--color-fondo-secundario: #111111;
+--color-card: #171717;
+--color-card-hover: #222222;
+
+/* Textos */
+--color-texto: #FFFFFF;
+--color-texto-secundario: #C9C9C9;
+--color-texto-muted: #888888;
+
+/* Naranja */
+--color-naranja: #FF7A00;
+--color-naranja-claro: #FF9D3D;
+--color-naranja-oscuro: #D95F00;
+
+/* Dorado */
+--color-dorado-oscuro: #8A6D1F;
+--color-dorado: #D4AF37;
+--color-dorado-claro: #F7D37A;
+
+/* Bordes */
+--color-borde: #2A2A2A;
+--color-borde-naranja: #FF7A00;
+
+/* Estados */
+--color-exito: #4CAF50;
+--color-error: #E53935;
+}
+
 *{
   margin: 0;
   padding: 0;

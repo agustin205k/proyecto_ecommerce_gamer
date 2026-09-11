@@ -9,6 +9,7 @@ import Admin from './pages/Admin/admin';
 import About from './pages/About/about';
 import Error404 from './pages/Error404/error404';
 import Register from './pages/Register/register';
+import Login from './pages/Login/login';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
               <Route path='admin' element={<Admin/>} />
               <Route path='register' element={<Register/>} />
               <Route path='about' element={<About/>} />
+              <Route path='login' element={<Login/>}/>
               <Route path='404' element={<Error404/>} />
             </Route>
         </Routes>

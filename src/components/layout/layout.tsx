@@ -10,17 +10,20 @@ function Layout(){
   <>
     <div className={styles.webPageLayout}>
       <header className={styles.webPageLayout__header}>
-        <ul>
-          <li><Link to={"/"}>inicio</Link></li>
-          <li><Link to={"/404"}>404</Link></li>
-          <li><Link to={"/about"}>About</Link></li>
-        </ul>
+        <nav className={styles.webPageLayout__nav}>
+          <ul className={styles.webPageLayout__navList}>
+            <li className={styles.webPageLayout__navLink}><Link to={"/"}>inicio</Link></li>
+            <li className={styles.webPageLayout__navLink}><Link to={"/about"}>About</Link></li>
+            <li className={styles.webPageLayout__navLink}><Link to={"/register"}>Register</Link></li>
+          </ul>
+        </nav>
+        
       </header>
       <div className={styles.webPageLayout__main}>
         <Outlet/>
       </div>
       <footer className={styles.webPageLayout__footer}>
-
+        <p>&copy;Developer</p>
       </footer>
     </div>
   </>

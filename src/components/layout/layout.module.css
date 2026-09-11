@@ -1,0 +1,27 @@
+.webPageLayout{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.webPageLayout__header,.webPageLayout__footer{
+  background-color: var(--color-naranja);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: white;
+  padding: 20px;  
+}
+
+.webPageLayout__navList{
+  display: flex;
+  flex-direction: row;
+  gap: 80px;
+}
+
+.webPageLayout__main{
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
