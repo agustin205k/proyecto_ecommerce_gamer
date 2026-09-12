@@ -59,3 +59,14 @@
 .formulario button:hover {
   background: #005fa3;
 }
+
+
+.mostrar{
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.mostrar__button{
+  padding: 20px;
+}
