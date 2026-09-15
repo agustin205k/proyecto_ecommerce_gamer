@@ -1,5 +1,22 @@
 import { Carousel } from "antd";
-import { Flame, Swords,Compass,Brain,SportShoe,WandSparkles,Car,Ghost,Sparkles,Crown} from 'lucide-react';
+import {
+  Flame,
+  Swords,
+  Compass,
+  Brain,
+  SportShoe,
+  WandSparkles,
+  Car,
+  Ghost,
+  Sparkles,
+  Crown,
+  MessageSquare,
+  Zap,
+  ShieldCheck,
+  Send,
+  Search,
+  MoveRight,
+} from "lucide-react";
 import "./home.css";
 
 function Home() {
@@ -58,51 +75,95 @@ function Home() {
             <p>Encontrá tu próximo juego</p>
           </div>
           <a href="/categorias" className="btn-see-all">
-            VER TODAS →
+            VER TODAS <MoveRight />
           </a>
         </div>
 
         <div className="categories-grid">
           <a href="#" className="category-card">
-            <div className="category-icon"><Swords /></div>
+            <div className="category-icon">
+              <Swords />
+            </div>
             <h3>Acción</h3>
           </a>
 
           <a href="#" className="category-card">
-            <div className="category-icon"><WandSparkles /></div>
+            <div className="category-icon">
+              <WandSparkles />
+            </div>
             <h3>RPG</h3>
           </a>
 
           <a href="#" className="category-card">
-            <div className="category-icon"><Ghost /></div>
+            <div className="category-icon">
+              <Ghost />
+            </div>
             <h3>Terror</h3>
           </a>
 
           <a href="#" className="category-card">
-            <div className="category-icon"><Car /></div>
+            <div className="category-icon">
+              <Car />
+            </div>
             <h3>Carreras</h3>
           </a>
 
           <a href="#" className="category-card">
-            <div className="category-icon"><SportShoe /></div>
+            <div className="category-icon">
+              <SportShoe />
+            </div>
             <h3>Deportes</h3>
           </a>
 
           <a href="#" className="category-card">
-            <div className="category-icon"><Brain /></div>
+            <div className="category-icon">
+              <Brain />
+            </div>
             <h3>Estrategia</h3>
           </a>
 
           <a href="#" className="category-card">
-            <div className="category-icon"><Compass /></div>
+            <div className="category-icon">
+              <Compass />
+            </div>
             <h3>Aventura</h3>
           </a>
         </div>
       </section>
 
+      <section className="features-container">
+        <div className="feature-card">
+          <div className="icon-glow-wrapper">
+            <MessageSquare className="feature-icon" />
+          </div>
+          <div className="feature-info">
+            <h3>Comunícate con nosotros</h3>
+            <p>Soporte rápido y asistencia personalizada.</p>
+          </div>
+        </div>
 
+        <div className="feature-card">
+          <div className="icon-glow-wrapper">
+            <Zap className="feature-icon" />
+          </div>
+          <div className="feature-info">
+            <h3>Descarga instantánea</h3>
+            <p>Digital. Simple. Al instante.</p>
+          </div>
+        </div>
 
-      <section>
+        <div className="feature-card">
+          <div className="icon-glow-wrapper">
+            <ShieldCheck className="feature-icon" />
+          </div>
+          <div className="feature-info">
+            <h3>Garantía asegurada</h3>
+            <p>Cobertura y soporte en todos los productos.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="game-section">
         <div className="section-header">
           <div className="section-title-wrapper">
             <div className="icon-badge">
@@ -114,16 +175,14 @@ function Home() {
           <div className="section-divider"></div>
 
           <button className="btn-see-all">
-            VER TODOS →
+            VER TODOS <MoveRight />
           </button>
         </div>
+
+        <section className="section-card">card</section>
       </section>
 
-      <section className="section-card">
-        card        
-      </section>
-
-      <section>
+      <section className="game-section">
         <div className="section-header">
           <div className="section-title-wrapper">
             <div className="icon-badge">
@@ -135,19 +194,13 @@ function Home() {
           <div className="section-divider"></div>
 
           <button className="btn-see-all">
-            VER TODOS →
+            VER TODOS <MoveRight />
           </button>
         </div>
+        <section className="section-card">card</section>
       </section>
 
-
-      <section className="section-card">
-        card        
-      </section>
-
-
-
-      <section>
+      <section className="game-section">
         <div className="section-header">
           <div className="section-title-wrapper">
             <div className="icon-badge">
@@ -159,16 +212,42 @@ function Home() {
           <div className="section-divider"></div>
 
           <button className="btn-see-all">
-            VER TODOS →
+            VER TODOS <MoveRight />
           </button>
         </div>
+
+        <section className="section-card">card</section>
       </section>
 
 
-      <section className="section-card">
-        card        
-      </section>
 
+
+
+      <section className="request-game-container">
+        <div className="request-info">
+          <div className="request-icon-wrapper">
+            <Search className="request-icon" />
+          </div>
+          <div className="request-text">
+            <h3>¿No encontrás el juego que buscás?</h3>
+            <p>
+              Pedilo y lo agregamos al catálogo. Dejanos el nombre y nos
+              encargamos del resto.
+            </p>
+          </div>
+        </div>
+        <div className="request-form">
+        <input
+          type="text"
+          className="request-input"
+          placeholder="Ej: Grand Theft Auto VI, FIFA 27..."
+        />
+        <button type="submit" className="btn-request">
+          Solicitar <Send size={16} />
+        </button>
+        </div>
+
+      </section>
     </>
   );
 }
