@@ -95,6 +95,9 @@ const usuarioItems: MenuProps["items"] = [
   },
 ];
 
+
+
+
 function Layout() {
   return (
     <>
@@ -124,7 +127,7 @@ function Layout() {
 
           {/* ACCIONES */}
           <div className="navbar-actions">
-            <Link to="/carrito" className="navbar-action">
+            <Link to="/cart" className="navbar-action">
               <ShoppingCart />
               <span className="cart-count">0</span>
             </Link>
