@@ -22,8 +22,8 @@ function App() {
               <Route path='admin' element={<Admin/>} />
               <Route path='register' element={<Register/>} />
               <Route path='about' element={<About/>} />
-              <Route path='404' element={<Error404/>} />
             </Route>
+              <Route path='404' element={<Error404/>} />
         </Routes>
       </BrowserRouter>
     </>

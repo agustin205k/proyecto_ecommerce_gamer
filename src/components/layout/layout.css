@@ -1,0 +1,1044 @@
+:root {
+  --color-fondo: #0B0B0B;
+  --color-fondo-secundario: #111111;
+  --color-card: #171717;
+  --color-card-hover: #222222;
+
+  --color-texto: #FFFFFF;
+  --color-texto-secundario: #C9C9C9;
+  --color-texto-muted: #888888;
+
+  --color-naranja: #FF7A00;
+  --color-naranja-claro: #FF9D3D;
+  --color-naranja-oscuro: #D95F00;
+
+  --color-dorado-oscuro: #8A6D1F;
+  --color-dorado: #D4AF37;
+  --color-dorado-claro: #F7D37A;
+
+  --color-borde: #2A2A2A;
+  --color-borde-naranja: #FF7A00;
+
+  --color-exito: #4CAF50;
+  --color-error: #E53935;
+
+  --fuente-titulos: "Orbitron", sans-serif;
+  --fuente-textos: "Exo 2", sans-serif;
+  --fuente-carousel: "Teko", sans-serif;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  width: 100%;
+  background-color: var(--color-fondo-secundario);
+  border-bottom: 1px solid var(--color-borde);
+  font-family: var(--fuente-textos);
+}
+
+
+/* ---------- Primera fila ---------- */
+
+.navbar-top {
+  width: 100%;
+  max-width: 1400px;
+  min-height: 80px;
+  margin: 0 auto;
+  padding: 12px 30px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 35px;
+  box-sizing: border-box;
+}
+
+
+/* Logo */
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.navbar-logo img {
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+
+/* ---------- Buscador ---------- */
+
+.navbar-search {
+  flex: 1;
+  max-width: 650px;
+  margin: 0 auto;
+
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+
+  background-color: var(--color-card);
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.navbar-search:focus-within {
+  border-color: var(--color-naranja);
+
+  box-shadow:
+    0 0 12px rgba(255, 122, 0, 0.12);
+}
+
+
+/* Icono de búsqueda */
+
+.search-icon {
+  width: 18px;
+  height: 18px;
+
+  margin-left: 14px;
+
+  color: var(--color-texto-muted);
+
+  flex-shrink: 0;
+}
+
+
+/* Ant Design AutoComplete */
+
+.search-autocomplete {
+  flex: 1;
+  width: 100%;
+}
+
+.navbar-search .ant-select {
+  width: 100%;
+  background: transparent;
+}
+
+.navbar-search .ant-select-selector {
+  height: 40px;
+
+  padding: 0 12px;
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+
+/* Input interno de Ant Design */
+
+/* =========================
+   BUSCADOR
+========================= */
+
+/* =========================
+   BUSCADOR (ANT DESIGN OVERRIDE)
+========================= */
+
+.navbar-search {
+  flex: 1;
+  max-width: 650px;
+  margin: 0 auto;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-card);
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar-search:focus-within {
+  border-color: var(--color-naranja);
+  box-shadow: 0 0 12px rgba(255, 122, 0, 0.12);
+}
+
+.search-icon {
+  width: 18px;
+  height: 18px;
+  margin-left: 14px;
+  color: var(--color-texto-muted) !important;
+  flex-shrink: 0;
+}
+
+/* Ant Design AutoComplete Container */
+.search-autocomplete {
+  flex: 1;
+  width: 100%;
+  border: none;
+}
+.navbar-search:focus-within {
+  border-color: var(--color-naranja); /* Cambia por 'transparent' si no quieres ningún borde */
+  box-shadow: 0 0 12px rgba(255, 122, 0, 0.12); /* Quita esta línea si no quieres resplandor */
+}
+
+.navbar-search .ant-select {
+  width: 100%;
+  background-color: transparent !important;
+}
+.navbar-search *:focus,
+.navbar-search *:focus-visible,
+.navbar-search .ant-select-focused .ant-select-selector {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none!important;
+}
+
+.navbar-search .ant-select-selector {
+ height: 40px !important;
+  padding: 0 12px !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Input nativo de Ant Design al escribir */
+.navbar-search .ant-select-selection-search {
+  inset-inline-start: 12px !important;
+  inset-inline-end: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.navbar-search .ant-select-selection-search-input,
+.navbar-search input {
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  font-family: var(--fuente-textos) !important;
+  font-size: 0.9rem !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  height: 100% !important;
+}
+
+/* Placeholder */
+.navbar-search .ant-select-selection-placeholder {
+  color: var(--color-texto-muted) !important;
+  font-family: var(--fuente-textos) !important;
+  font-size: 0.9rem !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Menú desplegable con las sugerencias */
+.ant-select-dropdown {
+  background-color: var(--color-card) !important;
+  border: 1px solid var(--color-borde) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
+}
+
+.ant-select-item-option {
+  color: var(--color-texto-secundario) !important;
+}
+
+.ant-select-item-option-active {
+  background-color:var(--color-borde) !important;
+  color: var(--color-dorado-claro) !important;
+}
+
+
+
+
+/* ---------- Acciones ---------- */
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-shrink: 0;
+}
+
+
+/* Carrito y usuario */
+
+.navbar-action {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-texto-secundario);
+
+  text-decoration: none;
+
+  border: 1px solid var(--color-borde);
+  border-radius: 10px;
+
+  background-color: var(--color-card);
+
+  transition: all 0.3s ease;
+}
+
+
+/* Iconos */
+
+.navbar-action svg {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* Hover */
+
+.navbar-action:hover {
+  color: var(--color-naranja);
+
+  border-color: var(--color-naranja);
+
+  background-color: rgba(255, 122, 0, 0.08);
+
+  transform: translateY(-2px);
+}
+
+
+/* ---------- Botón usuario de Ant Design ---------- */
+
+.navbar-actions .navbar-action.ant-btn {
+  width: 42px;
+  height: 42px;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--color-texto-secundario);
+
+  background-color: var(--color-card);
+
+  border: 1px solid var(--color-borde);
+
+  box-shadow: none;
+}
+
+.navbar-actions .navbar-action.ant-btn:hover {
+  color: var(--color-naranja);
+
+  background-color: rgba(255, 122, 0, 0.08);
+
+  border-color: var(--color-naranja);
+}
+
+
+/* ---------- Contador carrito ---------- */
+
+.cart-count {
+  position: absolute;
+
+  top: -6px;
+  right: -6px;
+
+  min-width: 17px;
+  height: 17px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 4px;
+
+  background-color: var(--color-naranja);
+  color: var(--color-texto);
+
+  border: 2px solid var(--color-fondo-secundario);
+
+  border-radius: 50%;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+
+/* =========================
+   SEGUNDA FILA - MENÚ
+========================= */
+
+.navbar-menu {
+  width: 100%;
+  min-height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 45px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+
+/* Links */
+
+.navbar-link {
+  position: relative;
+
+  padding: 14px 4px;
+
+  color: var(--color-texto-secundario);
+
+  text-decoration: none;
+
+  font-family: var(--fuente-titulos);
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+
+  transition: color 0.3s ease;
+}
+
+
+/* Línea debajo */
+
+.navbar-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 4px;
+
+  width: 0;
+  height: 2px;
+
+  background-color: var(--color-naranja);
+
+  transition: width 0.3s ease;
+}
+
+
+/* Hover */
+
+.navbar-link:hover {
+  color: var(--color-naranja-claro);
+}
+
+.navbar-link:hover::after {
+  width: 100%;
+}
+
+
+/* ---------- Botón Categorías ---------- */
+
+.navbar-menu .navbar-dropdown-button {
+  color: var(--color-texto-secundario);
+
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  font-family: var(--fuente-titulos);
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  letter-spacing: 0.8px;
+}
+
+/* =========================================
+   ESTILOS DROPDOWN Y BOTÓN DE CATEGORÍAS
+========================================= */
+
+/* 1. Sobrescribir el botón en Hover, Focus y Click/Active */
+.navbar-dropdown-button.ant-btn:hover,
+.navbar-dropdown-button.ant-btn:focus,
+.navbar-dropdown-button.ant-btn:focus-visible,
+.navbar-dropdown-button.ant-btn:active,
+.ant-dropdown-open .navbar-dropdown-button {
+  background: transparent !important;
+  color: var(--color-naranja-claro) !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* 2. Quitar el borde azul de enfoque (outline) nativo */
+.navbar-dropdown-button:focus,
+.navbar-dropdown-button:focus-visible {
+  outline: none !important;
+  border-color: transparent !important;
+}
+
+/* 3. Estilos del menú desplegable (Opciones de Categorías) */
+.ant-dropdown .ant-dropdown-menu {
+  background-color: var(--color-card) !important;
+  border: 1px solid var(--color-borde) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
+  padding: 6px !important;
+}
+
+/* Estilo de cada ítem de categoría */
+.ant-dropdown .ant-dropdown-menu-item {
+  color: var(--color-texto-secundario) !important;
+  font-family: var(--fuente-textos) !important;
+  font-size: 0.88rem !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Hover y selección de las opciones del menú */
+.ant-dropdown .ant-dropdown-menu-item:hover,
+.ant-dropdown .ant-dropdown-menu-item-active,
+.ant-dropdown .ant-dropdown-menu-item-selected {
+  background-color: rgba(255, 122, 0, 0.12) !important;
+  color: var(--color-dorado-claro) !important;
+}
+.navbar-menu .navbar-dropdown-button::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 4px;
+
+  width: 0;
+  height: 2px;
+
+  background-color: var(--color-naranja);
+
+  transition: width 0.3s ease;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  width: 100%;
+
+  margin-top: 60px;
+
+  background-color: var(--color-fondo-secundario);
+
+  font-family: var(--fuente-textos);
+}
+
+
+/* Línea superior */
+
+.footer-line {
+  width: 100%;
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--color-dorado),
+      var(--color-naranja),
+      var(--color-dorado),
+      transparent
+    );
+}
+
+
+/* Contenedor */
+
+.footer-container {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding: 50px 30px;
+
+  display: grid;
+
+  grid-template-columns:
+    1.5fr
+    1fr
+    1fr
+    1fr;
+
+  gap: 50px;
+
+  box-sizing: border-box;
+}
+
+
+/* ---------- Marca ---------- */
+
+.footer-brand {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  gap: 15px;
+}
+
+
+/* Logo */
+
+.footer-logo {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  text-decoration: none;
+}
+
+.footer-logo img {
+  display: block;
+
+  height: 156px;
+  width: auto;
+}
+
+
+/* Frase */
+
+.footer-brand p {
+  width: 100%;
+  max-width: 280px;
+
+  margin: 0;
+
+  text-align: center;
+
+  color: var(--color-texto-muted);
+
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+
+/* ---------- Columnas ---------- */
+
+.footer-column {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+
+/* Títulos */
+
+.footer-column h3 {
+  margin: 0 0 10px;
+
+  color: var(--color-dorado-claro);
+
+  font-family: var(--fuente-titulos);
+
+  font-size: 0.85rem;
+
+  letter-spacing: 1px;
+}
+
+
+/* Links */
+
+.footer-column a {
+  width: fit-content;
+
+  color: var(--color-texto-muted);
+
+  text-decoration: none;
+
+  font-size: 0.85rem;
+
+  transition:
+    color 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+/* Hover */
+
+.footer-column a:hover {
+  color: var(--color-naranja-claro);
+
+  transform: translateX(4px);
+}
+
+
+/* ---------- Redes sociales ---------- */
+
+.footer-social a {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.footer-social svg {
+  width: 17px;
+  height: 17px;
+}
+
+
+/* ---------- Parte inferior ---------- */
+
+.footer-bottom {
+  width: 100%;
+
+  border-top: 1px solid var(--color-borde);
+
+  padding: 18px 30px;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  box-sizing: border-box;
+}
+
+.footer-bottom p {
+  margin: 0;
+
+  color: var(--color-texto-muted);
+
+  font-size: 0.75rem;
+}
+
+
+/* =========================
+   LOGO CON CHISPAS
+========================= */
+
+.logo-fire {
+  position: relative;
+
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.logo-fire img {
+  position: relative;
+
+  z-index: 2;
+
+  display: block;
+}
+
+
+/* Chispas */
+
+.spark {
+  position: absolute;
+
+  width: 3px;
+  height: 9px;
+
+  background:
+    linear-gradient(
+      to top,
+      var(--color-naranja-oscuro),
+      var(--color-dorado-claro)
+    );
+
+  border-radius: 50% 50% 50% 0;
+
+  box-shadow:
+    0 0 5px var(--color-naranja),
+    0 0 10px rgba(255, 122, 0, 0.5);
+
+  transform: rotate(45deg);
+
+  opacity: 0;
+
+  animation:
+    fireSpark 2s infinite ease-out;
+}
+
+
+/* Posición y retraso */
+
+.spark-1 {
+  left: 15%;
+  bottom: 20%;
+
+  animation-delay: 0s;
+}
+
+.spark-2 {
+  left: 30%;
+  bottom: 10%;
+
+  animation-delay: 0.4s;
+}
+
+.spark-3 {
+  right: 25%;
+  bottom: 15%;
+
+  animation-delay: 0.8s;
+}
+
+.spark-4 {
+  right: 10%;
+  bottom: 25%;
+
+  animation-delay: 1.2s;
+}
+
+.spark-5 {
+  left: 50%;
+  bottom: 5%;
+
+  animation-delay: 1.6s;
+}
+
+
+/* Animación */
+
+@keyframes fireSpark {
+  0% {
+    opacity: 0;
+
+    transform:
+      translate(0, 0)
+      rotate(45deg)
+      scale(0.5);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  60% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 0;
+
+    transform:
+      translate(15px, -55px)
+      rotate(90deg)
+      scale(0.1);
+  }
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 768px) {
+
+  .navbar-top {
+    gap: 18px;
+
+    padding: 12px 20px;
+  }
+
+
+  .logo-text {
+    display: none;
+  }
+
+
+  .navbar-menu {
+    gap: 25px;
+  }
+
+
+  .navbar-link {
+    font-size: 0.7rem;
+  }
+
+
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 35px;
+
+    padding: 40px 25px;
+  }
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 480px) {
+
+  /* ---------- Navbar superior ---------- */
+
+  .navbar-top {
+    min-height: 70px;
+
+    padding: 12px 15px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 12px;
+  }
+
+
+  /* Logo */
+
+  .navbar-logo {
+    width: 48px;
+
+    flex-shrink: 0;
+  }
+
+
+  .navbar-logo img {
+    height: 32px;
+
+    width: auto;
+  }
+
+
+  /* Acciones */
+
+  .navbar-actions {
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+  }
+
+
+  /* Buscador */
+
+  .navbar-search {
+    order: 3;
+
+    width: 100%;
+
+    max-width: none;
+
+    flex-basis: 100%;
+  }
+
+
+  /* ---------- Menú ---------- */
+
+  .navbar-menu {
+    gap: 0;
+
+    justify-content: space-around;
+
+    padding: 0 10px;
+  }
+
+
+  .navbar-link {
+    font-size: 0.62rem;
+
+    letter-spacing: 0.3px;
+  }
+
+
+  .navbar-menu .navbar-dropdown-button {
+    font-size: 0.62rem;
+
+    letter-spacing: 0.3px;
+
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+
+  /* ---------- Footer ---------- */
+
+  .footer-container {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+
+    padding: 35px 20px;
+  }
+
+
+  .footer-brand {
+    align-items: center;
+
+    text-align: center;
+  }
+
+
+  .footer-logo img {
+    height: 130px;
+
+    width: auto;
+  }
+
+
+  .footer-brand p {
+    width: 100%;
+
+    max-width: 280px;
+
+    text-align: center;
+  }
+
+
+  .footer-column {
+    align-items: center;
+
+    text-align: center;
+  }
+
+
+  .footer-column a:hover {
+    transform: none;
+  }
+
+
+  /* ---------- Footer inferior ---------- */
+
+  .footer-bottom {
+    flex-direction: column;
+
+    gap: 6px;
+
+    text-align: center;
+
+    padding: 15px;
+  }
+}
