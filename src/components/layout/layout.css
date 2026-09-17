@@ -177,12 +177,11 @@
 /* Ant Design AutoComplete Container */
 .search-autocomplete {
   flex: 1;
-  width: 100%;
-  border: none;
+  width: 100% !important;
 }
-.navbar-search:focus-within {
-  border-color: var(--color-naranja); /* Cambia por 'transparent' si no quieres ningún borde */
-  box-shadow: 0 0 12px rgba(255, 122, 0, 0.12); /* Quita esta línea si no quieres resplandor */
+
+.navbar-search .ant-select {
+  width: 100% !important;
 }
 
 

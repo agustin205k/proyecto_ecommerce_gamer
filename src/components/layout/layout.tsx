@@ -157,6 +157,7 @@ function Layout() {
                   variant="borderless"
                   options={opciones}
                   value={query}
+                  style={{ width: "600px" }}
                   onChange={(value) => setQuery(value)}
                   placeholder="Buscar juegos..."
                   className="search-autocomplete"
