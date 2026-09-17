@@ -90,8 +90,8 @@ const usuarioItems: MenuProps["items"] = [
     label: <Link to="/login">Iniciar sesión</Link>,
   },
   {
-    key: "registro",
-    label: <Link to="/registro">Registrarse</Link>,
+    key: "register",
+    label: <Link to="/register">Registrarse</Link>,
   },
 ];
 
