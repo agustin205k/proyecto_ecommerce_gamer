@@ -148,26 +148,17 @@
    BUSCADOR (ANT DESIGN OVERRIDE)
 ========================= */
 
-/* =========================
-   BUSCADOR
-========================= */
-
 .navbar-search {
   flex: 1;
   max-width: 650px;
   margin: 0 auto;
   height: 42px;
-
   display: flex;
   align-items: center;
-
   background-color: var(--color-card);
   border: 1px solid var(--color-borde);
   border-radius: 10px;
-  color: var(--color-texto);
-
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
-
 }
 
 .navbar-search:focus-within {
@@ -183,75 +174,90 @@
   flex-shrink: 0;
 }
 
+/* Ant Design AutoComplete Container */
 .search-autocomplete {
   flex: 1;
   width: 100%;
   border: none;
+}
+.navbar-search:focus-within {
+  border-color: var(--color-naranja); /* Cambia por 'transparent' si no quieres ningún borde */
+  box-shadow: 0 0 12px rgba(255, 122, 0, 0.12); /* Quita esta línea si no quieres resplandor */
 }
 
 .navbar-search .ant-select {
   width: 100%;
   background-color: transparent !important;
 }
+.navbar-search *:focus,
+.navbar-search *:focus-visible,
+.navbar-search .ant-select-focused .ant-select-selector {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none!important;
+}
 
 .navbar-search .ant-select-selector {
-  height: 40px !important;
+ height: 40px !important;
   padding: 0 12px !important;
   background-color: transparent !important;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
-
   display: flex !important;
   align-items: center !important;
 }
 
+/* Input nativo de Ant Design al escribir */
 .navbar-search .ant-select-selection-search {
   inset-inline-start: 12px !important;
   inset-inline-end: 12px !important;
-
   display: flex !important;
   align-items: center !important;
 }
 
-/* Texto escrito */
-
 .navbar-search .ant-select-selection-search-input,
 .navbar-search input {
-  color: var(--color-texto) !important;
-  -webkit-text-fill-color: var(--color-texto) !important;
-
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF !important;
   font-family: var(--fuente-textos) !important;
   font-size: 0.9rem !important;
-
   background: transparent !important;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
-
   height: 100% !important;
 }
 
 /* Placeholder */
-
-/* 1. Placeholder cuando el AutoComplete está vacío (Componente de Ant Design) */
-/* Ant Design Render Placeholder */
 .navbar-search .ant-select-selection-placeholder {
-  color:var(--color-texto) !important;
-  -webkit-text-fill-color: var(--color-texto) !important;
-  opacity: 1 !important;
+  color: var(--color-texto-muted) !important;
   font-family: var(--fuente-textos) !important;
   font-size: 0.9rem !important;
-  line-height: normal !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-/* Input Native Placeholder */
-.navbar-search input::placeholder,
-.navbar-search .ant-select-selection-search-input::placeholder {
-  color:var(--color-texto)!important;
-  -webkit-text-fill-color: var(--color-texto) !important;
-  opacity: 1 !important;
+/* Menú desplegable con las sugerencias */
+.ant-select-dropdown {
+  background-color: var(--color-card) !important;
+  border: 1px solid var(--color-borde) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
 }
+
+.ant-select-item-option {
+  color: var(--color-texto-secundario) !important;
+}
+
+.ant-select-item-option-active {
+  background-color:var(--color-borde) !important;
+  color: var(--color-dorado-claro) !important;
+}
+
+
+
+
 /* ---------- Acciones ---------- */
 
 .navbar-actions {

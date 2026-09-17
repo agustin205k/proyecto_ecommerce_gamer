@@ -1,0 +1,385 @@
+:root {
+  /* Fondos */
+  --color-fondo: #0B0B0B;
+  --color-fondo-secundario: #111111;
+  --color-card: #171717;
+  --color-card-hover: #222222;
+  /* Color Textos */
+  --color-texto: #FFFFFF;
+  --color-texto-secundario: #C9C9C9;
+  --color-texto-muted: #888888;
+  /* Naranja */
+  --color-naranja: #FF7A00;
+  --color-naranja-claro: #FF9D3D;
+  --color-naranja-oscuro: #D95F00;
+  /* Dorado */
+  --color-dorado-oscuro: #8A6D1F;
+  --color-dorado: #D4AF37;
+  --color-dorado-claro: #F7D37A;
+  /* Bordes */
+  --color-borde: #2A2A2A;
+  --color-borde-naranja: #FF7A00;
+  /* Estados */
+  --color-exito: #4CAF50;
+  --color-error: #E53935;
+  /* Tipografías */
+  --fuente-titulos: "Orbitron", sans-serif;
+  --fuente-textos: "Exo 2", sans-serif;
+  --fuente-carousel: "Teko", sans-serif;
+}
+
+.loginPage {
+  height: 100%;
+  width: 100%;
+  flex: 1;              /* se estira dentro del main */
+  display: flex;
+  flex-direction: row;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+/* Left Section */
+.left{
+  display: none;
+  position: relative;
+  width: 45%;
+  height: 100%;
+}
+
+.left img{
+  max-height: 700px;
+  width: 100%;
+  object-fit: cover;
+}
+
+/* Right Section */
+.right {
+  flex: 1;              /* ocupa todo el alto disponible */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.top{
+  margin-bottom: 40px;
+}
+
+.right .top{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem 0 1.8rem;
+}
+.right .scooter{
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  gap: 0.1rem;
+}
+
+.right .top img{
+    width: 1.5rem;
+}
+.right .top a{
+    color: var(--color-black);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Forms */
+.forms{
+    display: flex;
+    /* flex-direction: column !important; */
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+.forms .welcome-message{
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+    text-align: center;
+    width: 100%;
+}
+.forms .login-description{
+    font-size: 0.7rem;
+    margin-bottom: 1.6rem;
+    text-align: center;
+}
+.forms .login-option{
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--color-borde-naranja);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    gap: 0.5rem;
+    height: 2.5rem;
+    width: 18rem;
+    justify-content: center;
+    margin-bottom: 0.6rem;
+}
+.login-option:hover,.loginButton:hover{
+  background-color: var(--color-card-hover);
+  border: 2px solid var(--color-borde-naranja);
+}
+
+.forms .login-option span{
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+/* Line with text*/
+.forms .line-with-text{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-texto);
+    font-size: 0.8rem;
+    margin: 1.5rem 0;
+}
+.forms .line-with-text::before,
+.forms .line-with-text::after{
+    content: '';
+    border-bottom: 2px solid var(--color-borde-naranja);
+    flex: 1;
+    margin: 0 0.6rem;
+}
+
+/* Form */
+form,
+form .input-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+form .input-container input{
+    border: 2px solid var(--color-borde-naranja);
+    border-radius: 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    height: 2.4rem;
+    outline: none;
+    padding: 0.2rem 0.5rem;
+}
+form .options-container{
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+    justify-content: space-between;
+    margin: 0.3rem 0 2rem;
+}
+form .options-container .checkbox{
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+}
+form .options-container input{
+    cursor: pointer;
+}
+
+form .options-container label,
+form .options-container a{
+    color: var(--color-black);
+    font-weight: 600;
+}
+
+form .options-container label{
+  margin-right: 20px;
+}
+
+form button{
+    background-color: var(--color-fondo-secundario);
+    color: var(--color-texto);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 500;
+    height: 2.5rem;
+}
+
+/* Login*/
+.login{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+/* modificaciones */
+
+
+.top{
+  font-family: var(--fuente-titulos);
+}
+
+.welcome-message,.login-description,.login-option,.checkbox__text,.options-container-text{
+  font-family: var(--fuente-titulos);
+}
+
+.checkbox .checkbox__text{
+  color: var(--color-texto);
+}
+
+.options-container .options-container-text{
+  color: var(--color-borde-naranja);
+}
+
+.login .login-description{
+  font-size: 18px;
+}
+
+.login-option{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#register-btn,.line-with-text,.line-with-text__span{
+  color: var(--color-texto);
+  font-family: var(--fuente-titulos);
+  font-size: 18px;
+}
+
+.loginButton{
+  font-family: var(--fuente-titulos);
+  font-weight: bold;
+}
+
+.scooterTitle{
+  font-size: 18px;
+}
+
+.login-option,.loginButton{
+  background-color: var(--color-borde-naranja);
+  border: none;
+}
+
+.nexoraLogo{
+  position: absolute;
+  top: 40%;
+  left: -10px;
+}
+
+.nexoraLogoIcon{
+  height: 150px;
+  width: 200px;
+}
+
+.input-container__row{
+  display: flex;
+  position: relative;
+  width: 290px;
+  height: max-content;
+}
+
+.input-container .input-container__input{
+  width: 100%;
+  padding: 30px 10px;
+  font-size: 14px;
+}
+
+.form__error{
+  color: var(--color-error);
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  font-size: 12px;
+}
+
+.input-container__row > .error{
+  color: var(--color-error);
+  outline: 2px solid var(--color-error);
+}
+
+.nexoraLogo__span{
+  position: absolute;
+  top: 58%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  color: var(--color-texto-muted);
+}
+
+.nexoraLogo__span > a:hover,.nexoraLogo__span > a:focus{
+  outline: 2px solid var(--color-borde-naranja);
+  border-radius: 5px;
+  outline-offset: 2px;
+}
+
+.nexoraLogo__span{
+  font-family: var(--fuente-textos);
+}
+
+.nexoraLogo__span a{
+  color: var(--color-borde-naranja);
+}
+
+/* .login-option:hover,.loginButton:hover,
+.login-option:focus,.loginButton:focus{
+  background-color: white;
+} */
+
+/* Responsive */
+@media (min-width:720px){
+
+  .login .welcome-message{
+    font-size: 30px;
+  }
+
+  .right{
+    margin: 60px;
+  }
+
+  .right .top{
+    display: none;
+  }
+
+  .nexoraLogoIcon{
+    display: none;
+  }
+
+  .left{
+    display: flex;
+  }
+
+  .right{
+    width: 100%;
+  }
+}
+
+@media (min-width:1000px){
+  .login .welcome-message{
+    font-size: 40px;
+  }
+  
+  .nexoraLogo{
+    top: 37%;
+  }
+
+  .nexoraLogo__span{
+    top: 60%;
+    font-size: 20px;
+  }
+}
+
+@media (min-width:1200px){
+
+  .nexoraLogo__span{
+    top: 65%;
+  }
+}
+
+@media (min-width:1600px){
+  .nexoraLogo{
+    top: 34%;
+  }
+
+  .nexoraLogo__span{
+    top: 70%;
+    font-size: 24px;
+  }
+}
