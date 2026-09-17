@@ -9,7 +9,6 @@ import Admin from './pages/Admin/admin';
 import About from './pages/About/about';
 import Error404 from './pages/Error404/error404';
 import Register from './pages/Register/register';
-import Login from './pages/Login/login';
 import Cart from"./pages/Cart/Cart"
 import Login from "./pages/Login/login";
 
