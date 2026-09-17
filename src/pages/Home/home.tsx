@@ -18,6 +18,169 @@ import {
   MoveRight,
 } from "lucide-react";
 import "./home.css";
+import GameCard from "../../components/GameCard/GameCard";
+
+interface Juego {
+  id: number;
+  nombre: string;
+  categoria: string;
+  precio: number;
+  imagen: string;
+  descripcion: string;
+}
+
+const juegosTendencia: Juego[] = [
+  {
+    id: 1,
+    nombre: "Grand Theft Auto V",
+    categoria: "Acción",
+    precio: 25000,
+    imagen: "/img/gta-v.jpg",
+    descripcion: "Viví una aventura llena de acción en Los Santos.",
+  },
+  {
+    id: 2,
+    nombre: "Minecraft",
+    categoria: "Aventura",
+    precio: 18000,
+    imagen: "/img/minecraft.jpg",
+    descripcion: "Construí, explorá y sobreviví en un mundo sin límites.",
+  },
+  {
+    id: 3,
+    nombre: "EA Sports FC 26",
+    categoria: "Deportes",
+    precio: 35000,
+    imagen: "/img/fc26.jpg",
+    descripcion: "Disfrutá de la experiencia futbolística.",
+  },
+  {
+    id: 4,
+    nombre: "Marvel's Wolverine",
+    categoria: "Acción",
+    precio: 45000,
+    imagen: "/img/wolverine.jpg",
+    descripcion: "Convertite en Wolverine y enfrentá nuevos desafíos.",
+  },
+  {
+    id: 5,
+    nombre: "Metroid Prime 4",
+    categoria: "Aventura",
+    precio: 40000,
+    imagen: "/img/metroid.jpg",
+    descripcion: "Explorá nuevos mundos y enfrentá peligros.",
+  },
+  {
+    id: 6,
+    nombre: "The Legend of Zelda",
+    categoria: "Aventura",
+    precio: 38000,
+    imagen: "/img/zelda.jpg",
+    descripcion: "Una aventura épica llena de misterios.",
+  },
+];
+
+const juegosMasNuevos: Juego[] = [
+  {
+    id: 1,
+    nombre: "Grand Theft Auto V",
+    categoria: "Acción",
+    precio: 25000,
+    imagen: "/img/gta-v.jpg",
+    descripcion: "Viví una aventura llena de acción en Los Santos.",
+  },
+  {
+    id: 2,
+    nombre: "Minecraft",
+    categoria: "Aventura",
+    precio: 18000,
+    imagen: "/img/minecraft.jpg",
+    descripcion: "Construí, explorá y sobreviví en un mundo sin límites.",
+  },
+  {
+    id: 3,
+    nombre: "EA Sports FC 26",
+    categoria: "Deportes",
+    precio: 35000,
+    imagen: "/img/fc26.jpg",
+    descripcion: "Disfrutá de la experiencia futbolística.",
+  },
+  {
+    id: 4,
+    nombre: "Marvel's Wolverine",
+    categoria: "Acción",
+    precio: 45000,
+    imagen: "/img/wolverine.jpg",
+    descripcion: "Convertite en Wolverine y enfrentá nuevos desafíos.",
+  },
+  {
+    id: 5,
+    nombre: "Metroid Prime 4",
+    categoria: "Aventura",
+    precio: 40000,
+    imagen: "/img/metroid.jpg",
+    descripcion: "Explorá nuevos mundos y enfrentá peligros.",
+  },
+  {
+    id: 6,
+    nombre: "The Legend of Zelda",
+    categoria: "Aventura",
+    precio: 38000,
+    imagen: "/img/zelda.jpg",
+    descripcion: "Una aventura épica llena de misterios.",
+  },
+];
+
+const juegosMasVendidos: Juego[] = [
+  {
+    id: 1,
+    nombre: "Grand Theft Auto V",
+    categoria: "Acción",
+    precio: 25000,
+    imagen: "/img/gta-v.jpg",
+    descripcion: "Viví una aventura llena de acción en Los Santos.",
+  },
+  {
+    id: 2,
+    nombre: "Minecraft",
+    categoria: "Aventura",
+    precio: 18000,
+    imagen: "/img/minecraft.jpg",
+    descripcion: "Construí, explorá y sobreviví en un mundo sin límites.",
+  },
+  {
+    id: 3,
+    nombre: "EA Sports FC 26",
+    categoria: "Deportes",
+    precio: 35000,
+    imagen: "/img/fc26.jpg",
+    descripcion: "Disfrutá de la experiencia futbolística.",
+  },
+  {
+    id: 4,
+    nombre: "Marvel's Wolverine",
+    categoria: "Acción",
+    precio: 45000,
+    imagen: "/img/wolverine.jpg",
+    descripcion: "Convertite en Wolverine y enfrentá nuevos desafíos.",
+  },
+  {
+    id: 5,
+    nombre: "Metroid Prime 4",
+    categoria: "Aventura",
+    precio: 40000,
+    imagen: "/img/metroid.jpg",
+    descripcion: "Explorá nuevos mundos y enfrentá peligros.",
+  },
+  {
+    id: 6,
+    nombre: "The Legend of Zelda",
+    categoria: "Aventura",
+    precio: 38000,
+    imagen: "/img/zelda.jpg",
+    descripcion: "Una aventura épica llena de misterios.",
+  },
+];
 
 function Home() {
   return (
@@ -179,7 +342,11 @@ function Home() {
           </button>
         </div>
 
-        <section className="section-card">card</section>
+        <section className="section-card">
+          {juegosTendencia.map((juego) => (
+            <GameCard key={juego.id} juego={juego} />
+          ))}
+        </section>
       </section>
 
       <section className="game-section">
@@ -197,7 +364,11 @@ function Home() {
             VER TODOS <MoveRight />
           </button>
         </div>
-        <section className="section-card">card</section>
+        <section className="section-card">
+          {juegosMasNuevos.map((juego) => (
+            <GameCard key={juego.id} juego={juego} />
+          ))}
+        </section>
       </section>
 
       <section className="game-section">
@@ -216,12 +387,15 @@ function Home() {
           </button>
         </div>
 
-        <section className="section-card">card</section>
+        <section className="section-card">
+          {juegosMasVendidos.map((juego) => (
+      <GameCard
+        key={juego.id}
+        juego={juego}
+      />
+    ))}
+        </section>
       </section>
-
-
-
-
 
       <section className="request-game-container">
         <div className="request-info">
@@ -237,16 +411,15 @@ function Home() {
           </div>
         </div>
         <div className="request-form">
-        <input
-          type="text"
-          className="request-input"
-          placeholder="Ej: Grand Theft Auto VI, FIFA 27..."
-        />
-        <button type="submit" className="btn-request">
-          Solicitar <Send size={16} />
-        </button>
+          <input
+            type="text"
+            className="request-input"
+            placeholder="Ej: Grand Theft Auto VI, FIFA 27..."
+          />
+          <button type="submit" className="btn-request">
+            Solicitar <Send size={16} />
+          </button>
         </div>
-
       </section>
     </>
   );
