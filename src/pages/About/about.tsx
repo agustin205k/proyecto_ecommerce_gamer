@@ -18,7 +18,7 @@ function About(){
         <div className={styles.heroContainer}>
           <div className={styles.hero__titleContainer}>
             <h2 className={styles.hero__title}>Sobre Nosotros</h2>
-            <h3 className={styles.hero__subtitle}>Somos un equipo de gamer, para gamers</h3>
+            <h3 className={styles.hero__subtitle}>Somos un equipo de gamers, para gamers</h3>
           </div>
           
           <p className={styles.hero__p}>En <strong>Nexora Gaming</strong> creemos que los videojuegos son más que un hobby, son una forma de vida. Por eso, creamos esta plataforma para que puedan encontrar,comprar y disfrutar tus juegos favoritos de manera facil, seguro y rapido.</p>

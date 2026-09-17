@@ -22,6 +22,10 @@
 /* Estados */
 --color-exito: #4CAF50;
 --color-error: #E53935;
+/* Tipografías */
+--fuente-titulos: "Orbitron", sans-serif;
+--fuente-textos: "Exo 2", sans-serif;
+--fuente-carousel: "Teko", sans-serif;
 }
 
 .about{
@@ -93,7 +97,7 @@
 }
 
 .teamList__span,.teamList__title{
-  width: 100px;
+  width: 120px;
   height: 40px;
 }
 
@@ -126,7 +130,6 @@
 .teamTitle{
   text-align: center;
 }
-
 
 .teamList__img,.iconsList__img{
   height: 100px;
@@ -163,6 +166,22 @@
 
 .teamList__item{
   margin: 20px auto;
+}
+
+/* titulos */
+.hero__title,.teamTitle{
+  color: var(--color-dorado);
+  font-family: var(--fuente-titulos);
+}
+
+/* parrafos */
+.iconsList__title,.teamList__title,.hero__subtitle{
+  color: var(--color-dorado-claro);
+  font-family: var(--fuente-titulos);
+}
+
+.hero__p,.iconsList__span,.teamList__span{
+  font-family: var(--fuente-textos);
 }
 
 
