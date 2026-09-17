@@ -10,6 +10,7 @@ import About from './pages/About/about';
 import Error404 from './pages/Error404/error404';
 import Register from './pages/Register/register';
 import Login from './pages/Login/login';
+import Cart from"./pages/Cart/Cart"
 
 function App() {
 
@@ -24,8 +25,9 @@ function App() {
               <Route path='register' element={<Register/>} />
               <Route path='about' element={<About/>} />
               <Route path='login' element={<Login/>}/>
-              <Route path='404' element={<Error404/>} />
+              <Route path='cart' element={<Cart/>} />
             </Route>
+              <Route path='404' element={<Error404/>} />
         </Routes>
       </BrowserRouter>
     </>
