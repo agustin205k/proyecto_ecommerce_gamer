@@ -10,6 +10,7 @@ import About from './pages/About/about';
 import Error404 from './pages/Error404/error404';
 import Register from './pages/Register/register';
 import Cart from"./pages/Cart/Cart"
+import Login from "./pages/Login/login";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
               <Route path='detalle/:id' element={<Detail/>} />
               <Route path='admin' element={<Admin/>} />
               <Route path='register' element={<Register/>} />
+              <Route path='login' element={<Login/>} />
               <Route path='about' element={<About/>} />
               <Route path='cart' element={<Cart/>} />
             </Route>
