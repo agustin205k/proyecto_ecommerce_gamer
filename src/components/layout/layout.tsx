@@ -139,6 +139,7 @@ function Layout() {
             </Dropdown>
           </div>
         </div>
+        <div className="footer-line"></div>
 
         {/* FILA INFERIOR */}
         <nav className="navbar-menu">
