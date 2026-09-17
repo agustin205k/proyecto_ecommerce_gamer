@@ -25,7 +25,6 @@ function App() {
               <Route path='register' element={<Register/>} />
               <Route path='login' element={<Login/>} />
               <Route path='about' element={<About/>} />
-              <Route path='login' element={<Login/>}/>
               <Route path='cart' element={<Cart/>} />
             </Route>
               <Route path='404' element={<Error404/>} />

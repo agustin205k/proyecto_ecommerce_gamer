@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
 import { Toaster,toast } from "sonner";
-import { useEffect, useState } from "react";
 
 /* Local */
 import styles from "./register.module.css";
@@ -24,23 +23,10 @@ function Register(){
   } = useForm<User>();
 
   const navigate = useNavigate();
-  const [isMobile, setIsMobile] = useState<boolean>(true);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 480) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-    handleResize();
-  }, []);
 
   const submit = (data:User) => {
     const newData = {...data,id:uuidv4()};
     console.log(newData);
-    /* Aqui debe hacerse la verificacion de usuarios para que no hayan multiples usuarios */
     toast.success("Usuario registrado correctamente",{
       style: {
         backgroundColor: "var(--color-card)",
@@ -63,22 +49,22 @@ function Register(){
         <picture className={styles.register__visual__imgContainer}>
           <img src={imgVisual} alt="" className={styles.register__visual__img} />
         </picture>
-        <h2 className={styles.register__visual__title}>Unete a la Comunidad</h2>
-        <p className={styles.register__visual__message}>
+        <h2 className={[styles.register__visual__title,styles.titulos].join(" ")}>Unete a la Comunidad</h2>
+        <p className={[styles.register__visual__message,styles.texto].join(" ")}>
           Guarda tus juegos favoritos.<br />
           accede a reseñas y mucho más.
         </p>
       </div>
       <div className={styles.register__formContainer}>
-        <h2 className={styles.register__title}>Crear una cuenta</h2>
+        <h2 className={[styles.register__title,styles.titulos].join(" ")}>Crear una cuenta</h2>
         <form className={styles.register__form} onSubmit={handleSubmit(submit)}>
           <div className={styles.register__form__row}>
             <input 
             minLength={4} maxLength={20} 
             type="text"
-            autoComplete={isMobile? "off": "username"} 
+            autoComplete="off" 
             placeholder="Nombre" 
-            className={[styles.register__form__input,
+            className={[styles.texto,styles.register__form__input,
               styles.register__form__nombre,
               errors.name && styles.register__form__error].join(" ")}
             {...register("name",{ 
@@ -106,9 +92,9 @@ function Register(){
             <input 
             maxLength={28}
             type="text"
-            autoComplete={isMobile? "off": "email"} 
+            autoComplete="off" 
             placeholder="Correo" 
-            className={[styles.register__form__input,
+            className={[styles.texto,styles.register__form__input,
               styles.register__form__correo,
               errors.mail && styles.register__form__error].join(" ")}
             {...register("mail",{ 
@@ -132,9 +118,9 @@ function Register(){
             <input
             minLength={4} maxLength={20} 
             type="text"
-            autoComplete={isMobile? "off": "new-password"} 
+            autoComplete="off" 
             placeholder="Contraseña" 
-            className={[styles.register__form__input,
+            className={[styles.texto,styles.register__form__input,
               styles.register__form__contraseña,
               errors.password && styles.register__form__error].join(" ")} 
             {...register("password",{ 
@@ -154,9 +140,9 @@ function Register(){
             />
             {errors.password && <span className={[styles.register__form__error,styles.register__form__errorSpan].join(" ")}>{errors.password.message}</span>}
           </div>
-          <div className={[styles["register__form__row"],styles["register__form__row--button"]].join(" ")}>
-            <button type="submit">Registrarse</button>
-            <span>¿Ya tenés una cuenta?, <Link to={"/login"}>Inicia sesión</Link></span>
+          <div className={[styles["register__form__row"],styles["register__form__row--button"],styles["titulos"]].join(" ")}>
+            <button className={styles.register__form__button} type="submit">Registrarse</button>
+            <span className={styles.texto}>¿Ya tenés una cuenta?, <Link to={"/login"}>Inicia sesión</Link></span>
           </div>
         </form>
       </div>
