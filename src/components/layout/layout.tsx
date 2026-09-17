@@ -5,7 +5,7 @@ import { FaInstagram, FaFacebook, FaDiscord } from "react-icons/fa";
 import "./layout.css";
 import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
-import { Dropdown, Button,AutoComplete } from "antd";
+import { Dropdown, Button,AutoComplete,ConfigProvider } from "antd";
 import type { MenuProps } from "antd";
 
 
@@ -110,19 +110,33 @@ function Layout() {
           <div className="navbar-search">
             <Search className="search-icon" />
 
-            <AutoComplete
-              options={opciones}
-              placeholder="Buscar juegos..."
-              className="search-autocomplete"
-              filterOption={(inputValue, option) =>
-                option?.value
-                  ? option.value
-                      .toString()
-                      .toLowerCase()
-                      .includes(inputValue.toLowerCase())
-                  : false
-              }
-            />
+
+
+            <ConfigProvider
+              theme={{
+                components: {
+                  Select: {
+                    colorTextPlaceholder: "#C9C9C9", // Color gris claro para el placeholder
+                    colorText: "#FFFFFF",            // Color blanco al escribir
+                    colorBgContainer: "transparent",
+                  },
+                },
+              }}
+            >
+              <AutoComplete
+                options={opciones}
+                placeholder="Buscar juegos..."
+                className="search-autocomplete"
+                filterOption={(inputValue, option) =>
+                  option?.value
+                    ? option.value
+                        .toString()
+                        .toLowerCase()
+                        .includes(inputValue.toLowerCase())
+                    : false
+                }
+              />
+            </ConfigProvider>
           </div>
 
           {/* ACCIONES */}
