@@ -1,13 +1,12 @@
 /* Dependencies */
-import { Outlet,Link } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { Search, ShoppingCart, User } from "lucide-react";
 import { FaInstagram, FaFacebook, FaDiscord } from "react-icons/fa";
 import "./layout.css";
 import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
-import { Dropdown, Button,AutoComplete,ConfigProvider } from "antd";
+import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
 import type { MenuProps } from "antd";
-
 
 interface Juego {
   id: number;
@@ -95,9 +94,6 @@ const usuarioItems: MenuProps["items"] = [
   },
 ];
 
-
-
-
 function Layout() {
   return (
     <>
@@ -110,15 +106,16 @@ function Layout() {
           <div className="navbar-search">
             <Search className="search-icon" />
 
-
-
             <ConfigProvider
               theme={{
                 components: {
                   Select: {
                     colorTextPlaceholder: "#C9C9C9", // Color gris claro para el placeholder
-                    colorText: "#FFFFFF",            // Color blanco al escribir
-                    colorBgContainer: "transparent",
+                    colorText: "#FFFFFF", // Color blanco para el texto escrito y opciones
+                    colorBgContainer: "transparent", // Fondo del input transparente
+                    colorBgElevated: "#171717", // Fondo oscuro del menú desplegable
+                    controlItemBgHover: "rgba(255, 122, 0, 0.2)", // Fondo al pasar el mouse por una opción
+                    controlItemBgActive: "#FF7A00", // Fondo de la opción elegida/activa
                   },
                 },
               }}
@@ -127,6 +124,7 @@ function Layout() {
                 options={opciones}
                 placeholder="Buscar juegos..."
                 className="search-autocomplete"
+                dropdownStyle={{ backgroundColor: "#171717" }}
                 filterOption={(inputValue, option) =>
                   option?.value
                     ? option.value
