@@ -1,5 +1,5 @@
 /* Dependencies */
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { Search, ShoppingCart, User } from "lucide-react";
 import { FaInstagram, FaFacebook, FaDiscord } from "react-icons/fa";
 import "./layout.css";
@@ -7,6 +7,7 @@ import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
 import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
 import type { MenuProps } from "antd";
+import { useState } from "react";
 
 interface Juego {
   id: number;
@@ -95,8 +96,22 @@ const usuarioItems: MenuProps["items"] = [
 ];
 
 function Layout() {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+  
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (query.trim() !== "") {
+      navigate(`/search/${query}`);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
   return (
-    <>
+    <>   
       <header className="navbar">
         <div className="navbar-top">
           <Link to="/" className="navbar-logo">
@@ -121,21 +136,26 @@ function Layout() {
                 },
               }}
             >
-              <AutoComplete
-              variant="borderless"
-                options={opciones}
-                placeholder="Buscar juegos..."
-                className="search-autocomplete"
-                dropdownStyle={{ backgroundColor: "#171717" }}
-                filterOption={(inputValue, option) =>
-                  option?.value
-                    ? option.value
-                        .toString()
-                        .toLowerCase()
-                        .includes(inputValue.toLowerCase())
-                    : false
-                }
-              />
+              <form onSubmit={handleSubmit}>
+                <AutoComplete
+                  variant="borderless"
+                    options={opciones}
+                    value={query}
+                    onChange={(value) => setQuery(value)}
+                    placeholder="Buscar juegos..."
+                    className="search-autocomplete"
+                    dropdownStyle={{ backgroundColor: "#171717" }}
+                    filterOption={(inputValue, option) =>
+                      option?.value
+                        ? option.value
+                            .toString()
+                            .toLowerCase()
+                            .includes(inputValue.toLowerCase())
+                        : false
+                    }
+                  />  
+              </form>
+              
             </ConfigProvider>
           </div>
 

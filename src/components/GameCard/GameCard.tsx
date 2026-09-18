@@ -1,17 +1,21 @@
+/* Dependencies */
 import { ShoppingCart } from "lucide-react";
-import "./GameCard.css";
 
-interface Juego {
+/* Local */
+import "./GameCard.css";
+import { type Game } from "../../context/gameContext/gameContext";
+
+/* interface Juego {
   id: number;
   nombre: string;
   categoria: string;
   precio: number;
   imagen: string;
   descripcion: string;
-}
+} */
 
 interface GameCardProps {
-  juego: Juego;
+  juego: Game;
 }
 
 function GameCard({ juego }: GameCardProps) {
@@ -19,23 +23,28 @@ function GameCard({ juego }: GameCardProps) {
     <article className="game-card">
 
       <div className="game-card-image">
-        <img src={juego.imagen} alt={juego.nombre} />
+        <img src={juego.img_portrait === "" ? undefined : juego.img_portrait} alt={juego.title} />
 
-        <span className="game-category">
-          {juego.categoria}
-        </span>
+        <div className="game-card-category">
+          {juego.genre.map((m,i) =>
+            (<span key={i} className={"game-category"}>
+            {m}
+          </span>)
+          )}
+        </div>
+        
       </div>
 
       <div className="game-card-info">
 
-        <h3>{juego.nombre}</h3>
+        <h3>{juego.title}</h3>
 
-        <p>{juego.descripcion}</p>
+        <p>{juego.description}</p>
 
         <div className="game-card-bottom">
 
           <span className="game-price">
-            ${juego.precio.toLocaleString("es-AR")}
+            ${juego.price.toLocaleString("es-AR")}
           </span>
 
           <button className="btn-game">

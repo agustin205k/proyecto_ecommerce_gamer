@@ -10,9 +10,10 @@ export interface Game {
   game_id: string;          
   title: string;
   description:string;
-  img_portrait:string;       
-  genre: string[];       
-  releaseYear: number; 
+  img_portrait:string | undefined;       
+  genre: string[];
+  price: number;       
+  releaseDate: string; 
   rating: number[];
   comments: Comments[];
 }
@@ -34,8 +35,9 @@ export const GameContext = createContext<GameContextType>({
     title: "", 
     description: "",
     img_portrait:"", 
-    genre: [], 
-    releaseYear: 0, 
+    genre: [],
+    price:0, 
+    releaseDate: "", 
     rating: [],
     comments: [],
   }),

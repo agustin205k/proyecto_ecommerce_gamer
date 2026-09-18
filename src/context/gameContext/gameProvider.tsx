@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 /* Local */
 import { GameContext,type Game } from "./gameContext";
 import { getLS,setLS } from "../../utils/localstorage";
-
+import { gamesSeeder } from "../../utils/games";
 
 interface GameProviderProps {
   children: ReactNode;
@@ -16,22 +16,28 @@ const GameProvider = ({children}:GameProviderProps) =>{
 
   useEffect(()=>{
     (function(){
-      const data = getLS<Game[]>("games");
-      if(data){
+      gamesSeeder();
+      const seededGames = getLS<Game[]>("defaultGames") ?? [];
+      const data = getLS<Game[]>("games") ?? [];
+      if(data?.length > seededGames?.length){
         setGames(data);
+        return;       
       }
+      setGames([...seededGames]);
     })()
   },[]);
 
   useEffect(() =>{
     (function(){
-      if (games.length > 0) { // 👈 evita guardar [] al inicio
+      if (games.length > 0) {
         setLS("games", games);
+        console.log(games);
       }
     })()
   },[games]);
 
   const addGame = (game:Game) =>{
+    console.log(game);
     const gameId = uuidv4();
     const newGame = {...game, game_id:gameId};
     setGames([...games,newGame]);
