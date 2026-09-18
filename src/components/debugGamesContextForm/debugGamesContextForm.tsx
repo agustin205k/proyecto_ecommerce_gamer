@@ -18,7 +18,7 @@ function DebugGamesContextForm(){
       title: "",
       description: "",
       genre: [""],
-      releaseYear: new Date().getFullYear(),
+      releaseDate: "",
       rating: [0],
     },
   });
@@ -33,7 +33,7 @@ function DebugGamesContextForm(){
       title: "",
       description: "",
       genre: [""],
-      releaseYear: new Date().getFullYear(),
+      releaseDate: "",
       rating: [0],
     },
   });
@@ -72,7 +72,7 @@ function DebugGamesContextForm(){
   <>
     <div className={styles.formulario}>
       <h2>Agregar</h2>
-      <form onSubmit={handleSubmitAgregar(añadirJuego)}>
+      <form onSubmit={handleSubmitAgregar((data) => añadirJuego(data))}>
         <div>
           <label>Título</label>
           <input {...registerAgregar("title", { required: "El título es obligatorio" })} />
@@ -98,7 +98,7 @@ function DebugGamesContextForm(){
 
         <div>
           <label>Año de lanzamiento</label>
-          <input type="number" {...registerAgregar("releaseYear", { valueAsNumber: true })} />
+          <input type="text" {...registerAgregar("releaseDate")} />
         </div>
 
         <div>
@@ -111,7 +111,7 @@ function DebugGamesContextForm(){
     </div>
     <div className={styles.formulario}>
       <h2>Modificar</h2>
-      <form onSubmit={handleSubmitEditar((data)=>editarJuego(data,gameID))}>
+      <form onSubmit={handleSubmitEditar((data) => editarJuego(data, gameID))}>
         <div>
           <label>Título</label>
           <input {...registerEditar("title", { required: "El título es obligatorio" })} />
@@ -137,7 +137,7 @@ function DebugGamesContextForm(){
 
         <div>
           <label>Año de lanzamiento</label>
-          <input type="number" {...registerEditar("releaseYear", { valueAsNumber: true })} />
+          <input type="text" {...registerEditar("releaseDate")} />
         </div>
 
         <div>

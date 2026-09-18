@@ -6,7 +6,7 @@ interface UserProviderProps {
 }
 
 const UserProvider = ({children}:UserProviderProps) =>{
-  const [user,setUser] = useState<string[]>([]);
+  const [user] = useState<string[]>([]);
 
 
 

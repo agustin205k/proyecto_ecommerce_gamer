@@ -106,10 +106,6 @@ function Layout() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuery(e.target.value);
-  };
-
   return (
     <>   
       <header className="navbar">

@@ -9,8 +9,6 @@ import {
   WandSparkles,
   Car,
   Ghost,
-  Sparkles,
-  Crown,
   MessageSquare,
   Zap,
   ShieldCheck,
@@ -26,7 +24,7 @@ import GameCard from "../../components/GameCard/GameCard";
 import { useGame } from "../../hooks/useGame";
 
 function SearchPage() {
-  const {addGame, getGames} = useGame(); 
+  const {getGames} = useGame(); 
   const {query} = useParams<{query:string}>();
 
   const searchFilter = () =>{

@@ -188,27 +188,7 @@ const juegosMasVendidos: Juego[] = [
 ]; */
 
 function Home() {
-  const {addGame, getGames} = useGame();
-
-  const readGames = ()=>{
-    console.log(getGames());
-  }
-
-  const newGame = ()=>{
-    addGame({
-      game_id: "123", 
-      title: "hola soy batman", 
-      description: "",
-      img_portrait:"https://static.vecteezy.com/system/resources/thumbnails/055/352/823/small/lake-and-mountain-nature-beautiful-photo.jpg", 
-      genre: ["aventura","deportes","arcade","lucha"],
-      price:0, 
-      releaseDate: "", 
-      rating: [],
-      comments: [],
-    });
-
-    console.log(getGames());
-  }
+  const {getGames} = useGame();
 
   return (
     <>
