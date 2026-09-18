@@ -18,196 +18,23 @@ import {
   Search,
   MoveRight,
 } from "lucide-react";
+import { useParams } from "react-router-dom";
 
 /* Local */
-import "./home.css";
+import "./searchPage.css";
 import GameCard from "../../components/GameCard/GameCard";
 import { useGame } from "../../hooks/useGame";
 
+function SearchPage() {
+  const {addGame, getGames} = useGame(); 
+  const {query} = useParams<{query:string}>();
 
-/* interface Juego {
-  id: number;
-  nombre: string;
-  categoria: string;
-  precio: number;
-  imagen: string;
-  descripcion: string;
-} */
-
-/* const juegosTendencia: Juego[] = [
-  {
-    id: 1,
-    nombre: "Grand Theft Auto V",
-    categoria: "Acción",
-    precio: 25000,
-    imagen: "/img/gta-v.jpg",
-    descripcion: "Viví una aventura llena de acción en Los Santos.",
-  },
-  {
-    id: 2,
-    nombre: "Minecraft",
-    categoria: "Aventura",
-    precio: 18000,
-    imagen: "/img/minecraft.jpg",
-    descripcion: "Construí, explorá y sobreviví en un mundo sin límites.",
-  },
-  {
-    id: 3,
-    nombre: "EA Sports FC 26",
-    categoria: "Deportes",
-    precio: 35000,
-    imagen: "/img/fc26.jpg",
-    descripcion: "Disfrutá de la experiencia futbolística.",
-  },
-  {
-    id: 4,
-    nombre: "Marvel's Wolverine",
-    categoria: "Acción",
-    precio: 45000,
-    imagen: "/img/wolverine.jpg",
-    descripcion: "Convertite en Wolverine y enfrentá nuevos desafíos.",
-  },
-  {
-    id: 5,
-    nombre: "Metroid Prime 4",
-    categoria: "Aventura",
-    precio: 40000,
-    imagen: "/img/metroid.jpg",
-    descripcion: "Explorá nuevos mundos y enfrentá peligros.",
-  },
-  {
-    id: 6,
-    nombre: "The Legend of Zelda",
-    categoria: "Aventura",
-    precio: 38000,
-    imagen: "/img/zelda.jpg",
-    descripcion: "Una aventura épica llena de misterios.",
-  },
-];
-
-const juegosMasNuevos: Juego[] = [
-  {
-    id: 1,
-    nombre: "Grand Theft Auto V",
-    categoria: "Acción",
-    precio: 25000,
-    imagen: "/img/gta-v.jpg",
-    descripcion: "Viví una aventura llena de acción en Los Santos.",
-  },
-  {
-    id: 2,
-    nombre: "Minecraft",
-    categoria: "Aventura",
-    precio: 18000,
-    imagen: "/img/minecraft.jpg",
-    descripcion: "Construí, explorá y sobreviví en un mundo sin límites.",
-  },
-  {
-    id: 3,
-    nombre: "EA Sports FC 26",
-    categoria: "Deportes",
-    precio: 35000,
-    imagen: "/img/fc26.jpg",
-    descripcion: "Disfrutá de la experiencia futbolística.",
-  },
-  {
-    id: 4,
-    nombre: "Marvel's Wolverine",
-    categoria: "Acción",
-    precio: 45000,
-    imagen: "/img/wolverine.jpg",
-    descripcion: "Convertite en Wolverine y enfrentá nuevos desafíos.",
-  },
-  {
-    id: 5,
-    nombre: "Metroid Prime 4",
-    categoria: "Aventura",
-    precio: 40000,
-    imagen: "/img/metroid.jpg",
-    descripcion: "Explorá nuevos mundos y enfrentá peligros.",
-  },
-  {
-    id: 6,
-    nombre: "The Legend of Zelda",
-    categoria: "Aventura",
-    precio: 38000,
-    imagen: "/img/zelda.jpg",
-    descripcion: "Una aventura épica llena de misterios.",
-  },
-];
-
-const juegosMasVendidos: Juego[] = [
-  {
-    id: 1,
-    nombre: "Grand Theft Auto V",
-    categoria: "Acción",
-    precio: 25000,
-    imagen: "/img/gta-v.jpg",
-    descripcion: "Viví una aventura llena de acción en Los Santos.",
-  },
-  {
-    id: 2,
-    nombre: "Minecraft",
-    categoria: "Aventura",
-    precio: 18000,
-    imagen: "/img/minecraft.jpg",
-    descripcion: "Construí, explorá y sobreviví en un mundo sin límites.",
-  },
-  {
-    id: 3,
-    nombre: "EA Sports FC 26",
-    categoria: "Deportes",
-    precio: 35000,
-    imagen: "/img/fc26.jpg",
-    descripcion: "Disfrutá de la experiencia futbolística.",
-  },
-  {
-    id: 4,
-    nombre: "Marvel's Wolverine",
-    categoria: "Acción",
-    precio: 45000,
-    imagen: "/img/wolverine.jpg",
-    descripcion: "Convertite en Wolverine y enfrentá nuevos desafíos.",
-  },
-  {
-    id: 5,
-    nombre: "Metroid Prime 4",
-    categoria: "Aventura",
-    precio: 40000,
-    imagen: "/img/metroid.jpg",
-    descripcion: "Explorá nuevos mundos y enfrentá peligros.",
-  },
-  {
-    id: 6,
-    nombre: "The Legend of Zelda",
-    categoria: "Aventura",
-    precio: 38000,
-    imagen: "/img/zelda.jpg",
-    descripcion: "Una aventura épica llena de misterios.",
-  },
-]; */
-
-function Home() {
-  const {addGame, getGames} = useGame();
-
-  const readGames = ()=>{
-    console.log(getGames());
-  }
-
-  const newGame = ()=>{
-    addGame({
-      game_id: "123", 
-      title: "hola soy batman", 
-      description: "",
-      img_portrait:"https://static.vecteezy.com/system/resources/thumbnails/055/352/823/small/lake-and-mountain-nature-beautiful-photo.jpg", 
-      genre: ["aventura","deportes","arcade","lucha"],
-      price:0, 
-      releaseDate: "", 
-      rating: [],
-      comments: [],
-    });
-
-    console.log(getGames());
+  const searchFilter = () =>{
+    const filtro = getGames().filter((game) =>
+      game.title.toLowerCase() === query?.toLowerCase()
+    );
+    console.log(filtro);
+    return filtro;
   }
 
   return (
@@ -268,6 +95,9 @@ function Home() {
             <button
               onClick={readGames}
             >leerJuegos</button> */}
+            {/* <button onClick={leerQuery}>
+              h
+            </button> */}
             <p>Encontrá tu próximo juego</p>
           </div>
           <a href="/categorias" className="btn-see-all">
@@ -365,7 +195,7 @@ function Home() {
             <div className="icon-badge">
               <Flame />
             </div>
-            <h2>Tendencias</h2>
+            <h2>{query}</h2>
           </div>
 
           <div className="section-divider"></div>
@@ -376,57 +206,19 @@ function Home() {
         </div>
         {/* modificacion */}
         <section className="section-card">
-          {getGames().map((juego) => (
-            <GameCard key={juego.game_id} juego={juego} />
-          ))}
-        </section>
-      </section>
-
-      <section className="game-section">
-        <div className="section-header">
-          <div className="section-title-wrapper">
-            <div className="icon-badge">
-              <Sparkles />
-            </div>
-            <h2>Más Nuevos</h2>
-          </div>
-
-          <div className="section-divider"></div>
-
-          <button className="btn-see-all">
-            VER TODOS <MoveRight />
-          </button>
-        </div>
-        <section className="section-card">
-          {getGames().map((juego) => (
-            <GameCard key={juego.game_id} juego={juego} />
-          ))}
-        </section>
-      </section>
-
-      <section className="game-section">
-        <div className="section-header">
-          <div className="section-title-wrapper">
-            <div className="icon-badge">
-              <Crown />
-            </div>
-            <h2>Lo Más Vendido:</h2>
-          </div>
-
-          <div className="section-divider"></div>
-
-          <button className="btn-see-all">
-            VER TODOS <MoveRight />
-          </button>
-        </div>
-
-        <section className="section-card">
-          {getGames().map((juego) => (
-            <GameCard
-              key={juego.game_id}
-              juego={juego}
-            />
-          ))}
+          {searchFilter().length > 0 ? (
+            searchFilter().map((juego) => (
+              <GameCard key={juego.game_id} juego={juego} />
+            ))
+          ) : (
+            <h3 className="section-card__no-result" style={
+              {
+                color:"var(--color-texto)",
+                width:"100%",
+                margin:"40px",
+              }
+            }>No hay juegos con ese nombre</h3>
+          )}
         </section>
       </section>
 
@@ -458,4 +250,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default SearchPage;

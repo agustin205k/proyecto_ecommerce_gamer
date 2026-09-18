@@ -185,75 +185,9 @@
   box-shadow: 0 0 12px rgba(255, 122, 0, 0.12); /* Quita esta línea si no quieres resplandor */
 }
 
-.navbar-search .ant-select {
-  width: 100%;
-  background-color: transparent !important;
-}
-.navbar-search *:focus,
-.navbar-search *:focus-visible,
-.navbar-search .ant-select-focused .ant-select-selector {
-  outline: none !important;
-  box-shadow: none !important;
-  border: none!important;
-}
 
-.navbar-search .ant-select-selector {
- height: 40px !important;
-  padding: 0 12px !important;
-  background-color: transparent !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  display: flex !important;
-  align-items: center !important;
-}
 
-/* Input nativo de Ant Design al escribir */
-.navbar-search .ant-select-selection-search {
-  inset-inline-start: 12px !important;
-  inset-inline-end: 12px !important;
-  display: flex !important;
-  align-items: center !important;
-}
 
-.navbar-search .ant-select-selection-search-input,
-.navbar-search input {
-  color: #FFFFFF !important;
-  -webkit-text-fill-color: #FFFFFF !important;
-  font-family: var(--fuente-textos) !important;
-  font-size: 0.9rem !important;
-  background: transparent !important;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
-  height: 100% !important;
-}
-
-/* Placeholder */
-.navbar-search .ant-select-selection-placeholder {
-  color: var(--color-texto-muted) !important;
-  font-family: var(--fuente-textos) !important;
-  font-size: 0.9rem !important;
-  display: flex !important;
-  align-items: center !important;
-}
-
-/* Menú desplegable con las sugerencias */
-.ant-select-dropdown {
-  background-color: var(--color-card) !important;
-  border: 1px solid var(--color-borde) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
-}
-
-.ant-select-item-option {
-  color: var(--color-texto-secundario) !important;
-}
-
-.ant-select-item-option-active {
-  background-color:var(--color-borde) !important;
-  color: var(--color-dorado-claro) !important;
-}
 
 
 
@@ -532,8 +466,6 @@
 
 .footer {
   width: 100%;
-
-  margin-top: 60px;
 
   background-color: var(--color-fondo-secundario);
 

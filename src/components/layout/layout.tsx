@@ -1,13 +1,13 @@
 /* Dependencies */
-import { Outlet,Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import { Search, ShoppingCart, User } from "lucide-react";
 import { FaInstagram, FaFacebook, FaDiscord } from "react-icons/fa";
 import "./layout.css";
 import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
-import { Dropdown, Button,AutoComplete } from "antd";
+import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
 import type { MenuProps } from "antd";
-
+import { useState } from "react";
 
 interface Juego {
   id: number;
@@ -90,14 +90,28 @@ const usuarioItems: MenuProps["items"] = [
     label: <Link to="/login">Iniciar sesión</Link>,
   },
   {
-    key: "registro",
-    label: <Link to="/registro">Registrarse</Link>,
+    key: "register",
+    label: <Link to="/register">Registrarse</Link>,
   },
 ];
 
 function Layout() {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+  
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (query.trim() !== "") {
+      navigate(`/search/${query}`);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
   return (
-    <>
+    <>   
       <header className="navbar">
         <div className="navbar-top">
           <Link to="/" className="navbar-logo">
@@ -107,24 +121,47 @@ function Layout() {
           <div className="navbar-search">
             <Search className="search-icon" />
 
-            <AutoComplete
-              options={opciones}
-              placeholder="Buscar juegos..."
-              className="search-autocomplete"
-              filterOption={(inputValue, option) =>
-                option?.value
-                  ? option.value
-                      .toString()
-                      .toLowerCase()
-                      .includes(inputValue.toLowerCase())
-                  : false
-              }
-            />
+            <ConfigProvider
+              theme={{
+                components: {
+                  Select: {
+                    colorPrimary: "#171717", // --color-card
+                    colorTextPlaceholder: "#C9C9C9", // --color-texto-secundario:
+                    colorText: "#FFFFFF", // Color blanco para el texto
+                    colorBgContainer: "transparent", // Fondo del input transparente
+                    colorBgElevated: "#171717", // --color-card
+                    controlItemBgHover: "#D95F00", // --color-naranja-oscuro
+                    controlItemBgActive: "#FF7A00", // --color-naranja
+                  },
+                },
+              }}
+            >
+              <form onSubmit={handleSubmit}>
+                <AutoComplete
+                  variant="borderless"
+                    options={opciones}
+                    value={query}
+                    onChange={(value) => setQuery(value)}
+                    placeholder="Buscar juegos..."
+                    className="search-autocomplete"
+                    dropdownStyle={{ backgroundColor: "#171717" }}
+                    filterOption={(inputValue, option) =>
+                      option?.value
+                        ? option.value
+                            .toString()
+                            .toLowerCase()
+                            .includes(inputValue.toLowerCase())
+                        : false
+                    }
+                  />  
+              </form>
+              
+            </ConfigProvider>
           </div>
 
           {/* ACCIONES */}
           <div className="navbar-actions">
-            <Link to="/carrito" className="navbar-action">
+            <Link to="/cart" className="navbar-action">
               <ShoppingCart />
               <span className="cart-count">0</span>
             </Link>
@@ -137,7 +174,9 @@ function Layout() {
           </div>
         </div>
 
-        {/* FILA INFERIOR */}
+        <div className="footer-line"></div>
+
+        {/* FILA INFERIOR  */}
         <nav className="navbar-menu">
           <Link to="/" className="navbar-link">
             INICIO
@@ -156,7 +195,7 @@ function Layout() {
           </Link>
         </nav>
       </header>
-      <div className="">
+      <div className="main">
         <Outlet />
       </div>
       <footer className="footer">
