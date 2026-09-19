@@ -13,14 +13,17 @@ import Register from './pages/Register/register';
 import Cart from"./pages/Cart/Cart"
 import Login from "./pages/Login/login";
 import SearchPage from './pages/Search/searchPage';
+import { UserProvider } from './context/userContext/UserProvider';
 
 function App() {
 
   return (
     <>
-      <GameProvider>
-        <BrowserRouter>
-          <Routes>
+     <UserProvider>
+        <GameProvider>
+          <BrowserRouter>
+            <Routes>
+
               <Route path='/' element={<Layout/>}>
                 <Route index element={<Home/>} />
                 <Route path='detalle/:id' element={<Detail/>} />
@@ -30,11 +33,14 @@ function App() {
                 <Route path='login' element={<Login/>} />
                 <Route path='about' element={<About/>} />
                 <Route path='cart' element={<Cart/>} />
-            </Route>
+              </Route>
+
               <Route path='404' element={<Error404/>} />
+
             </Routes>
-        </BrowserRouter>
-      </GameProvider>
+          </BrowserRouter>
+        </GameProvider>
+      </UserProvider>
     </>
   )
 }

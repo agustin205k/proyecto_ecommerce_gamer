@@ -18,7 +18,7 @@ const usuariosIniciales: Usuario[] = usuariosGuardados
   ? JSON.parse(usuariosGuardados)
   : [adminInicial];
 
-  const adminExiste = usuariosIniciales.find(
+const adminExiste = usuariosIniciales.find(
   (usuario) => usuario.rol === "admin",
 );
 
@@ -34,103 +34,103 @@ export function UserProvider({ children }: UserProviderProps) {
   const [usuarios, setUsuarios] = useState<Usuario[]>(usuariosIniciales);
   const usuarioActualGuardado = localStorage.getItem("usuarioActual");
 
-const [usuarioActual, setUsuarioActual] = useState<Usuario | null>(
-  usuarioActualGuardado ? JSON.parse(usuarioActualGuardado) : null,
-);
-
-const registrarUsuario = (usuario: Usuario) => {
-  const usuarioExistente = usuarios.find(
-    (usuarioActual) => usuarioActual.email === usuario.email,
+  const [usuarioActual, setUsuarioActual] = useState<Usuario | null>(
+    usuarioActualGuardado ? JSON.parse(usuarioActualGuardado) : null,
   );
 
-  if (usuarioExistente) {
-    toast.error("El email ya está registrado");
-    return;
-  }
+  const registrarUsuario = (usuario: Usuario) => {
+    const usuarioExistente = usuarios.find(
+      (usuarioActual) => usuarioActual.email === usuario.email,
+    );
 
-  const nuevosUsuarios = [...usuarios, usuario];
+    if (usuarioExistente) {
+      toast.error("El email ya está registrado");
+      return;
+    }
 
-  setUsuarios(nuevosUsuarios);
+    const nuevosUsuarios = [...usuarios, usuario];
 
-  localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
-};
+    setUsuarios(nuevosUsuarios);
 
-const eliminarUsuario = (id: string) => {
-  const usuarioAEliminar = usuarios.find((usuario) => usuario.id === id);
+    localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
+  };
 
-  const cantidadAdmins = usuarios.filter(
-    (usuario) => usuario.rol === "admin",
-  ).length;
+  const eliminarUsuario = (id: string) => {
+    const usuarioAEliminar = usuarios.find((usuario) => usuario.id === id);
 
-  if (usuarioAEliminar?.rol === "admin" && cantidadAdmins === 1) {
-    toast.error("No se puede eliminar el ultimo administrador");
-    return;
-  }
+    const cantidadAdmins = usuarios.filter(
+      (usuario) => usuario.rol === "admin",
+    ).length;
 
-  const nuevosUsuarios = usuarios.filter((usuario) => usuario.id !== id);
+    if (usuarioAEliminar?.rol === "admin" && cantidadAdmins === 1) {
+      toast.error("No se puede eliminar el ultimo administrador");
+      return;
+    }
 
-  setUsuarios(nuevosUsuarios);
+    const nuevosUsuarios = usuarios.filter((usuario) => usuario.id !== id);
 
-  localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
+    setUsuarios(nuevosUsuarios);
 
-  toast.success("Usuario eliminado correctamente");
-};
+    localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
 
-const editarUsuario = (usuarioEditado: Usuario) => {
-  const usuarioExistente = usuarios.find(
-    (usuario) =>
-      usuario.email === usuarioEditado.email &&
-      usuario.id !== usuarioEditado.id,
+    toast.success("Usuario eliminado correctamente");
+  };
+
+  const editarUsuario = (usuarioEditado: Usuario) => {
+    const usuarioExistente = usuarios.find(
+      (usuario) =>
+        usuario.email === usuarioEditado.email &&
+        usuario.id !== usuarioEditado.id,
+    );
+
+    if (usuarioExistente) {
+      toast.error("El email ya está registrado");
+      return;
+    }
+
+    const nuevosUsuarios = usuarios.map((usuario) =>
+      usuario.id === usuarioEditado.id ? usuarioEditado : usuario,
+    );
+
+    setUsuarios(nuevosUsuarios);
+
+    localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
+  };
+
+  const iniciarSesion = (email: string, password: string): Usuario | null => {
+    const usuarioEncontrado = usuarios.find(
+      (usuario) => usuario.email === email && usuario.password === password,
+    );
+
+    if (usuarioEncontrado) {
+      setUsuarioActual(usuarioEncontrado);
+
+      localStorage.setItem("usuarioActual", JSON.stringify(usuarioEncontrado));
+
+      return usuarioEncontrado;
+    }
+
+    return null;
+  };
+
+  const cerrarSesion = () => {
+    setUsuarioActual(null);
+    localStorage.removeItem("usuarioActual");
+  };
+
+  return (
+    <UserContext.Provider
+      value={{
+        usuarios,
+        usuarioActual,
+        registrarUsuario,
+        eliminarUsuario,
+        editarUsuario,
+        iniciarSesion,
+        cerrarSesion,
+      }}
+    >
+      {children}
+    </UserContext.Provider>
   );
-
-  if (usuarioExistente) {
-    toast.error("El email ya está registrado");
-    return;
-  }
-
-  const nuevosUsuarios = usuarios.map((usuario) =>
-    usuario.id === usuarioEditado.id ? usuarioEditado : usuario,
-  );
-
-  setUsuarios(nuevosUsuarios);
-
-  localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
-};
-
-const iniciarSesion = (email: string, password: string): Usuario | null => {
-  const usuarioEncontrado = usuarios.find(
-    (usuario) => usuario.email === email && usuario.password === password,
-  );
-
-  if (usuarioEncontrado) {
-    setUsuarioActual(usuarioEncontrado);
-
-    localStorage.setItem("usuarioActual", JSON.stringify(usuarioEncontrado));
-
-    return usuarioEncontrado;
-  }
-
-  return null;
-};
-
-const cerrarSesion = () => {
-  setUsuarioActual(null);
-  localStorage.removeItem("usuarioActual");
-};
-
-return (
-  <UserContext.Provider
-    value={{
-      usuarios,
-      usuarioActual,
-      registrarUsuario,
-      eliminarUsuario,
-      editarUsuario,
-      iniciarSesion,
-      cerrarSesion,
-    }}
-  >
-    {children}
-  </UserContext.Provider>
-);
 }
