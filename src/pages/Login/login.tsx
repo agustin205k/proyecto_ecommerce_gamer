@@ -1,5 +1,5 @@
 /* Dependencies */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -9,6 +9,8 @@ import banner from "../../assets/imgs/Bannerpge.jpg";
 import nexoraLogoIcon from "../../assets/icons/nexora_logo_icon.png";
 import nexoraLogo from "../../assets/imgs/nexora_logo.png";
 import { UserContext } from "../../context/userContext/userContext";
+import openEye from "../../assets/icons/open_eye.png";
+import closedEye from "../../assets/icons/closed_eye.png";
 
 interface Login {
   user: string;
@@ -17,6 +19,8 @@ interface Login {
 
 function Login() {
   const { iniciarSesion } = useContext(UserContext);
+  const [generalError,setGeneralError] = useState<string>("");
+  const [showPassword,setShowPassword] = useState<boolean>(true);
   const navigate = useNavigate();
 
   const {
@@ -34,9 +38,11 @@ function Login() {
     const resultado = iniciarSesion(data.user, data.password);
 
     if (resultado) {
+      setGeneralError("");
       navigate("/");
     } else {
       console.log("Email o contraseña incorrectos");
+      setGeneralError("Email o contraseña incorrectos");
     }
   };
 
@@ -149,8 +155,10 @@ function Login() {
                   </div>
                   <div className={styles["input-container__row"]}>
                     <input
-                      type="password"
+                      type={showPassword? "password": "text"}
                       placeholder="Contraseña"
+                      minLength={4}
+                      maxLength={32}
                       autoComplete="off"
                       className={[
                         styles["input-container__input"],
@@ -166,7 +174,7 @@ function Login() {
                           message: "Debe tener al menos 4 caracteres",
                         },
                         maxLength: {
-                          value: 16,
+                          value: 30,
                           message: "No debe superar los 30 caracteres",
                         },
                         pattern: {
@@ -175,6 +183,13 @@ function Login() {
                         },
                       })}
                     />
+                    <img 
+                      className={styles.iconEye} 
+                      src={showPassword? openEye : closedEye} 
+                      alt={showPassword? "mostrar constraseña" : "ocultar contraseña"}
+                      title={showPassword? "mostrar constraseña" : "ocultar contraseña"}
+                      onClick={() => showPassword? setShowPassword(false):setShowPassword(true)}
+                     />
                     {errors.password && (
                       <span className={styles.form__error}>
                         {errors.password.message}
@@ -193,6 +208,7 @@ function Login() {
                     Te olvidaste la contraseña?
                   </a>
                 </div>
+                {generalError && <span className={styles.generalError}>{generalError}</span>}
                 <button className={styles.loginButton}>Ingresar</button>
               </form>
             </div>

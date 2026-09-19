@@ -5,27 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import { getLS, setLS } from "./localstorage";
 import { type Game } from "../context/gameContext/gameContext";
 
-/* interface Juego {
-  id: number;
-  nombre: string;
-  categoria: string;
-  precio: number;
-  imagen: string;
-  descripcion: string;
-} */
-
-/* export interface Game {
-  game_id: string;          
-  title: string;
-  description:string;
-  img_portrait:string;       
-  genre: string[];
-  price:Number;       
-  releaseDate: string; 
-  rating: number[];
-  comments: Comments[];
-} */
-
 const defaultGames: Game[] = [
   {
     game_id: uuidv4(),
@@ -34,18 +13,18 @@ const defaultGames: Game[] = [
     genre: ["Acción"],
     price: 25000,
     releaseDate:"",
-    img_portrait: "/img/gta-v.jpg",
+    img_portrait: "https://media.vandal.net/m/15192/grand-theft-auto-v-201342141558_1.jpg",
     rating: [5],
     comments:[]
   },
   {
     game_id: uuidv4(),
     title: "Minecraft",
-    description: "Construí, explorá y sobreviví en un mundo sin límites.",
+    description: "Crea, Viaja, Construye, Aprende y Vive en este mundo de bloques.",
     genre: ["Aventura"],
     price: 18000,
     releaseDate:"",
-    img_portrait: "/img/minecraft.jpg",
+    img_portrait: "https://i.pinimg.com/474x/0e/8a/bd/0e8abd5986fa0d36aca45603af3090bc.jpg",
     rating: [5],
     comments:[]
   },
@@ -56,19 +35,18 @@ const defaultGames: Game[] = [
     genre: ["Deportes"],
     price: 35000,
     releaseDate:"",
-    img_portrait:"/img/fc26.jpg",
+    img_portrait:"https://media.vandal.net/m/7-2025/16/20257161559461_1.jpg.webp",
     rating: [5],
     comments:[]
   },
   {
-
     game_id: uuidv4(),
     title:"Marvel's Wolverine",
     description:"Convertite en Wolverine y enfrentá nuevos desafíos.",
     genre: ["Acción"],
     price: 45000,
     releaseDate:"",
-    img_portrait:"/img/wolverine.jpg",
+    img_portrait:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3ZGnwUtarMxo2TJpcmzyu3yi2u1hFrODzGNg7tt0M3zO4EeK6TLyi8Wtz&s=10",
     rating: [5],
     comments:[]
   },
@@ -79,7 +57,7 @@ const defaultGames: Game[] = [
     genre: ["Aventura"],
     price: 40000,
     releaseDate:"",
-    img_portrait:"/img/metroid.jpg",
+    img_portrait:"https://i.3djuegos.com/juegos/15009/metroid_prime_4/fotos/ficha/metroid_prime_4-5953311.webp",
     rating: [5],
     comments:[]
   },
@@ -90,7 +68,7 @@ const defaultGames: Game[] = [
     genre: ["Aventura"],
     price: 38000,
     releaseDate:"",
-    img_portrait:"/img/zelda.jpg",
+    img_portrait:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyqWlR-sN0uI5MKa-XYqTvz5B5nB1uBsdyxvJ86lVo477PNE7MH5VJWFY&s=10",
     rating: [5],
     comments:[]
     
