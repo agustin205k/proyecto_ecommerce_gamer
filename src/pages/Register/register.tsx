@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
-import { Toaster, toast } from "sonner";
+/* import { Toaster, toast } from "sonner"; */
 
 /* Local */
 import styles from "./register.module.css";
@@ -20,9 +20,10 @@ interface User {
 }
 
 function Register() {
-  const { registrarUsuario } = useContext(UserContext);
+  const {usuarios, registrarUsuario } = useContext(UserContext);
   const [showPassword,setShowPassword] = useState<boolean>(true);
   const [showConfirmPassword,setShowConfirmPassword] = useState<boolean>(true);
+  const [generalError,setGeneralError] = useState<string>("");
 
   const {
     register,
@@ -35,6 +36,13 @@ function Register() {
   const navigate = useNavigate();
 
   const submit = (data: User) => {
+
+    const existeUsuario = usuarios.some(u => u.nombre === data.name || u.email === data.mail);
+    if(existeUsuario){
+      setGeneralError("Ese usuario o email ya existe");
+      return;
+    }
+
     const newData = {
       id: uuidv4(),
       nombre: data.name,
@@ -45,14 +53,8 @@ function Register() {
 
     registrarUsuario(newData);
 
+
     console.log(newData);
-    toast.success("Usuario registrado correctamente", {
-      style: {
-        backgroundColor: "var(--color-card)",
-        border: "1px solid #2e7d32",
-      },
-      duration: 800,
-    });
     resetField("name");
     resetField("mail");
     resetField("password");
@@ -279,7 +281,8 @@ function Register() {
                 styles["titulos"],
               ].join(" ")}
             >
-              <button className={styles.register__form__button} type="submit">
+              {generalError && <span className={styles.generalError} >{generalError}</span>}
+              <button className={styles.register__form__button} type="submit" onClick={() => setGeneralError("")}>
                 Registrarse
               </button>
               <span className={styles.texto}>
@@ -288,7 +291,7 @@ function Register() {
             </div>
           </form>
         </div>
-        <Toaster position="bottom-right" richColors />
+        {/* <Toaster position="bottom-right" richColors /> */}
       </main>
     </>
   );

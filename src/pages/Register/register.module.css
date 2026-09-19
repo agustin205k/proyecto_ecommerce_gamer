@@ -227,6 +227,13 @@
   width: 30px; 
 }
 
+.register__form__row .generalError{
+  margin: 0;
+  margin-bottom: 20px;
+  color: var(--color-error);
+  font-size: 18px;
+}
+
 /* register Querys */
 
 @media (min-width: 768px){
