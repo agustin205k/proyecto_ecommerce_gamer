@@ -14,12 +14,14 @@ interface User {
   name: string;
   mail: string;
   password: string;
+  confirmPassword: string;
 }
 
 function Register() {
   const { registrarUsuario } = useContext(UserContext);
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
     resetField,
@@ -175,7 +177,7 @@ function Register() {
               <input
                 minLength={4}
                 maxLength={20}
-                type="text"
+                type="password"
                 autoComplete="off"
                 placeholder="Contraseña"
                 className={[
@@ -207,6 +209,47 @@ function Register() {
                   ].join(" ")}
                 >
                   {errors.password.message}
+                </span>
+              )}
+            </div>
+            <div className={styles.register__form__row}>
+              <input
+                minLength={4}
+                maxLength={20}
+                type="password"
+                autoComplete="off"
+                placeholder="Confirmar contraseña"
+                className={[
+                  styles.texto,
+                  styles.register__form__input,
+                  styles.register__form__contraseña,
+                  errors.confirmPassword && styles.register__form__error,
+                ].join(" ")}
+                {...register("confirmPassword", {
+                  required: {
+                    value: true,
+                    message: "Debe confirmar su contraseña",
+                  },
+                  minLength: {
+                    value: 4,
+                    message: "Como mínimo 4 caracteres",
+                  },
+                  maxLength: {
+                    value: 16,
+                    message: "No exceda los 16 caracteres",
+                  },
+                  validate: (value) =>
+                    value === getValues("password") || "Las contraseñas no coinciden",
+                })}
+              />
+              {errors.confirmPassword && (
+                <span
+                  className={[
+                    styles.register__form__error,
+                    styles.register__form__errorSpan,
+                  ].join(" ")}
+                >
+                  {errors.confirmPassword.message}
                 </span>
               )}
             </div>
