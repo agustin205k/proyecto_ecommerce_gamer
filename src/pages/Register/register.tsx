@@ -1,5 +1,5 @@
 /* Dependencies */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
@@ -9,6 +9,8 @@ import { Toaster, toast } from "sonner";
 import styles from "./register.module.css";
 import imgVisual from "../../assets/imgs/joystick.png";
 import { UserContext } from "../../context/userContext/userContext";
+import openEye from "../../assets/icons/open_eye.png";
+import closedEye from "../../assets/icons/closed_eye.png";
 
 interface User {
   name: string;
@@ -19,6 +21,9 @@ interface User {
 
 function Register() {
   const { registrarUsuario } = useContext(UserContext);
+  const [showPassword,setShowPassword] = useState<boolean>(true);
+  const [showConfirmPassword,setShowConfirmPassword] = useState<boolean>(true);
+
   const {
     register,
     getValues,
@@ -177,7 +182,7 @@ function Register() {
               <input
                 minLength={4}
                 maxLength={20}
-                type="password"
+                type={showPassword?"password":"text"}
                 autoComplete="off"
                 placeholder="Contraseña"
                 className={[
@@ -201,6 +206,13 @@ function Register() {
                   },
                 })}
               />
+              <img 
+                className={styles.iconEye} 
+                src={showPassword? openEye : closedEye} 
+                alt={showPassword? "mostrar constraseña" : "ocultar contraseña"}
+                title={showPassword? "mostrar constraseña" : "ocultar contraseña"}
+                onClick={() => showPassword? setShowPassword(false):setShowPassword(true)}
+              />
               {errors.password && (
                 <span
                   className={[
@@ -216,7 +228,7 @@ function Register() {
               <input
                 minLength={4}
                 maxLength={20}
-                type="password"
+                type={showConfirmPassword?"password":"text"}
                 autoComplete="off"
                 placeholder="Confirmar contraseña"
                 className={[
@@ -241,6 +253,13 @@ function Register() {
                   validate: (value) =>
                     value === getValues("password") || "Las contraseñas no coinciden",
                 })}
+              />
+              <img 
+                className={styles.iconEye} 
+                src={showConfirmPassword? openEye : closedEye} 
+                alt={showConfirmPassword? "mostrar constraseña" : "ocultar contraseña"}
+                title={showConfirmPassword? "mostrar constraseña" : "ocultar contraseña"}
+                onClick={() => showConfirmPassword? setShowConfirmPassword(false):setShowConfirmPassword(true)}
               />
               {errors.confirmPassword && (
                 <span
