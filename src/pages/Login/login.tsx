@@ -31,18 +31,14 @@ function Login() {
   });
 
   const submit = (data: Login) => {
-  const resultado = iniciarSesion(data.user, data.password);
+    const resultado = iniciarSesion(data.user, data.password);
 
-  if (resultado) {
-    if (resultado.rol === "admin") {
-      navigate("/admin");
-    } else {
+    if (resultado) {
       navigate("/");
+    } else {
+      console.log("Email o contraseña incorrectos");
     }
-  } else {
-    console.log("Email o contraseña incorrectos");
-  }
-};
+  };
 
   return (
     <>

@@ -8,6 +8,7 @@ import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
 import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
 import type { MenuProps } from "antd";
 import { useState } from "react";
+import { useUser } from "../../hooks/useUser";
 
 interface Juego {
   id: number;
@@ -84,21 +85,40 @@ const categoriasItems: MenuProps["items"] = [
   },
 ];
 
-const usuarioItems: MenuProps["items"] = [
-  {
-    key: "login",
-    label: <Link to="/login">Iniciar sesión</Link>,
-  },
-  {
-    key: "register",
-    label: <Link to="/register">Registrarse</Link>,
-  },
-];
-
 function Layout() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  
+  const { usuarioActual, cerrarSesion } = useUser();
+
+  const usuarioItems: MenuProps["items"] = usuarioActual
+    ? usuarioActual.rol === "admin"
+      ? [
+          {
+            key: "admin",
+            label: <Link to="/admin">Panel de administrador</Link>,
+          },
+          {
+            key: "logout",
+            label: "Cerrar sesión",
+          },
+        ]
+      : [
+          {
+            key: "logout",
+            label: "Cerrar sesión",
+          },
+        ]
+    : [
+        {
+          key: "login",
+          label: <Link to="/login">Iniciar sesión</Link>,
+        },
+        {
+          key: "register",
+          label: <Link to="/register">Registrarse</Link>,
+        },
+      ];
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (query.trim() !== "") {
@@ -107,7 +127,7 @@ function Layout() {
   };
 
   return (
-    <>   
+    <>
       <header className="navbar">
         <div className="navbar-top">
           <Link to="/" className="navbar-logo">
@@ -135,23 +155,22 @@ function Layout() {
               <form onSubmit={handleSubmit}>
                 <AutoComplete
                   variant="borderless"
-                    options={opciones}
-                    value={query}
-                    onChange={(value) => setQuery(value)}
-                    placeholder="Buscar juegos..."
-                    className="search-autocomplete"
-                    dropdownStyle={{ backgroundColor: "#171717" }}
-                    filterOption={(inputValue, option) =>
-                      option?.value
-                        ? option.value
-                            .toString()
-                            .toLowerCase()
-                            .includes(inputValue.toLowerCase())
-                        : false
-                    }
-                  />  
+                  options={opciones}
+                  value={query}
+                  onChange={(value) => setQuery(value)}
+                  placeholder="Buscar juegos..."
+                  className="search-autocomplete"
+                  dropdownStyle={{ backgroundColor: "#171717" }}
+                  filterOption={(inputValue, option) =>
+                    option?.value
+                      ? option.value
+                          .toString()
+                          .toLowerCase()
+                          .includes(inputValue.toLowerCase())
+                      : false
+                  }
+                />
               </form>
-              
             </ConfigProvider>
           </div>
 
@@ -162,7 +181,18 @@ function Layout() {
               <span className="cart-count">0</span>
             </Link>
 
-            <Dropdown menu={{ items: usuarioItems }} placement="bottomRight">
+            <Dropdown
+              menu={{
+                items: usuarioItems,
+                onClick: ({ key }) => {
+                  if (key === "logout") {
+                    cerrarSesion();
+                    navigate("/");
+                  }
+                },
+              }}
+              placement="bottomRight"
+            >
               <Button className="navbar-action">
                 <User />
               </Button>
