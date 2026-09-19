@@ -97,9 +97,10 @@ export function UserProvider({ children }: UserProviderProps) {
     localStorage.setItem("usuarios", JSON.stringify(nuevosUsuarios));
   };
 
+  /* El inicio de sesion ahora acepta usuario y mail */
   const iniciarSesion = (email: string, password: string): Usuario | null => {
     const usuarioEncontrado = usuarios.find(
-      (usuario) => usuario.email === email && usuario.password === password,
+      (usuario) => (usuario.email === email || usuario.nombre === email) && usuario.password === password,
     );
 
     if (usuarioEncontrado) {
