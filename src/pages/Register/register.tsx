@@ -1,25 +1,33 @@
 /* Dependencies */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { v4 as uuidv4 } from "uuid";
-import { Toaster, toast } from "sonner";
+/* import { Toaster, toast } from "sonner"; */
 
 /* Local */
 import styles from "./register.module.css";
 import imgVisual from "../../assets/imgs/joystick.png";
 import { UserContext } from "../../context/userContext/userContext";
+import openEye from "../../assets/icons/open_eye.png";
+import closedEye from "../../assets/icons/closed_eye.png";
 
 interface User {
   name: string;
   mail: string;
   password: string;
+  confirmPassword: string;
 }
 
 function Register() {
-  const { registrarUsuario } = useContext(UserContext);
+  const {usuarios, registrarUsuario } = useContext(UserContext);
+  const [showPassword,setShowPassword] = useState<boolean>(true);
+  const [showConfirmPassword,setShowConfirmPassword] = useState<boolean>(true);
+  const [generalError,setGeneralError] = useState<string>("");
+
   const {
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
     resetField,
@@ -28,6 +36,13 @@ function Register() {
   const navigate = useNavigate();
 
   const submit = (data: User) => {
+
+    const existeUsuario = usuarios.some(u => u.nombre === data.name || u.email === data.mail);
+    if(existeUsuario){
+      setGeneralError("Ese usuario o email ya existe");
+      return;
+    }
+
     const newData = {
       id: uuidv4(),
       nombre: data.name,
@@ -38,14 +53,8 @@ function Register() {
 
     registrarUsuario(newData);
 
+
     console.log(newData);
-    toast.success("Usuario registrado correctamente", {
-      style: {
-        backgroundColor: "var(--color-card)",
-        border: "1px solid #2e7d32",
-      },
-      duration: 800,
-    });
     resetField("name");
     resetField("mail");
     resetField("password");
@@ -175,7 +184,7 @@ function Register() {
               <input
                 minLength={4}
                 maxLength={20}
-                type="text"
+                type={showPassword?"password":"text"}
                 autoComplete="off"
                 placeholder="Contraseña"
                 className={[
@@ -199,6 +208,13 @@ function Register() {
                   },
                 })}
               />
+              <img 
+                className={styles.iconEye} 
+                src={showPassword? openEye : closedEye} 
+                alt={showPassword? "mostrar constraseña" : "ocultar contraseña"}
+                title={showPassword? "mostrar constraseña" : "ocultar contraseña"}
+                onClick={() => showPassword? setShowPassword(false):setShowPassword(true)}
+              />
               {errors.password && (
                 <span
                   className={[
@@ -210,6 +226,54 @@ function Register() {
                 </span>
               )}
             </div>
+            <div className={styles.register__form__row}>
+              <input
+                minLength={4}
+                maxLength={20}
+                type={showConfirmPassword?"password":"text"}
+                autoComplete="off"
+                placeholder="Confirmar contraseña"
+                className={[
+                  styles.texto,
+                  styles.register__form__input,
+                  styles.register__form__contraseña,
+                  errors.confirmPassword && styles.register__form__error,
+                ].join(" ")}
+                {...register("confirmPassword", {
+                  required: {
+                    value: true,
+                    message: "Debe confirmar su contraseña",
+                  },
+                  minLength: {
+                    value: 4,
+                    message: "Como mínimo 4 caracteres",
+                  },
+                  maxLength: {
+                    value: 16,
+                    message: "No exceda los 16 caracteres",
+                  },
+                  validate: (value) =>
+                    value === getValues("password") || "Las contraseñas no coinciden",
+                })}
+              />
+              <img 
+                className={styles.iconEye} 
+                src={showConfirmPassword? openEye : closedEye} 
+                alt={showConfirmPassword? "mostrar constraseña" : "ocultar contraseña"}
+                title={showConfirmPassword? "mostrar constraseña" : "ocultar contraseña"}
+                onClick={() => showConfirmPassword? setShowConfirmPassword(false):setShowConfirmPassword(true)}
+              />
+              {errors.confirmPassword && (
+                <span
+                  className={[
+                    styles.register__form__error,
+                    styles.register__form__errorSpan,
+                  ].join(" ")}
+                >
+                  {errors.confirmPassword.message}
+                </span>
+              )}
+            </div>
             <div
               className={[
                 styles["register__form__row"],
@@ -217,7 +281,8 @@ function Register() {
                 styles["titulos"],
               ].join(" ")}
             >
-              <button className={styles.register__form__button} type="submit">
+              {generalError && <span className={styles.generalError} >{generalError}</span>}
+              <button className={styles.register__form__button} type="submit" onClick={() => setGeneralError("")}>
                 Registrarse
               </button>
               <span className={styles.texto}>
@@ -226,7 +291,7 @@ function Register() {
             </div>
           </form>
         </div>
-        <Toaster position="bottom-right" richColors />
+        {/* <Toaster position="bottom-right" richColors /> */}
       </main>
     </>
   );

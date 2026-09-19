@@ -44,6 +44,7 @@ export function UserProvider({ children }: UserProviderProps) {
     );
 
     if (usuarioExistente) {
+      console.log("El email ya está registrado");
       toast.error("El email ya está registrado");
       return;
     }
