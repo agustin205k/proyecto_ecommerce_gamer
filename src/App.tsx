@@ -6,6 +6,7 @@ import Layout from "./components/layout/layout";
 import Home from "./pages/Home/home";
 import Detail from "./pages/Detail/detail";
 import Admin from "./pages/Admin/admin";
+import Usuarios from "./pages/Admin/Usuarios";
 import About from "./pages/About/about";
 import Error404 from "./pages/Error404/error404";
 import GameProvider from "./context/gameContext/gameProvider";
@@ -25,13 +26,21 @@ function App() {
             <Routes>
               <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
-                <Route path="detail/:id" element={<Detail/>} />
+                <Route path="detail/:id" element={<Detail />} />
                 <Route path="search/:query" element={<SearchPage />} />
                 <Route
                   path="admin"
                   element={
                     <RutaProtegida>
                       <Admin />
+                    </RutaProtegida>
+                  }
+                />
+                <Route
+                  path="admin/usuarios"
+                  element={
+                    <RutaProtegida>
+                      <Usuarios />
                     </RutaProtegida>
                   }
                 />
