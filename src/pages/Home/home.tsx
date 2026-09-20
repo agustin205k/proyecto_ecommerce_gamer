@@ -79,12 +79,6 @@ function Home() {
         <div className="categories-header">
           <div className="categories-title">
             <h2>CATEGORÍAS</h2>
-            {/* <button
-              onClick={newGame}
-            >crearJuego</button>
-            <button
-              onClick={readGames}
-            >leerJuegos</button> */}
             <p>Encontrá tu próximo juego</p>
           </div>
           <a href="/categorias" className="btn-see-all">

@@ -12,18 +12,26 @@ import {
 } from "../../context/gameContext/gameContext";
 
 import { useGame } from "../../hooks/useGame";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../hooks/useUser";
 
 interface GameCardProps {
   juego: Game;
 }
 
 function GameCard({ juego }: GameCardProps) {
-
+  const navigate = useNavigate();
   const { agregarCarrito } = useGame();
+  const {usuarioActual} = useUser();
+
+  const toDetail = ()=>{
+    navigate("/detail/" + juego.game_id);
+  }
+
 
 
   const handleAgregarCarrito = () => {
-
+    if(!usuarioActual) return alert("Debe iniciar sesion para comprar juegos")
     const agregado =
       agregarCarrito(juego);
 
@@ -47,7 +55,7 @@ function GameCard({ juego }: GameCardProps) {
 
     <article className="game-card">
 
-      <div className="game-card-image">
+      <div className="game-card-image" onClick={toDetail}>
 
         <img
           src={

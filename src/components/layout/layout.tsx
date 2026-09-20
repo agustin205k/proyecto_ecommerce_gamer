@@ -7,10 +7,9 @@ import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
 import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
 import type { MenuProps } from "antd";
-import { useState } from "react";
+import {  useState } from "react";
 import { useUser } from "../../hooks/useUser";
 import { useGame } from "../../hooks/useGame";
-
 
 interface Juego {
   id: number;
@@ -91,7 +90,7 @@ function Layout() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { usuarioActual, cerrarSesion } = useUser();
-   const { carrito } = useGame();
+  const { carrito } = useGame();
 
   const usuarioItems: MenuProps["items"] = usuarioActual
     ? usuarioActual.rol === "admin"
@@ -180,13 +179,19 @@ function Layout() {
 
           {/* ACCIONES */}
           <div className="navbar-actions">
-            <Link to="/cart" className="navbar-action">
-  <ShoppingCart />
+            <button 
+             className="navbar-action"
+             onClick={()=>{
+              if(!usuarioActual) return alert("Debe iniciar sesión para ver su carrito");
+              navigate("/cart");
+             }}
+            >
+              <ShoppingCart />
 
-  <span className="cart-count">
-    {carrito.length}
-  </span>
-</Link>
+              <span className={usuarioActual? "cart-count":undefined}>
+                {usuarioActual && carrito.length}
+              </span>
+            </button>
             <Dropdown
               menu={{
                 items: usuarioItems,

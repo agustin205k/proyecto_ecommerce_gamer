@@ -2,7 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-
+import { message } from "antd";
 /* Local */
 import styles from "./detail.module.css";
 import cart from "../../assets/icons/cart4.svg";
@@ -12,8 +12,7 @@ import nexoraIcon from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
 import suit_heart from "../../assets/icons/suit-heart-fill.svg";
 import { useGame } from "../../hooks/useGame";
 import { type Game } from "../../context/gameContext/gameContext";
-import { type Usuario } from "../../context/userContext/userContext";
-import { getLS } from "../../utils/localstorage";
+import { useUser } from "../../hooks/useUser";
 
 export interface GameReview{
   comment:string;
@@ -25,16 +24,7 @@ function Detail(){
   const {id} = useParams<{ id: string }>();
   const {games,getGame,agregarCarrito} = useGame();
   const [gameInfo,setGameInfo] = useState<Game>();
-  const [actualUser,setActualUser] = useState<Usuario>();
-
-  useEffect(()=>{
-    (function(){
-      const isUserLogged:Usuario[] | undefined= getLS<Usuario[]>("usuarioActual");
-      if(!Array.isArray(isUserLogged)){
-        setActualUser(isUserLogged);
-      }
-    })()
-  },[]);
+  const {usuarioActual} = useUser();
 
   useEffect(()=>{
     (function(){
@@ -64,7 +54,7 @@ function Detail(){
   }
 
   const handleAddToCart = () => {
-  if (!actualUser) {
+  if (!usuarioActual) {
     return alert("Debe iniciar sesión para comprar");
   }
 
@@ -75,10 +65,14 @@ function Detail(){
   const agregado = agregarCarrito(gameInfo);
 
   if (agregado === false) {
-    return alert("Este juego ya está en tu carrito");
+    return message.info(
+        "Este juego ya está en tu carrito"
+    );
   }
 
-  alert("¡Juego añadido al carrito exitosamente!");
+  message.success(
+      `${gameInfo.title} se agregó al carrito`
+    );
 };
 
   const handleFav = () => {
@@ -129,7 +123,7 @@ function Detail(){
               <button 
                id={styles["fav-btn"]}
                style={{
-                display:actualUser?"":"none"
+                display:usuarioActual?"":"none"
                }} 
                className={styles["btn-fav"]} 
                aria-label="Añadir a favoritos"
@@ -161,7 +155,7 @@ function Detail(){
           <form 
            className={styles["review-form"]}
            style={{
-            display: actualUser? "":"none"
+            display: usuarioActual? "":"none"
            }} 
            onSubmit={handleSubmit((data)=> submit(data,reviewCounter))}
           >
@@ -208,7 +202,7 @@ function Detail(){
               </div>
             </div>
             
-            <h2 className={styles["fuenteTitulo"]}>{actualUser?.nombre}</h2>
+            <h2 className={styles["fuenteTitulo"]}>{usuarioActual?.nombre}</h2>
 
             <textarea 
              maxLength={102}
