@@ -1,6 +1,6 @@
-/* ============================================================
-   VARIABLES GLOBALES
-   ============================================================ */
+/* VARIABLES */
+
+
 :root {
   /* fondos */
   --color-fondo: #0b0b0b;
@@ -35,9 +35,11 @@
   --fuente-carousel: "Teko", sans-serif;
 }
 
-/* ============================================================
-   PÁGINA — Contenedor principal
-   ============================================================ */
+
+
+/* PAGINA */
+
+
 .seccion-panel {
   width: 100%;
   max-width: 1200px;
@@ -54,9 +56,12 @@
   text-align: left;
 }
 
-/* ============================================================
-   ENCABEZADO — Título y línea divisoria
-   ============================================================ */
+
+
+
+/* HEADER */
+
+
 .panel-header {
   margin-bottom: 12px;
 }
@@ -82,9 +87,11 @@
     0 0 16px rgba(255, 122, 0, 0.3);
 }
 
-/* ============================================================
-   DESCRIPCIÓN
-   ============================================================ */
+
+
+/* DESCRIPCION */
+
+
 .panel-descripcion {
   margin: 24px 0 32px;
 
@@ -93,9 +100,12 @@
   line-height: 1.6;
 }
 
-/* ============================================================
-   ACCIONES — Botones del panel
-   ============================================================ */
+
+
+
+/* BOTONES */
+
+
 .panel-acciones {
   display: flex;
   align-items: center;
@@ -130,7 +140,7 @@
     transform 0.3s ease;
 }
 
-/* botón principal (naranja) */
+
 .btn-primario {
   background-color: var(--color-naranja);
   color: var(--color-texto);
@@ -142,7 +152,7 @@
   transform: translateY(-2px);
 }
 
-/* botón secundario (outline naranja) */
+
 .btn-outline {
   background-color: rgba(255, 122, 0, 0.08);
   border: 1px solid rgba(255, 122, 0, 0.3);
@@ -156,10 +166,10 @@
   box-shadow: 0 4px 15px rgba(255, 122, 0, 0.3);
 }
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-/* tablet / notebooks pequeñas */
+
+
+/* RESPONSIVE */
+
 @media (max-width: 1024px) {
   .seccion-panel {
     padding: 40px 24px;
@@ -170,7 +180,7 @@
   }
 }
 
-/* tablet / móviles grandes */
+
 @media (max-width: 768px) {
   .seccion-panel {
     padding: 32px 20px;
@@ -191,7 +201,7 @@
   }
 }
 
-/* móviles pequeños */
+
 @media (max-width: 480px) {
   .seccion-panel {
     padding: 24px 16px;

@@ -1,6 +1,5 @@
-/* ============================================================
-   VARIABLES GLOBALES
-   ============================================================ */
+/* VARIABLES */
+
 :root {
   /* fondos */
   --color-fondo: #0b0b0b;
@@ -35,9 +34,10 @@
   --fuente-carousel: "Teko", sans-serif;
 }
 
-/* ============================================================
-   PÁGINA — Contenedor principal
-   ============================================================ */
+
+
+/* PAGINA */
+
 .seccion-panel {
   width: 100%;
   max-width: 1200px;
@@ -54,9 +54,10 @@
   text-align: left;
 }
 
-/* ============================================================
-   ENCABEZADO — Título y línea divisoria
-   ============================================================ */
+
+
+/* HEADER */
+
 .panel-header {
   margin-bottom: 8px;
 }
@@ -82,9 +83,10 @@
     0 0 16px rgba(255, 122, 0, 0.3);
 }
 
-/* ============================================================
-   BARRA SUPERIOR — Contador y botón de acción
-   ============================================================ */
+
+
+/* BARRA CONTADOR */
+
 .barra-superior {
   display: flex;
   align-items: center;
@@ -116,9 +118,10 @@
     0 0 16px rgba(255, 122, 0, 0.35);
 }
 
-/* ============================================================
-   BOTONES
-   ============================================================ */
+
+
+/* BOTONES */
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -145,7 +148,7 @@
     transform 0.3s ease;
 }
 
-/* botón principal (naranja) */
+
 .btn-primario {
   background-color: var(--color-naranja);
   color: var(--color-texto);
@@ -157,7 +160,7 @@
   transform: translateY(-2px);
 }
 
-/* botón secundario / editar (outline naranja) */
+
 .btn-outline,
 .btn-editar {
   background-color: rgba(255, 122, 0, 0.08);
@@ -173,7 +176,7 @@
   box-shadow: 0 4px 15px rgba(255, 122, 0, 0.3);
 }
 
-/* botón peligro */
+
 .btn-eliminar {
   background-color: rgba(229, 57, 53, 0.1);
   border: 1px solid rgba(229, 57, 53, 0.4);
@@ -187,7 +190,7 @@
   box-shadow: 0 4px 12px rgba(229, 57, 53, 0.35);
 }
 
-/* botón cancelar (neutro) */
+
 .btn-cancelar {
   background-color: transparent;
   border: 1px solid var(--color-borde);
@@ -203,9 +206,10 @@
   margin-left: auto;
 }
 
-/* ============================================================
-   FORMULARIO
-   ============================================================ */
+
+
+/* FORMULARIO */
+
 .formulario-card {
   margin: 28px 0;
   padding: 28px;
@@ -301,9 +305,10 @@
   margin-top: 6px;
 }
 
-/* ============================================================
-   LISTA DE USUARIOS
-   ============================================================ */
+
+
+/* LISTA DE USUARIOS CRUD */
+
 .lista-usuarios {
   list-style: none;
   margin: 0;
@@ -364,7 +369,7 @@
   font-size: 0.72rem;
 }
 
-/* badge de rol */
+
 .badge-rol {
   display: inline-flex;
   align-items: center;
@@ -399,9 +404,10 @@
   gap: 10px;
 }
 
-/* ============================================================
-   MODAL DE CONFIRMACIÓN (Ant Design)
-   ============================================================ */
+
+
+/* MODAL DE CONFIRMACION DE ELIMINACION */
+
 .ant-modal-mask {
   background-color: rgba(0, 0, 0, 0.72) !important;
   backdrop-filter: blur(2px);
@@ -474,17 +480,16 @@
 }
 
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-/* tablet / notebooks pequeñas */
+
+/* RESPONSIVE */
+
 @media (max-width: 1024px) {
   .seccion-panel {
     padding: 40px 24px;
   }
 }
 
-/* tablet / móviles grandes */
+
 @media (max-width: 768px) {
   .seccion-panel {
     padding: 32px 20px;
@@ -513,7 +518,7 @@
   }
 }
 
-/* móviles pequeños */
+
 @media (max-width: 480px) {
   .seccion-panel {
     padding: 24px 16px;
