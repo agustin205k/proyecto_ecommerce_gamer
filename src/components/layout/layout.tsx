@@ -7,7 +7,7 @@ import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
 import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
 import type { MenuProps } from "antd";
-import {  useState } from "react";
+import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
 import { useGame } from "../../hooks/useGame";
 
@@ -156,14 +156,10 @@ function Layout() {
             >
               <form onSubmit={handleSubmit}>
                 <AutoComplete
-                  variant="borderless"
                   options={opciones}
                   value={query}
-                  style={{ width: "600px" }}
                   onChange={(value) => setQuery(value)}
-                  placeholder="Buscar juegos..."
                   className="search-autocomplete"
-                  dropdownStyle={{ backgroundColor: "#171717" }}
                   filterOption={(inputValue, option) =>
                     option?.value
                       ? option.value
@@ -172,23 +168,31 @@ function Layout() {
                           .includes(inputValue.toLowerCase())
                       : false
                   }
-                />
+                >
+                  <input
+                    type="text"
+                    placeholder="Buscar juegos..."
+                    maxLength={60}
+                    className="custom-search-input"
+                  />
+                </AutoComplete>
               </form>
             </ConfigProvider>
           </div>
 
           {/* ACCIONES */}
           <div className="navbar-actions">
-            <button 
-             className="navbar-action"
-             onClick={()=>{
-              if(!usuarioActual) return alert("Debe iniciar sesión para ver su carrito");
-              navigate("/cart");
-             }}
+            <button
+              className="navbar-action"
+              onClick={() => {
+                if (!usuarioActual)
+                  return alert("Debe iniciar sesión para ver su carrito");
+                navigate("/cart");
+              }}
             >
               <ShoppingCart />
 
-              <span className={usuarioActual? "cart-count":undefined}>
+              <span className={usuarioActual ? "cart-count" : undefined}>
                 {usuarioActual && carrito.length}
               </span>
             </button>

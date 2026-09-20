@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import { message } from "antd";
 /* Local */
 import styles from "./detail.module.css";
@@ -50,12 +51,17 @@ function Detail(){
       review: [review]
     };
     console.log(newReview.comment + review.toString());
-    alert("¡Gracias por tu reseña!");
+    message.info(
+        "¡Gracias por tu reseña!"
+      )
+
   }
 
   const handleAddToCart = () => {
   if (!usuarioActual) {
-    return alert("Debe iniciar sesión para comprar");
+    return message.info(
+        "Debe iniciar sesion para comprar juegos"
+      )
   }
 
   if (!gameInfo) {

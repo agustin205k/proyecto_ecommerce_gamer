@@ -31,7 +31,9 @@ function GameCard({ juego }: GameCardProps) {
 
 
   const handleAgregarCarrito = () => {
-    if(!usuarioActual) return alert("Debe iniciar sesion para comprar juegos")
+    if(!usuarioActual) return message.info(
+        "Debe iniciar sesion para comprar juegos"
+      )
     const agregado =
       agregarCarrito(juego);
 
