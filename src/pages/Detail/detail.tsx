@@ -23,7 +23,7 @@ function Detail(){
   const [favActive, setFavActive] = useState<boolean>(false);
   const [reviewCounter,setReviewCounter] = useState<number>(0);
   const {id} = useParams<{ id: string }>();
-  const {games,getGame} = useGame();
+  const {games,getGame,agregarCarrito} = useGame();
   const [gameInfo,setGameInfo] = useState<Game>();
   const [actualUser,setActualUser] = useState<Usuario>();
 
@@ -64,9 +64,22 @@ function Detail(){
   }
 
   const handleAddToCart = () => {
-    if(!actualUser) return alert("Debe iniciar sesion para comprar") ; 
-    alert("¡Juego añadido al carrito exitosamente!");
-  };
+  if (!actualUser) {
+    return alert("Debe iniciar sesión para comprar");
+  }
+
+  if (!gameInfo) {
+    return;
+  }
+
+  const agregado = agregarCarrito(gameInfo);
+
+  if (agregado === false) {
+    return alert("Este juego ya está en tu carrito");
+  }
+
+  alert("¡Juego añadido al carrito exitosamente!");
+};
 
   const handleFav = () => {
     console.log(favActive);

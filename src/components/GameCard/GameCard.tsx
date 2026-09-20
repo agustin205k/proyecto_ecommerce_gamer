@@ -4,66 +4,49 @@ import { ShoppingCart } from "lucide-react";
 import { message } from "antd";
 
 /* Local */
-<<<<<<< HEAD
 
 import "./GameCard.css";
 
-import { type Game } from "../../context/gameContext/gameContext";
-import { getLS, setLS } from "../../utils/localstorage";
+import {
+  type Game,
+} from "../../context/gameContext/gameContext";
 
-=======
-import "./GameCard.css";
-import { useNavigate } from "react-router-dom";
-import { type Game } from "../../context/gameContext/gameContext";
+import { useGame } from "../../hooks/useGame";
 
->>>>>>> 41a0c00874ff5ae21f5e3c4a3ea93361052cba23
 interface GameCardProps {
   juego: Game;
 }
 
 function GameCard({ juego }: GameCardProps) {
-<<<<<<< HEAD
+
+  const { agregarCarrito } = useGame();
+
 
   const handleAgregarCarrito = () => {
-    // Obtener los juegos que ya están en el carrito
-    const carrito = getLS<Game[]>("carrito") ?? [];
 
-    // Verificar si el juego ya está agregado
-    const yaExiste = carrito.some(
-      (juegoCarrito) => juegoCarrito.game_id === juego.game_id
-    );
+    const agregado =
+      agregarCarrito(juego);
 
-    if (yaExiste) {
-      message.info("Este juego ya está en tu carrito");
+    if (agregado === false) {
+
+      message.info(
+        "Este juego ya está en tu carrito"
+      );
+
       return;
     }
 
-    // Agregar el nuevo juego
-    const nuevoCarrito = [...carrito, juego];
+    message.success(
+      `${juego.title} se agregó al carrito`
+    );
 
-    // Guardar el carrito
-    setLS("carrito", nuevoCarrito);
-
-    // Mostrar mensaje
-    message.success(`${juego.title} se agregó al carrito`);
   };
 
+
   return (
+
     <article className="game-card">
 
-=======
-  const navigate = useNavigate();
-
-  const toDetail = (id:string)=>{
-    navigate("/detail/" + id);
-  }
-
-  return (
-    <article 
-    className="game-card"
-    onClick={() => toDetail(juego.game_id)}
-    >
->>>>>>> 41a0c00874ff5ae21f5e3c4a3ea93361052cba23
       <div className="game-card-image">
 
         <img
@@ -76,14 +59,22 @@ function GameCard({ juego }: GameCardProps) {
         />
 
         <div className="game-card-category">
+
           {juego.genre.map((m, i) => (
-            <span key={i} className="game-category">
+
+            <span
+              key={i}
+              className="game-category"
+            >
               {m}
             </span>
+
           ))}
+
         </div>
 
       </div>
+
 
       <div className="game-card-info">
 
@@ -102,6 +93,7 @@ function GameCard({ juego }: GameCardProps) {
             onClick={handleAgregarCarrito}
           >
             <ShoppingCart size={16} />
+
             AGREGAR
           </button>
 
@@ -110,6 +102,7 @@ function GameCard({ juego }: GameCardProps) {
       </div>
 
     </article>
+
   );
 }
 

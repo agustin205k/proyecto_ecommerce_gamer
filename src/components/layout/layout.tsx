@@ -7,10 +7,10 @@ import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
 import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
 import type { MenuProps } from "antd";
-import { getLS} from "../../utils/localstorage";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
-import type { Game } from "../../context/gameContext/gameContext";
+import { useGame } from "../../hooks/useGame";
+
 
 interface Juego {
   id: number;
@@ -89,23 +89,9 @@ const categoriasItems: MenuProps["items"] = [
 
 function Layout() {
   const [query, setQuery] = useState("");
-  const [cantidadCarrito, setCantidadCarrito] = useState(0);
   const navigate = useNavigate();
   const { usuarioActual, cerrarSesion } = useUser();
-
-  useEffect(() => {
-
-    function juegosCarrito() {
-      
-      const carrito = getLS<Game[]>("carrito") ?? [];
-  
-      setCantidadCarrito(carrito.length);
-    }
-    juegosCarrito
-    ()
-
-
-  }, []);
+   const { carrito } = useGame();
 
   const usuarioItems: MenuProps["items"] = usuarioActual
     ? usuarioActual.rol === "admin"
@@ -195,10 +181,12 @@ function Layout() {
           {/* ACCIONES */}
           <div className="navbar-actions">
             <Link to="/cart" className="navbar-action">
-              <ShoppingCart />
-              <span className="cart-count">0</span>
-            </Link>
+  <ShoppingCart />
 
+  <span className="cart-count">
+    {carrito.length}
+  </span>
+</Link>
             <Dropdown
               menu={{
                 items: usuarioItems,
