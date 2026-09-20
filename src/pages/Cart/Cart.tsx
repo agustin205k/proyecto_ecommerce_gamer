@@ -1,12 +1,23 @@
 import { ShoppingCart, ArrowLeft, Trash2 } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Cart.css";
 import { useGame } from "../../hooks/useGame";
 import { message } from "antd";
+import { useEffect } from "react";
+import { useUser } from "../../hooks/useUser";
 
 
 function Cart() {
   const { carrito, eliminarCarrito, vaciarCarrito } = useGame();
+  const navigate = useNavigate();
+  const {usuarioActual} = useUser();
+
+  useEffect(()=>{
+    (function(){
+      if(!usuarioActual) return navigate("/");
+    })()
+  },[]);
+
   const subtotal = carrito.reduce(
     (total, juego) => total + juego.price,
     0
