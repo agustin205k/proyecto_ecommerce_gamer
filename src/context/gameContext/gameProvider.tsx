@@ -110,8 +110,12 @@ const GameProvider = ({children}:GameProviderProps) =>{
 
   };
 
+  const vaciarCarrito = () => {
+  setCarrito([]);
+};
+
   return(
-    <GameContext.Provider value={{games,addGame,getGames,getGame,updateGame,removeGame,carrito,eliminarCarrito,agregarCarrito}}>
+    <GameContext.Provider value={{games,addGame,getGames,getGame,updateGame,removeGame,carrito,eliminarCarrito,agregarCarrito,vaciarCarrito}}>
       {children}
     </GameContext.Provider>
   );

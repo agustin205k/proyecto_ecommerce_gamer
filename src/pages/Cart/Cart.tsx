@@ -1,264 +1,139 @@
-import {
-  ShoppingCart,
-  ArrowLeft,
-  Trash2,
-} from "lucide-react";
-
+import { ShoppingCart, ArrowLeft, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
-
 import "./Cart.css";
-
 import { useGame } from "../../hooks/useGame";
+import { message } from "antd";
+
 
 function Cart() {
-
-  const {
-    carrito,
-    eliminarCarrito,
-  } = useGame();
-
-
+  const { carrito, eliminarCarrito, vaciarCarrito } = useGame();
   const subtotal = carrito.reduce(
-    (total, juego) =>
-      total + juego.price,
+    (total, juego) => total + juego.price,
     0
   );
+ const handleComprar = () => {
+  if (carrito.length === 0) {
+    message.info("Tu carrito está vacío. Agregá un juego antes de comprar.");
+    return;
+  }
 
-
+  vaciarCarrito();
+  message.success("¡Compra realizada con éxito! 🎮");
+};
   return (
-
     <main className="carrito-page">
-
       <div className="carrito-header">
-
         <h1>MI CARRITO</h1>
 
-        <p>
-          Revisá los juegos que seleccionaste
-          antes de comprar.
-        </p>
-
+        <p>Revisá los juegos que seleccionaste antes de comprar.</p>
       </div>
 
-
       <div className="carrito-content">
-
-
         {/* JUEGOS SELECCIONADOS */}
 
         <section className="carrito-juegos">
-
           <div className="carrito-section-header">
-
             <ShoppingCart />
 
-            <h2>
-              JUEGOS SELECCIONADOS
-            </h2>
-
+            <h2>JUEGOS SELECCIONADOS</h2>
           </div>
 
-
           {carrito.length === 0 ? (
-
             <div className="carrito-vacio">
-
               <div className="carrito-vacio-icon">
-
                 <ShoppingCart />
-
               </div>
 
-              <h2>
-                Tu carrito está vacío
-              </h2>
+              <h2>Tu carrito está vacío</h2>
 
               <p>
-                Todavía no agregaste ningún juego.
-                Explorá nuestro catálogo y
+                Todavía no agregaste ningún juego. Explorá nuestro catálogo y
                 encontrá tu próxima aventura.
               </p>
 
-              <Link
-                to="/"
-                className="btn-ver-catalogo"
-              >
-
+              <Link to="/" className="btn-ver-catalogo">
                 <ArrowLeft size={18} />
-
                 VER CATÁLOGO
-
               </Link>
-
             </div>
-
           ) : (
-
             <div className="juegos-lista">
-
               {carrito.map((juego) => (
-
-                <article
-                  className="juego-carrito"
-                  key={juego.game_id}
-                >
-
+                <article className="juego-carrito" key={juego.game_id}>
                   <div className="juego-carrito-imagen">
-
-                    <img
-                      src={juego.img_portrait}
-                      alt={juego.title}
-                    />
-
+                    <img src={juego.img_portrait} alt={juego.title} />
                   </div>
-
 
                   <div className="juego-carrito-info">
-
                     <div className="juego-carrito-categoria">
-
-                      {juego.genre.map(
-                        (genero, index) => (
-
-                          <span
-                            key={index}
-                            className="game-category"
-                          >
-                            {genero}
-                          </span>
-
-                        )
-                      )}
-
+                      {juego.genre.map((genero, index) => (
+                        <span key={index} className="game-category">
+                          {genero}
+                        </span>
+                      ))}
                     </div>
 
+                    <h3>{juego.title}</h3>
 
-                    <h3>
-                      {juego.title}
-                    </h3>
-
-
-                    <p>
-                      {juego.description}
-                    </p>
-
+                    <p>{juego.description}</p>
 
                     <strong className="juego-carrito-precio">
-
-                      $
-                      {juego.price.toLocaleString(
-                        "es-AR"
-                      )}
-
+                      ${juego.price.toLocaleString("es-AR")}
                     </strong>
-
                   </div>
-
 
                   <button
                     className="btn-eliminar-juego"
-                    aria-label={
-                      `Eliminar ${juego.title}`
-                    }
-                    onClick={() =>
-                      eliminarCarrito(
-                        juego.game_id
-                      )
-                    }
+                    aria-label={`Eliminar ${juego.title}`}
+                    onClick={() => eliminarCarrito(juego.game_id)}
                   >
-
                     <Trash2 size={20} />
-
                   </button>
-
                 </article>
-
               ))}
-
             </div>
-
           )}
-
         </section>
-
 
         {/* RESUMEN */}
 
         <aside className="cart-summary">
-
-          <h2>
-            RESUMEN DE COMPRA
-          </h2>
-
+          <h2>RESUMEN DE COMPRA</h2>
 
           <div className="summary-line">
+            <span>Juegos</span>
 
-            <span>
-              Juegos
-            </span>
-
-            <span>
-              {carrito.length}
-            </span>
-
+            <span>{carrito.length}</span>
           </div>
-
 
           <div className="summary-line">
+            <span>Subtotal</span>
 
-            <span>
-              Subtotal
-            </span>
-
-            <span>
-              ${subtotal.toLocaleString("es-AR")}
-            </span>
-
+            <span>${subtotal.toLocaleString("es-AR")}</span>
           </div>
 
-
-          <div className="summary-divider">
-          </div>
-
+          <div className="summary-divider"></div>
 
           <div className="summary-total">
+            <span>TOTAL</span>
 
-            <span>
-              TOTAL
-            </span>
-
-            <strong>
-              ${subtotal.toLocaleString("es-AR")}
-            </strong>
-
+            <strong>${subtotal.toLocaleString("es-AR")}</strong>
           </div>
-
 
           <button
             className="btn-comprar"
-            disabled={carrito.length === 0}
+            onClick={handleComprar}
           >
             COMPRAR AHORA
           </button>
 
-
-          <Link
-            to="/"
-            className="btn-seguir-comprando"
-          >
-
+          <Link to="/" className="btn-seguir-comprando">
             <ArrowLeft size={16} />
-
             SEGUIR COMPRANDO
-
           </Link>
-
         </aside>
-
       </div>
-
     </main>
-
   );
 }
 
