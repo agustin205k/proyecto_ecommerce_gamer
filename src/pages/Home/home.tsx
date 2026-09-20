@@ -14,12 +14,9 @@ import {
   MessageSquare,
   Zap,
   ShieldCheck,
-  Send,
-  Search,
   MoveRight,
 } from "lucide-react";
-
-/* Local */
+import { Link} from "react-router-dom";
 import "./home.css";
 import GameCard from "../../components/GameCard/GameCard";
 import { useGame } from "../../hooks/useGame";
@@ -35,7 +32,9 @@ function Home() {
             <div className="info-carousel">
               <h2>TU PRÓXIMA AVENTURA COMIENZA AQUÍ</h2>
               <p>Descubrí, elegí y jugá.</p>
+              <Link to="/404">
               <button className="btn-carousel">VER CATÁLOGO</button>
+              </Link>,
             </div>
           </div>
         </div>
@@ -45,7 +44,9 @@ function Home() {
             <div className="info-carousel">
               <h2>¿LISTO PARA LA ACCIÓN?</h2>
               <p>Descubrí nuestra selección de juegos de acción.</p>
+              <Link to="/404">
               <button className="btn-carousel">VER ACCIÓN</button>
+              </Link>,
             </div>
           </div>
         </div>
@@ -59,7 +60,9 @@ function Home() {
                 Gaming.
               </p>
               <p className="highlight-text">🔥 PRE-REGISTRO ABIERTO</p>
+              <Link to="/404">
               <button className="btn-carousel">PRE-REGISTRARME →</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -69,7 +72,9 @@ function Home() {
             <div className="info-carousel">
               <h2>NUEVOS LANZAMIENTOS</h2>
               <p>Descubrí los últimos títulos.</p>
+              <Link to="/404">
               <button className="btn-carousel">VER NOVEDADES</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -203,10 +208,11 @@ function Home() {
           </div>
 
           <div className="section-divider"></div>
-
+          <Link to="/404">
           <button className="btn-see-all">
             VER TODOS <MoveRight />
           </button>
+          </Link>,
         </div>
         <section className="section-card">
           {getGames().map((juego) => (
@@ -225,10 +231,11 @@ function Home() {
           </div>
 
           <div className="section-divider"></div>
-
+          <Link to="/404">
           <button className="btn-see-all">
             VER TODOS <MoveRight />
           </button>
+          </Link>,
         </div>
 
         <section className="section-card">
@@ -241,30 +248,6 @@ function Home() {
         </section>
       </section>
 
-      <section className="request-game-container">
-        <div className="request-info">
-          <div className="request-icon-wrapper">
-            <Search className="request-icon" />
-          </div>
-          <div className="request-text">
-            <h3>¿No encontrás el juego que buscás?</h3>
-            <p>
-              Pedilo y lo agregamos al catálogo. Dejanos el nombre y nos
-              encargamos del resto.
-            </p>
-          </div>
-        </div>
-        <div className="request-form">
-          <input
-            type="text"
-            className="request-input"
-            placeholder="Ej: Grand Theft Auto VI, FIFA 27..."
-          />
-          <button type="submit" className="btn-request">
-            Solicitar <Send size={16} />
-          </button>
-        </div>
-      </section>
     </>
   );
 }
