@@ -2,6 +2,7 @@
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import { message } from "antd";
 /* Local */
 import styles from "./detail.module.css";

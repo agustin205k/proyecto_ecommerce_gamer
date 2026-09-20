@@ -183,6 +183,18 @@
 .navbar-search .ant-select {
   width: 100% !important;
 }
+.navbar-search input {
+  margin-left: 6px;
+  width: 600px;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-texto);
+  outline: none;
+  height: 30px;
+  box-sizing: border-box;
+}
+
 
 
 
@@ -393,55 +405,7 @@
   letter-spacing: 0.8px;
 }
 
-/* =========================================
-   ESTILOS DROPDOWN Y BOTÓN DE CATEGORÍAS
-========================================= */
 
-/* 1. Sobrescribir el botón en Hover, Focus y Click/Active */
-.navbar-dropdown-button.ant-btn:hover,
-.navbar-dropdown-button.ant-btn:focus,
-.navbar-dropdown-button.ant-btn:focus-visible,
-.navbar-dropdown-button.ant-btn:active,
-.ant-dropdown-open .navbar-dropdown-button {
-  background: transparent !important;
-  color: var(--color-naranja-claro) !important;
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-/* 2. Quitar el borde azul de enfoque (outline) nativo */
-.navbar-dropdown-button:focus,
-.navbar-dropdown-button:focus-visible {
-  outline: none !important;
-  border-color: transparent !important;
-}
-
-/* 3. Estilos del menú desplegable (Opciones de Categorías) */
-.ant-dropdown .ant-dropdown-menu {
-  background-color: var(--color-card) !important;
-  border: 1px solid var(--color-borde) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
-  padding: 6px !important;
-}
-
-/* Estilo de cada ítem de categoría */
-.ant-dropdown .ant-dropdown-menu-item {
-  color: var(--color-texto-secundario) !important;
-  font-family: var(--fuente-textos) !important;
-  font-size: 0.88rem !important;
-  border-radius: 6px !important;
-  transition: all 0.2s ease !important;
-}
-
-/* Hover y selección de las opciones del menú */
-.ant-dropdown .ant-dropdown-menu-item:hover,
-.ant-dropdown .ant-dropdown-menu-item-active,
-.ant-dropdown .ant-dropdown-menu-item-selected {
-  background-color: rgba(255, 122, 0, 0.12) !important;
-  color: var(--color-dorado-claro) !important;
-}
 .navbar-menu .navbar-dropdown-button::after {
   content: "";
 
@@ -808,6 +772,8 @@
   .navbar-link {
     font-size: 0.7rem;
   }
+  
+  
 
 
   .footer-container {
@@ -913,6 +879,7 @@
     padding-left: 4px;
     padding-right: 4px;
   }
+  
 
 
   /* ---------- Footer ---------- */
