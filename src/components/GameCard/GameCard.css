@@ -4,6 +4,7 @@
   border-radius: 12px;
   overflow: hidden;
   transition: 0.3s ease;
+  cursor: pointer;
 }
 
 .game-card:hover {

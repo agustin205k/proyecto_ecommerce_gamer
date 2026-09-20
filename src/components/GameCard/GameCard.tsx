@@ -3,24 +3,25 @@ import { ShoppingCart } from "lucide-react";
 
 /* Local */
 import "./GameCard.css";
+import { useNavigate } from "react-router-dom";
 import { type Game } from "../../context/gameContext/gameContext";
-
-/* interface Juego {
-  id: number;
-  nombre: string;
-  categoria: string;
-  precio: number;
-  imagen: string;
-  descripcion: string;
-} */
 
 interface GameCardProps {
   juego: Game;
 }
 
 function GameCard({ juego }: GameCardProps) {
+  const navigate = useNavigate();
+
+  const toDetail = (id:string)=>{
+    navigate("/detail/" + id);
+  }
+
   return (
-    <article className="game-card">
+    <article 
+    className="game-card"
+    onClick={() => toDetail(juego.game_id)}
+    >
       <div className="game-card-image">
         <img src={juego.img_portrait === "" ? undefined : juego.img_portrait} alt={juego.title} />
         <div className="game-card-category">
