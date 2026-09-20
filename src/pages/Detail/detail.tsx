@@ -1,6 +1,6 @@
 /* Dependencies */
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { message } from "antd";
 /* Local */
@@ -11,7 +11,7 @@ import star_fill from "../../assets/icons/star-fill.svg";
 import nexoraIcon from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
 import suit_heart from "../../assets/icons/suit-heart-fill.svg";
 import { useGame } from "../../hooks/useGame";
-import { type Game } from "../../context/gameContext/gameContext";
+import { type Game,type Comments } from "../../context/gameContext/gameContext";
 import { useUser } from "../../hooks/useUser";
 
 export interface GameReview{
@@ -22,9 +22,9 @@ function Detail(){
   const [favActive, setFavActive] = useState<boolean>(false);
   const [reviewCounter,setReviewCounter] = useState<number>(0);
   const {id} = useParams<{ id: string }>();
-  const {games,getGame,agregarCarrito} = useGame();
+  const {games,getGame,agregarCarrito,updateGame} = useGame();
   const [gameInfo,setGameInfo] = useState<Game>();
-  const {usuarioActual} = useUser();
+  const {usuarioActual,usuarios} = useUser();
 
   useEffect(()=>{
     (function(){
@@ -39,23 +39,50 @@ function Detail(){
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<GameReview>({
+  } = useForm<Comments>({
       defaultValues: {
+      user_id:"",
+      comment_date:new Date().toISOString().slice(0,16),
       comment:""
     }});
     
-  const submit = (data:GameReview,review:number)=>{
-    const newReview = {
-      comment: data.comment,
-      review: [review]
+  
+  const getUser = (id:string)=>{
+    const userName = usuarios.find((u) => u.id === id);
+    return userName;
+  }
+
+  const submit = (data:GameReview,lastReview:number)=>{
+    if (!gameInfo) return;
+
+
+    const newComment: Comments = {
+      user_id: usuarioActual?.id ?? "",
+      comment_date: new Date().toISOString().slice(0,16),
+      comment: data.comment, // si tu tipo Comments lo incluye
+      review: lastReview,
     };
-    console.log(newReview.comment + review.toString());
-    alert("¡Gracias por tu reseña!");
+
+    const updatedGame: Game = {
+      ...gameInfo,
+      comments: [...gameInfo.comments, newComment],
+    };
+
+    // actualizo el estado local
+    setGameInfo(updatedGame);
+
+    // actualizo el contexto/global con updateGame
+    updateGame(updatedGame);
+
+    setReviewCounter(0);
+    console.log(updatedGame);
+
+    message.success("¡Se ha publicado su reseña!");
   }
 
   const handleAddToCart = () => {
   if (!usuarioActual) {
-    return alert("Debe iniciar sesión para comprar");
+    return message.info("Debe iniciar sesion para comprar");
   }
 
   if (!gameInfo) {
@@ -98,9 +125,22 @@ function Detail(){
               <span>Descarga digital</span>
             </div>
             <div className={styles["product-rating"]}>
-              <span className={styles["stars"]}>★ 4,9 ★★★★★</span>
-              <a href="#reseñas">29 reseñas</a>
-              <a href="#requisitos">Ver requisitos ?</a>
+              <span className={styles["stars"]}>
+                {(() => {
+                  if (!gameInfo?.comments || gameInfo.comments.length === 0) {
+                    return "Sin reseñas todavía";
+                  }
+                  const total = gameInfo.comments.reduce((acc, c) => acc + (c.review ?? 0), 0);
+                  const avg = total / gameInfo.comments.length;
+                  const rounded = Math.round(avg);
+                  const avgFormatted = avg.toFixed(1);
+                  return `${avgFormatted} ${"★".repeat(rounded)}`;
+                })()}
+              </span>
+              <a href="#">
+                {gameInfo?.comments?.length ?? 0} reseñas
+              </a>
+              <Link to={"/404"}>Ver requisitos ?</Link>
             </div>
             <div className={styles["product-price"]}>
               <span className={styles["currency"]}>$</span>
@@ -223,23 +263,38 @@ function Detail(){
              className={styles["btn-submit-review"]}
              >Publicar reseña</button>
           </form>
-          <div className={styles["reviews-list"]}>
-            <div className={styles["review-card"]}>
-              <div className={styles["review-header"]}>
-                <strong className={styles["fuenteTitulo"]}>Gonzalo M.</strong>
-                <span className={styles["review-stars"]}>★★★★★</span>
-              </div>
-              <span className={styles["review-date"]}>Hace 2 días</span>
-              <p className={styles["review-comment"]}>Excelente juego, los gráficos son de otra generación. El código llegó al instante a mi mail.</p>
-            </div>
-            <div className={styles["review-card"]}>
+          <div className={styles["reviews-list"]} id="reseña">
+            {gameInfo?.comments && gameInfo.comments.length > 0 ? (
+              gameInfo.comments
+                .slice(-5) // toma los últimos 5
+                .map((m, index) => (
+                  <div key={index} className={styles["review-card"]}>
+                    <div className={styles["review-header"]}>
+                      <strong className={styles["fuenteTitulo"]}>
+                        {getUser(m.user_id)?.nombre ?? "Usuario desconocido"}
+                      </strong>
+                      <span className={styles["review-stars"]}>{"★".repeat(m.review ?? 0)}</span>
+                    </div>
+                    <span className={styles["review-date"]}>
+                      {"publicado el " + m.comment_date}
+                    </span>
+                    <p className={styles["review-comment"]}>{m.comment}</p>
+                  </div>
+                ))
+            ) : (
+              <span className={styles["fuenteTitulo"]}>
+                No hay comentarios todavía, sé el primero
+              </span>
+            )}
+            
+            {/* <div className={styles["review-card"]}>
               <div className={styles["review-header"]}>
                 <strong className={styles["fuenteTitulo"]}>Lucía R.</strong>
                 <span className={styles["review-stars"]}>★★★★★</span>
               </div>
               <span className={styles["review-date"]}>Hace 1 semana</span>
               <p className={styles["review-comment"]}>Todo perfecto, pagué con transferencia y la activación en Nexora fue instantánea.</p>
-            </div>
+            </div> */}
           </div>
         </section>
       </div>
