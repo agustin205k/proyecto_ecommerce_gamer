@@ -24,7 +24,12 @@ export interface GameContextType {
   getGame: (id: string) => Game | undefined;
   getGames: () => Game[];
   removeGame: (id: string) => void;       
-  updateGame: (game: Game) => void;     
+  updateGame: (game: Game) => void;    
+  
+  carrito: Game[];
+  agregarCarrito: (game: Game) => boolean;
+  eliminarCarrito: (id: string) => void;
+  vaciarCarrito: () => void;
 }
 
 export const GameContext = createContext<GameContextType>({
@@ -44,4 +49,9 @@ export const GameContext = createContext<GameContextType>({
   getGames: () => [],
   removeGame: () => {},
   updateGame: () => {},
+
+   carrito: [],
+  agregarCarrito: () => false,
+  eliminarCarrito: () => {},
+  vaciarCarrito: () => {},
 });

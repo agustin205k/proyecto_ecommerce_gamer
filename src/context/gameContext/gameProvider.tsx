@@ -13,6 +13,7 @@ interface GameProviderProps {
 
 const GameProvider = ({children}:GameProviderProps) =>{
   const [games,setGames] = useState<Game[]>([]);
+  const [carrito, setCarrito] = useState<Game[]>([]);
 
   useEffect(()=>{
     (function(){
@@ -35,6 +36,26 @@ const GameProvider = ({children}:GameProviderProps) =>{
       }
     })()
   },[games]);
+
+
+    useEffect(() => {
+      function guardarCarrito() {
+        
+        const carritoGuardado =
+          getLS<Game[]>("carrito") ?? [];
+    
+        setCarrito(carritoGuardado);
+      }
+      guardarCarrito()
+  }, []);
+
+
+  // Guardar carrito
+  useEffect(() => {
+
+    setLS("carrito", carrito);
+
+  }, [carrito]);
 
   const addGame = (game:Game) =>{
     console.log(game);
@@ -65,8 +86,36 @@ const GameProvider = ({children}:GameProviderProps) =>{
     setGames(updatedGames);
   };
 
+  const agregarCarrito = (game: Game) => {
+  const yaExiste = carrito.some(
+    (juego) => juego.game_id === game.game_id
+  );
+
+  if (yaExiste) {
+    return false;
+  }
+
+  setCarrito([...carrito, game]);
+  return true;
+};
+
+  const eliminarCarrito = (id: string) => {
+
+    const nuevoCarrito = carrito.filter(
+      (juego) =>
+        juego.game_id !== id
+    );
+
+    setCarrito(nuevoCarrito);
+
+  };
+
+  const vaciarCarrito = () => {
+  setCarrito([]);
+};
+
   return(
-    <GameContext.Provider value={{games,addGame,getGames,getGame,updateGame,removeGame}}>
+    <GameContext.Provider value={{games,addGame,getGames,getGame,updateGame,removeGame,carrito,eliminarCarrito,agregarCarrito,vaciarCarrito}}>
       {children}
     </GameContext.Provider>
   );

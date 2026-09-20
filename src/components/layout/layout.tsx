@@ -9,6 +9,8 @@ import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
 import type { MenuProps } from "antd";
 import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
+import { useGame } from "../../hooks/useGame";
+
 
 interface Juego {
   id: number;
@@ -89,6 +91,7 @@ function Layout() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { usuarioActual, cerrarSesion } = useUser();
+   const { carrito } = useGame();
 
   const usuarioItems: MenuProps["items"] = usuarioActual
     ? usuarioActual.rol === "admin"
@@ -157,6 +160,7 @@ function Layout() {
                   variant="borderless"
                   options={opciones}
                   value={query}
+                  style={{ width: "600px" }}
                   onChange={(value) => setQuery(value)}
                   placeholder="Buscar juegos..."
                   className="search-autocomplete"
@@ -177,10 +181,12 @@ function Layout() {
           {/* ACCIONES */}
           <div className="navbar-actions">
             <Link to="/cart" className="navbar-action">
-              <ShoppingCart />
-              <span className="cart-count">0</span>
-            </Link>
+  <ShoppingCart />
 
+  <span className="cart-count">
+    {carrito.length}
+  </span>
+</Link>
             <Dropdown
               menu={{
                 items: usuarioItems,
