@@ -28,8 +28,6 @@ function GameCard({ juego }: GameCardProps) {
     navigate("/detail/" + juego.game_id);
   }
 
-
-
   const handleAgregarCarrito = () => {
     if(!usuarioActual) return message.info(
         "Debe iniciar sesion para comprar juegos"

@@ -2,8 +2,9 @@ import { createContext } from "react";
 
 export interface Comments{
   user_id:string;
-  comment_id:number;
+  comment_date:string;
   comment:string;
+  review:number;
 }
 
 export interface Game {

@@ -15,18 +15,25 @@ const GameProvider = ({children}:GameProviderProps) =>{
   const [games,setGames] = useState<Game[]>([]);
   const [carrito, setCarrito] = useState<Game[]>([]);
 
-  useEffect(()=>{
-    (function(){
+    useEffect(() => {
+    (function () {
       gamesSeeder();
+
       const seededGames = getLS<Game[]>("defaultGames") ?? [];
       const data = getLS<Game[]>("games") ?? [];
-      if(data?.length > seededGames?.length){
-        setGames(data);
-        return;       
-      }
-      setGames([...seededGames]);
-    })()
-  },[]);
+
+      // Fusionar: si un juego existe en data, usar ese (con comentarios actualizados)
+      const mergedGames = seededGames.map(seeded => {
+        const existing = data.find(d => d.game_id === seeded.game_id);
+        return existing ?? seeded;
+      });
+
+      // Agregar juegos que estén en data pero no en seeded
+      const extraGames = data.filter(d => !seededGames.some(s => s.game_id === d.game_id));
+
+      setGames([...mergedGames, ...extraGames]);
+    })();
+  }, []);
 
   useEffect(() =>{
     (function(){

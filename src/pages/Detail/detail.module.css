@@ -394,11 +394,11 @@
 /* fuentes */
 
 .fuenteTitulo{
-  font-family: var(--fuente-titulos);
+  font-family: var(--fuente-titulos) !important;
 }
 
 .fuenteTexto{
-  font-family: var(--fuente-textos);
+  font-family: var(--fuente-textos) !important;
 }
 
 a,span,p{
