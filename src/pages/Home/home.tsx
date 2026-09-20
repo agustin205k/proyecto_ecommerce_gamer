@@ -24,7 +24,6 @@ import "./home.css";
 import GameCard from "../../components/GameCard/GameCard";
 import { useGame } from "../../hooks/useGame";
 
-
 function Home() {
   const {getGames} = useGame();
 

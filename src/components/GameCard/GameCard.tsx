@@ -4,17 +4,25 @@ import { ShoppingCart } from "lucide-react";
 import { message } from "antd";
 
 /* Local */
+<<<<<<< HEAD
 
 import "./GameCard.css";
 
 import { type Game } from "../../context/gameContext/gameContext";
 import { getLS, setLS } from "../../utils/localstorage";
 
+=======
+import "./GameCard.css";
+import { useNavigate } from "react-router-dom";
+import { type Game } from "../../context/gameContext/gameContext";
+
+>>>>>>> 41a0c00874ff5ae21f5e3c4a3ea93361052cba23
 interface GameCardProps {
   juego: Game;
 }
 
 function GameCard({ juego }: GameCardProps) {
+<<<<<<< HEAD
 
   const handleAgregarCarrito = () => {
     // Obtener los juegos que ya están en el carrito
@@ -43,6 +51,19 @@ function GameCard({ juego }: GameCardProps) {
   return (
     <article className="game-card">
 
+=======
+  const navigate = useNavigate();
+
+  const toDetail = (id:string)=>{
+    navigate("/detail/" + id);
+  }
+
+  return (
+    <article 
+    className="game-card"
+    onClick={() => toDetail(juego.game_id)}
+    >
+>>>>>>> 41a0c00874ff5ae21f5e3c4a3ea93361052cba23
       <div className="game-card-image">
 
         <img

@@ -19,9 +19,11 @@ function Cart() {
 
   // Cargar carrito cuando entramos a la página
   useEffect(() => {
-    const carrito = getLS<Game[]>("carrito") ?? [];
-
-    setJuegos(carrito);
+    function CargarCarrito() {
+      const carrito = getLS<Game[]>("carrito") ?? [];
+      setJuegos(carrito);
+    }
+    CargarCarrito()
   }, []);
 
   // Eliminar juego
