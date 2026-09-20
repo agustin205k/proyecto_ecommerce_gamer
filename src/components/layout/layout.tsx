@@ -208,8 +208,9 @@ function Layout() {
               }}
               placement="bottomRight"
             >
-              <Button className="navbar-action">
-                <User />
+              <Button 
+               className="navbar-action">
+                <User/>
               </Button>
             </Dropdown>
           </div>
