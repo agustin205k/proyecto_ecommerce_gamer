@@ -13,9 +13,7 @@ import {
 
 import { useGame } from "../../hooks/useGame";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getLS } from "../../utils/localstorage";
-import type { Usuario } from "../../context/userContext/userContext";
+import { useUser } from "../../hooks/useUser";
 
 interface GameCardProps {
   juego: Game;
@@ -23,18 +21,8 @@ interface GameCardProps {
 
 function GameCard({ juego }: GameCardProps) {
   const navigate = useNavigate();
-  const [actualUser,setActualUser] = useState<Usuario>();
   const { agregarCarrito } = useGame();
-  
-
-  useEffect(()=>{
-    (function(){
-      const isUserLogged:Usuario[] | undefined= getLS<Usuario[]>("usuarioActual");
-      if(!Array.isArray(isUserLogged)){
-        setActualUser(isUserLogged);
-      }
-    })()
-  },[]);
+  const {usuarioActual} = useUser();
 
   const toDetail = ()=>{
     navigate("/detail/" + juego.game_id);
@@ -43,7 +31,7 @@ function GameCard({ juego }: GameCardProps) {
 
 
   const handleAgregarCarrito = () => {
-    if(!actualUser) return alert("Debe iniciar sesion para comprar juegos")
+    if(!usuarioActual) return alert("Debe iniciar sesion para comprar juegos")
     const agregado =
       agregarCarrito(juego);
 

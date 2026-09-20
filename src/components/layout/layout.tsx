@@ -188,8 +188,8 @@ function Layout() {
             >
               <ShoppingCart />
 
-              <span className="cart-count">
-                {carrito.length}
+              <span className={usuarioActual? "cart-count":undefined}>
+                {usuarioActual && carrito.length}
               </span>
             </button>
             <Dropdown
