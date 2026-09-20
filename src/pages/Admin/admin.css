@@ -155,3 +155,49 @@
   color: var(--color-texto);
   box-shadow: 0 4px 15px rgba(255, 122, 0, 0.3);
 }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+/* tablet / notebooks pequeñas */
+@media (max-width: 1024px) {
+  .seccion-panel {
+    padding: 40px 24px;
+  }
+
+  .panel-acciones {
+    flex-wrap: wrap;
+  }
+}
+
+/* tablet / móviles grandes */
+@media (max-width: 768px) {
+  .seccion-panel {
+    padding: 32px 20px;
+  }
+
+  .titulo-panel {
+    font-size: 1.35rem;
+  }
+
+  .panel-acciones {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* móviles pequeños */
+@media (max-width: 480px) {
+  .seccion-panel {
+    padding: 24px 16px;
+  }
+
+  .titulo-panel {
+    font-size: 1.15rem;
+  }
+}
