@@ -472,3 +472,81 @@
 
   cursor: pointer;
 }
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+/* tablet / notebooks pequeñas */
+@media (max-width: 1024px) {
+  .seccion-panel {
+    padding: 40px 24px;
+  }
+}
+
+/* tablet / móviles grandes */
+@media (max-width: 768px) {
+  .seccion-panel {
+    padding: 32px 20px;
+  }
+
+  .titulo-panel {
+    font-size: 1.35rem;
+  }
+
+  .formulario-card {
+    padding: 20px;
+  }
+
+  .tarjeta-usuario {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .usuario-acciones {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .usuario-acciones .btn {
+    flex: 1;
+  }
+}
+
+/* móviles pequeños */
+@media (max-width: 480px) {
+  .seccion-panel {
+    padding: 24px 16px;
+  }
+
+  .titulo-panel {
+    font-size: 1.15rem;
+  }
+
+  .barra-superior {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-agregar-usuario {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .formulario-card {
+    padding: 16px;
+  }
+
+  .formulario-acciones .btn {
+    flex: 1 1 100%;
+  }
+
+  .tarjeta-usuario {
+    padding: 14px 16px;
+  }
+
+  .usuario-acciones .btn {
+    flex: 1 1 100%;
+  }
+}
