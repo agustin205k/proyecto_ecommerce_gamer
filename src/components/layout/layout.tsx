@@ -5,7 +5,7 @@ import { FaInstagram, FaFacebook, FaDiscord } from "react-icons/fa";
 import "./layout.css";
 import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
-import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
+import { Dropdown, Button, AutoComplete, ConfigProvider,message } from "antd";
 import type { MenuProps } from "antd";
 import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
@@ -186,7 +186,7 @@ function Layout() {
               className="navbar-action"
               onClick={() => {
                 if (!usuarioActual)
-                  return alert("Debe iniciar sesión para ver su carrito");
+                  return message.info("Debe iniciar sesión para ver su carrito");
                 navigate("/cart");
               }}
             >

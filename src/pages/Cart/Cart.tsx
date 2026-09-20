@@ -12,11 +12,16 @@ function Cart() {
   const navigate = useNavigate();
   const {usuarioActual} = useUser();
 
-  useEffect(()=>{
-    (function(){
-      if(!usuarioActual) return navigate("/");
-    })()
-  },[]);
+  useEffect(() => {
+    if (!usuarioActual) {
+      navigate("/");
+    }
+  }, [usuarioActual, navigate]);
+
+
+  if (!usuarioActual) {
+    return null;
+  }
 
   const subtotal = carrito.reduce(
     (total, juego) => total + juego.price,

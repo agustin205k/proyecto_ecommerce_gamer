@@ -1,132 +1,155 @@
-/* Dependencies */
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState,useCallback, type ReactNode } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-/* Local */
-import { GameContext,type Game } from "./gameContext";
-import { getLS,setLS } from "../../utils/localstorage";
+import { GameContext, type Game } from "./gameContext";
+import { getLS, setLS } from "../../utils/localstorage";
 import { gamesSeeder } from "../../utils/games";
+import { useUser } from "../../hooks/useUser";
 
 interface GameProviderProps {
   children: ReactNode;
 }
 
-const GameProvider = ({children}:GameProviderProps) =>{
-  const [games,setGames] = useState<Game[]>([]);
+const GameProvider = ({ children }: GameProviderProps) => {
+  const { usuarioActual } = useUser();
+
+  const [games, setGames] = useState<Game[]>([]);
   const [carrito, setCarrito] = useState<Game[]>([]);
 
-    useEffect(() => {
+  const obtenerClaveCarrito = useCallback(() => {
+    if (usuarioActual && usuarioActual.id) {
+      return `carrito_${usuarioActual.id}`;
+    }
+    return "carrito_invitado";
+  }, [usuarioActual]);
+
+  useEffect(() => {
     (function () {
       gamesSeeder();
 
       const seededGames = getLS<Game[]>("defaultGames") ?? [];
       const data = getLS<Game[]>("games") ?? [];
 
-      // Fusionar: si un juego existe en data, usar ese (con comentarios actualizados)
-      const mergedGames = seededGames.map(seeded => {
-        const existing = data.find(d => d.game_id === seeded.game_id);
-        return existing ?? seeded;
-      });
+      if (data?.length > seededGames?.length) {
+        setGames(data);
+        return;
+      }
 
-      // Agregar juegos que estén en data pero no en seeded
-      const extraGames = data.filter(d => !seededGames.some(s => s.game_id === d.game_id));
-
-      setGames([...mergedGames, ...extraGames]);
+      setGames([...seededGames]);
     })();
   }, []);
 
-  useEffect(() =>{
-    (function(){
+  useEffect(() => {
+    (function () {
       if (games.length > 0) {
         setLS("games", games);
         console.log(games);
       }
-    })()
-  },[games]);
+    })();
+  }, [games]);
 
 
-    useEffect(() => {
-      function guardarCarrito() {
-        
-        const carritoGuardado =
-          getLS<Game[]>("carrito") ?? [];
-    
-        setCarrito(carritoGuardado);
-      }
-      guardarCarrito()
-  }, []);
-
-
-  // Guardar carrito
   useEffect(() => {
+    function cargarCarrito() {
+      
+      const claveCarrito = obtenerClaveCarrito();
+      const carritoGuardado = getLS<Game[]>(claveCarrito) ?? [];
+      setCarrito(carritoGuardado);
+    }
+    cargarCarrito()
+  }, [usuarioActual?.id, obtenerClaveCarrito]);
 
-    setLS("carrito", carrito);
 
-  }, [carrito]);
 
-  const addGame = (game:Game) =>{
+  const addGame = (game: Game) => {
     console.log(game);
+
     const gameId = uuidv4();
-    const newGame = {...game, game_id:gameId};
-    setGames([...games,newGame]);
+
+    const newGame = {
+      ...game,
+      game_id: gameId,
+    };
+
+    setGames([...games, newGame]);
   };
 
-  const getGame = (id:string) =>{
-    const game = getGames().find((m) => m.game_id === id);
-    return game;
+  const getGame = (id: string) => {
+    return getGames().find((m) => m.game_id === id);
   };
 
-  const removeGame = (id:string) =>{
-    const game = getGames().filter((m) => m.game_id !== id);
-    setGames([...game]);
+  const removeGame = (id: string) => {
+    setGames([
+      ...getGames().filter((m) => m.game_id !== id),
+    ]);
   };
 
-  const getGames = () =>{
-    const readGame = [...games];
-    return readGame;
-  };
+  const getGames = () => [...games];
 
-  const updateGame = (game:Game) =>{
+  const updateGame = (game: Game) => {
     const updatedGames = getGames().map((m) =>
-    m.game_id === game.game_id ? game : m
+      m.game_id === game.game_id ? game : m
     );
+
     setGames(updatedGames);
   };
 
+
   const agregarCarrito = (game: Game) => {
-  const yaExiste = carrito.some(
-    (juego) => juego.game_id === game.game_id
-  );
+    const claveCarrito = obtenerClaveCarrito() 
+    let seAgrego = false;
+    setCarrito((prevCarrito) => {
+      const yaExiste = prevCarrito.some(
+        (juego) => juego.game_id === game.game_id
+      );
 
-  if (yaExiste) {
-    return false;
-  }
+      if (yaExiste) {
+        seAgrego = false;
+        return prevCarrito;
+      }
 
-  setCarrito([...carrito, game]);
-  return true;
-};
+      const nuevoCarrito = [...prevCarrito, game];
+      setLS(claveCarrito, nuevoCarrito);
+      seAgrego = true;
+      return nuevoCarrito;
+    });
+
+    return seAgrego;
+  };
 
   const eliminarCarrito = (id: string) => {
-
     const nuevoCarrito = carrito.filter(
-      (juego) =>
-        juego.game_id !== id
+      (juego) => juego.game_id !== id
     );
 
     setCarrito(nuevoCarrito);
 
+    setLS(obtenerClaveCarrito(), nuevoCarrito);
   };
 
   const vaciarCarrito = () => {
-  setCarrito([]);
-};
+    setCarrito([]);
 
-  return(
-    <GameContext.Provider value={{games,addGame,getGames,getGame,updateGame,removeGame,carrito,eliminarCarrito,agregarCarrito,vaciarCarrito}}>
+    setLS(obtenerClaveCarrito(), []);
+  };
+
+  return (
+    <GameContext.Provider
+      value={{
+        games,
+        addGame,
+        getGames,
+        getGame,
+        updateGame,
+        removeGame,
+        carrito,
+        eliminarCarrito,
+        agregarCarrito,
+        vaciarCarrito,
+      }}
+    >
       {children}
     </GameContext.Provider>
   );
-
 };
 
 export default GameProvider;
