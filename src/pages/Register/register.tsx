@@ -58,6 +58,7 @@ function Register() {
     resetField("name");
     resetField("mail");
     resetField("password");
+    resetField("confirmPassword");
     setTimeout(() => {
       navigate("/login");
     }, 1000);
