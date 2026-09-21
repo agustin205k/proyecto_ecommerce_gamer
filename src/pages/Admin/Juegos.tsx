@@ -351,6 +351,26 @@ function Juegos() {
       <Modal
         className="modal-eliminar"
         title="Eliminar usuario"
+        styles={{
+          header: {
+            backgroundColor: "var(--color-card)",
+            color: "var(--color-texto)"
+          },
+          body: {
+            backgroundColor: "var(--color-card)",
+            color: "var(--color-texto-secundario)"
+          },
+          footer: {
+            backgroundColor: "var(--color-card)"
+          },
+          container:{
+            backgroundColor: "var(--color-card)"
+          },
+          close:{
+            color: "var(--color-texto)",
+            backgroundColor: "var(--color-fondo)"
+          },
+        }}
         open={juegoEliminando !== null}
         onCancel={() => setJuegoEliminando(null)}
         footer={
