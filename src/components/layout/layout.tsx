@@ -5,18 +5,18 @@ import { FaInstagram, FaFacebook, FaDiscord } from "react-icons/fa";
 import "./layout.css";
 import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
-import { Dropdown, Button, AutoComplete, ConfigProvider,message } from "antd";
+import { Dropdown, Button,message } from "antd";
 import type { MenuProps } from "antd";
 import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
 import { useGame } from "../../hooks/useGame";
 
-interface Juego {
+/* interface Juego {
   id: number;
   nombre: string;
-}
+} */
 
-const juegos: Juego[] = [
+/* const juegos: Juego[] = [
   {
     id: 1,
     nombre: "Grand Theft Auto V",
@@ -49,7 +49,7 @@ const juegos: Juego[] = [
 
 const opciones = juegos.map((juego) => ({
   value: juego.nombre,
-}));
+})); */
 
 const categoriasItems: MenuProps["items"] = [
   {
@@ -139,45 +139,17 @@ function Layout() {
           <div className="navbar-search">
             <Search className="search-icon" />
 
-            <ConfigProvider
-              theme={{
-                components: {
-                  Select: {
-                    colorPrimary: "#171717", // --color-card
-                    colorTextPlaceholder: "#C9C9C9", // --color-texto-secundario:
-                    colorText: "#FFFFFF", // Color blanco para el texto
-                    colorBgContainer: "transparent", // Fondo del input transparente
-                    colorBgElevated: "#171717", // --color-card
-                    controlItemBgHover: "#D95F00", // --color-naranja-oscuro
-                    controlItemBgActive: "#FF7A00", // --color-naranja
-                  },
-                },
-              }}
-            >
+            
               <form onSubmit={handleSubmit}>
-                <AutoComplete
-                  options={opciones}
-                  value={query}
-                  onChange={(value) => setQuery(value)}
-                  className="search-autocomplete"
-                  filterOption={(inputValue, option) =>
-                    option?.value
-                      ? option.value
-                          .toString()
-                          .toLowerCase()
-                          .includes(inputValue.toLowerCase())
-                      : false
-                  }
-                >
                   <input
                     type="text"
+                    value={query}
+                    onChange={(value) => setQuery(value.target.value)}
                     placeholder="Buscar juegos..."
                     maxLength={60}
                     className="custom-search-input"
                   />
-                </AutoComplete>
               </form>
-            </ConfigProvider>
           </div>
 
           {/* ACCIONES */}

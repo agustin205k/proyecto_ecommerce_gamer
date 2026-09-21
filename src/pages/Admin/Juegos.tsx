@@ -1,76 +1,73 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { UserContext } from "../../context/userContext/userContext";
 import { v4 as uuidv4 } from "uuid";
-import { Modal } from "antd";
-import type { Usuario } from "../../context/userContext/userContext";
+import { message, Modal } from "antd";
 import "./Juegos.css";
 import { Link } from "react-router-dom";
+import { useGame } from "../../hooks/useGame";
+import { type Game } from "../../context/gameContext/gameContext";
 
-interface FormularioUsuario {
-  nombre: string;
-  email: string;
-  password: string;
-  confirmarPassword: string;
-  rol: "admin" | "visitante";
-}
+/* export interface Game {
+  game_id: string;          
+  title: string;
+  description:string;
+  img_portrait:string | undefined;       
+  genre: string[];
+  price: number;       
+  releaseDate: string; 
+  rating: number[];
+  comments: Comments[];
+  }
+} */
 
 function Juegos() {
-  const {
-    usuarios,
-    usuarioActual,
-    registrarUsuario,
-    eliminarUsuario,
-    editarUsuario,
-  } = useContext(UserContext);
+  const {games,updateGame,addGame,removeGame} = useGame();
 
-  const [usuarioEditando, setUsuarioEditando] = useState<Usuario | null>(null);
-  const [usuarioEliminando, setUsuarioEliminando] =
-    useState<Usuario | null>(null);
-
-  const [modoFormulario, setModoFormulario] = useState<
-    "crear" | "editar" | null
-  >(null);
+  const [juegoEditando, setJuegoEditando] = useState<Game | null>(null);
+  const [juegoEliminando, setJuegoEliminando] = useState<Game | null>(null);
+  const [modoFormulario, setModoFormulario] = useState<"crear" | "editar" | null>(null);
 
   const {
     register,
     handleSubmit,
     reset,
-    getValues,
     formState: { errors },
-  } = useForm<FormularioUsuario>();
+  } = useForm<Game>();
   return (
     <div className="seccion-panel">
       <header className="panel-header">
         <Link to={"/admin"} 
          className="btn btn-primario boton-volver"
         >&larr; Volver al panel</Link>
-        <h1 className="titulo-panel">Administrar Usuarios</h1>
+        <h1 className="titulo-panel">Administrar Juegos</h1>
         <div className="linea-divisora"></div>
       </header>
 
       <div className="barra-superior">
         <p className="contador-usuarios">
           Total de usuarios:
-          <span className="contador-numero">{usuarios.length}</span>
+          <span className="contador-numero">{games.length}</span>
         </p>
 
         <button
           className="btn btn-primario btn-agregar-usuario"
           onClick={() => {
             setModoFormulario("crear");
-            setUsuarioEditando(null);
+            setJuegoEditando(null);
 
             reset({
-              nombre: "",
-              email: "",
-              password: "",
-              confirmarPassword: "",
-              rol: "visitante",
+              game_id:"",
+              description:"",
+              img_portrait:"",       
+              genre: [],
+              price: 0,       
+              releaseDate: "", 
+              rating: [],
+              comments: [],
             });
           }}
         >
-          Agregar usuario
+          Agregar Juego
         </button>
       </div>
 
@@ -78,110 +75,166 @@ function Juegos() {
         <div className="formulario-card">
           <h2 className="titulo-card">
             {modoFormulario === "crear"
-              ? "Agregar usuario"
-              : "Editar usuario"}
+              ? "Agregar juego"
+              : "Editar juego"}
           </h2>
 
           <form
             onSubmit={handleSubmit((datos) => {
               if (modoFormulario === "crear") {
-                registrarUsuario({
-                  id: uuidv4(),
-                  nombre: datos.nombre,
-                  email: datos.email,
-                  password: datos.password,
-                  rol: datos.rol,
+                addGame({
+                  game_id: uuidv4(),          
+                  title: datos.title,
+                  description:datos.description,
+                  img_portrait:datos.img_portrait,       
+                  genre: datos.genre,
+                  price: datos.price,       
+                  releaseDate: datos.releaseDate, 
+                  rating: datos.rating,
+                  comments: datos.comments,
                 });
               }
 
-              if (modoFormulario === "editar" && usuarioEditando) {
-                editarUsuario({
-                  ...usuarioEditando,
-                  nombre: datos.nombre,
-                  email: datos.email,
-                  password: datos.password,
-                  rol: datos.rol,
+              if (modoFormulario === "editar" && juegoEditando) {
+                updateGame({
+                  ...juegoEditando,
+                  title: datos.title,
+                  description:datos.description,
+                  img_portrait:datos.img_portrait,       
+                  genre: datos.genre,
+                  price: datos.price,       
+                  releaseDate: datos.releaseDate, 
+                  rating: datos.rating,
+                  comments: datos.comments,
                 });
               }
 
               setModoFormulario(null);
-              setUsuarioEditando(null);
+              setJuegoEditando(null);
               reset();
             })}
           >
             <div className="campo-grupo">
               <label className="campo-label" htmlFor="usuario-nombre">
-                Nombre Completo
+                Titulo
               </label>
 
               <input
                 className="campo-texto"
                 id="usuario-nombre"
                 type="text"
-                placeholder="Nombre Completo"
-                {...register("nombre", {
-                  required: "El nombre es obligatorio",
+                placeholder="Titulo"
+                {...register("title", {
+                  required: "El titulo es obligatorio",
                   minLength: {
                     value: 3,
-                    message: "El nombre debe tener al menos 3 caracteres",
+                    message: "El titulo debe tener al menos 3 caracteres",
                   },
                 })}
               />
 
-              {errors.nombre && (
-                <p className="error-texto">{errors.nombre.message}</p>
+              {errors.title && (
+                <p className="error-texto">{errors.title.message}</p>
               )}
             </div>
 
             <div className="campo-grupo">
               <label className="campo-label" htmlFor="usuario-email">
-                Email
+                Descripcion
               </label>
 
               <input
                 className="campo-texto"
                 id="usuario-email"
-                type="email"
-                placeholder="Email"
-                {...register("email", {
-                  required: "El email es obligatorio",
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: "Ingresá un email válido",
-                  },
+                type="text"
+                placeholder="descripcion"
+                {...register("description", {
+                  required: "La descripcion es obligatoria",
                 })}
               />
 
-              {errors.email && (
-                <p className="error-texto">{errors.email.message}</p>
+              {errors.description && (
+                <p className="error-texto">{errors.description.message}</p>
               )}
             </div>
 
             <div className="campo-grupo">
               <label className="campo-label" htmlFor="usuario-password">
-                Contraseña
+                precio
               </label>
 
               <input
                 className="campo-texto"
                 id="usuario-password"
-                type="password"
-                placeholder="Contraseña"
-                {...register("password", {
-                  required: "La contraseña es obligatoria",
-                  minLength: {
-                    value: 6,
-                    message: "La contraseña debe tener al menos 6 caracteres",
-                  },
+                type="text"
+                maxLength={6}
+                placeholder="Precio"
+                {...register("price", {
+                  required: {
+                    value:true,
+                    message:""
+                  }
                 })}
               />
 
-              {errors.password && (
-                <p className="error-texto">{errors.password.message}</p>
+              {errors.price && (
+                <p className="error-texto">{errors.price.message}</p>
               )}
             </div>
 
             <div className="campo-grupo">
+              <label className="campo-label" htmlFor="usuario-rol">
+                genero
+              </label>
+
+              <select
+                className="campo-select genero"
+                id="usuario-rol"
+                {...register("genre", {
+                  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => {
+                    const selected = Array.from(e.target.selectedOptions).map(opt => opt.value);
+
+                    if (selected.length > 4) {
+                      e.target.options[e.target.selectedIndex].selected = false;
+                      message.info("No se puede elegir mas de 4 generos")
+                    }
+                  }
+                })}
+                multiple
+              >
+                <option value="accion">Acción</option>
+                <option value="shooter">Shooter</option>
+                <option value="RPG">RPG</option>
+                <option value="Terror">Terror</option>
+                <option value="Carreras">Carreras</option>
+                <option value="Deportes">Deportes</option>
+                <option value="Estrategia">Estrategia</option>
+                <option value="Aventura">Aventura</option>
+                
+              </select>
+            </div>
+
+            <div className="campo-grupo">
+              <label className="campo-label" htmlFor="img-game">
+                url de imagen
+              </label>
+
+              <input
+                className="campo-texto"
+                id="img-game"
+                type="text"
+                placeholder="url de la imagen"
+                {...register("img_portrait", {
+                  required: "La imagen es obligatoria",
+                })}
+              />
+
+              {errors.img_portrait && (
+                <p className="error-texto">{errors.img_portrait.message}</p>
+              )}
+            </div>
+
+            {/* <div className="campo-grupo">
               <label
                 className="campo-label"
                 htmlFor="usuario-confirmar-password"
@@ -226,12 +279,12 @@ function Juegos() {
                 <option value="visitante">Visitante</option>
                 <option value="admin">Admin</option>
               </select>
-            </div>
+            </div> */}
 
             <div className="formulario-acciones">
               <button className="btn btn-primario" type="submit">
                 {modoFormulario === "crear"
-                  ? "Agregar usuario"
+                  ? "Agregar juego"
                   : "Guardar cambios"}
               </button>
 
@@ -240,7 +293,7 @@ function Juegos() {
                 type="button"
                 onClick={() => {
                   setModoFormulario(null);
-                  setUsuarioEditando(null);
+                  setJuegoEditando(null);
                   reset();
                 }}
               >
@@ -252,45 +305,44 @@ function Juegos() {
       )}
 
       <ul className="lista-usuarios">
-        {usuarios.map((usuario) => (
-          <li className="tarjeta-usuario" key={usuario.id}>
+        {games.map((game) => (
+          <li className="tarjeta-usuario" key={game.game_id}>
             <div className="usuario-info">
-              <span className="usuario-nombre">{usuario.nombre}</span>
-              <span className="usuario-correo">{usuario.email}</span>
-              <span className="usuario-id">ID: {usuario.id}</span>
+              <span className="usuario-nombre">{game.title}</span>
+              <span className="usuario-correo">{game.description}</span>
+              <span className="usuario-id">ID: {game.game_id}</span>
             </div>
 
-            <span className={"badge-rol badge-" + usuario.rol}>
-              {usuario.rol}
-            </span>
+            <div className={"badge-rol badge-" + game.genre}>
+              {game.genre.map((m,i)=> (<span key={i}>{m}</span>))}
+            </div>
 
             <div className="usuario-acciones">
               <button
                 className="btn btn-editar"
                 onClick={() => {
                   setModoFormulario("editar");
-                  setUsuarioEditando(usuario);
+                  setJuegoEditando(game);
 
                   reset({
-                    nombre: usuario.nombre,
-                    email: usuario.email,
-                    password: usuario.password,
-                    confirmarPassword: usuario.password,
-                    rol: usuario.rol,
+                    title: game.title,
+                    description: game.description,
+                    price: game.price,
+                    genre: game.genre,
+                    img_portrait:game.img_portrait,
                   });
                 }}
               >
                 Editar
               </button>
 
-              {usuarioActual?.id !== usuario.id && (
-                <button
-                  className="btn btn-eliminar"
-                  onClick={() => setUsuarioEliminando(usuario)}
-                >
-                  Eliminar
-                </button>
-              )}
+              <button
+                className="btn btn-eliminar"
+                onClick={() => setJuegoEliminando(game)}
+              >
+                Eliminar
+              </button>
+              
             </div>
           </li>
         ))}
@@ -299,13 +351,13 @@ function Juegos() {
       <Modal
         className="modal-eliminar"
         title="Eliminar usuario"
-        open={usuarioEliminando !== null}
-        onCancel={() => setUsuarioEliminando(null)}
+        open={juegoEliminando !== null}
+        onCancel={() => setJuegoEliminando(null)}
         footer={
           <>
             <button
               className="btn-cancelar"
-              onClick={() => setUsuarioEliminando(null)}
+              onClick={() => setJuegoEliminando(null)}
             >
               Cancelar
             </button>
@@ -313,9 +365,9 @@ function Juegos() {
             <button
               className="btn-eliminar"
               onClick={() => {
-                if (usuarioEliminando) {
-                  eliminarUsuario(usuarioEliminando.id);
-                  setUsuarioEliminando(null);
+                if (juegoEliminando) {
+                  removeGame(juegoEliminando.game_id);
+                  setJuegoEliminando(null);
                 }
               }}
             >
@@ -326,7 +378,7 @@ function Juegos() {
       >
         <p>
           ¿Estás seguro de que querés eliminar al usuario{" "}
-          <b>{usuarioEliminando?.nombre}</b>?
+          <b>{juegoEliminando?.title}</b>?
         </p>
       </Modal>
     </div>
