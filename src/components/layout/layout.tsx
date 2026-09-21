@@ -196,8 +196,12 @@ function Layout() {
             INICIO
           </Link>
 
-          <Dropdown menu={{ items: categoriasItems }} placement="bottom">
-            <Button className="navbar-dropdown-button">CATEGORÍAS</Button>
+          <Dropdown menu={{ items: categoriasItems }} placement="bottom"
+            
+          >
+            <Button 
+              className="navbar-dropdown-button categoria"
+              >CATEGORÍAS</Button>
           </Dropdown>
 
           <Link to="/404" className="navbar-link">
