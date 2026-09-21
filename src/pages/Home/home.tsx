@@ -20,9 +20,11 @@ import { Link} from "react-router-dom";
 import "./home.css";
 import GameCard from "../../components/GameCard/GameCard";
 import { useGame } from "../../hooks/useGame";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const {getGames} = useGame();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -86,55 +88,55 @@ function Home() {
             <h2>CATEGORÍAS</h2>
             <p>Encontrá tu próximo juego</p>
           </div>
-          <a href="/categorias" className="btn-see-all">
+          <Link to={"./404"} className="btn-see-all">
             VER TODAS <MoveRight />
-          </a>
+          </Link>
         </div>
 
         <div className="categories-grid">
-          <a href="#" className="category-card">
-            <div className="category-icon">
+          <a className="category-card" onClick={() => navigate(`/search/${"Accion"}`)}>
+            <div className="category-icon" >
               <Swords />
             </div>
             <h3>Acción</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"RPG"}`)}>
             <div className="category-icon">
               <WandSparkles />
             </div>
             <h3>RPG</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Terror"}`)}>
             <div className="category-icon">
               <Ghost />
             </div>
             <h3>Terror</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Carreras"}`)}>
             <div className="category-icon">
               <Car />
             </div>
             <h3>Carreras</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Deportes"}`)}>
             <div className="category-icon">
               <SportShoe />
             </div>
             <h3>Deportes</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Estrategia"}`)}>
             <div className="category-icon">
               <Brain />
             </div>
             <h3>Estrategia</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Aventura"}`)}>
             <div className="category-icon">
               <Compass />
             </div>

@@ -346,6 +346,7 @@
 
 .usuario-info {
   display: flex;
+  width: 20rem;
   flex-direction: column;
   gap: 4px;
   min-width: 0;
