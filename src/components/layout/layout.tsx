@@ -54,35 +54,35 @@ const opciones = juegos.map((juego) => ({
 const categoriasItems: MenuProps["items"] = [
   {
     key: "accion",
-    label: <Link to="/categorias/accion">Acción</Link>,
+    label: <Link to="/404">Acción</Link>,
   },
   {
     key: "shooter",
-    label: <Link to="/categorias/shooter">Shooter</Link>,
+    label: <Link to="/404">Shooter</Link>,
   },
   {
     key: "rpg",
-    label: <Link to="/categorias/rpg">RPG</Link>,
+    label: <Link to="/404">RPG</Link>,
   },
   {
     key: "terror",
-    label: <Link to="/categorias/terror">Terror</Link>,
+    label: <Link to="/404">Terror</Link>,
   },
   {
     key: "carreras",
-    label: <Link to="/categorias/carreras">Carreras</Link>,
+    label: <Link to="/404">Carreras</Link>,
   },
   {
     key: "deportes",
-    label: <Link to="/categorias/deportes">Deportes</Link>,
+    label: <Link to="/404">Deportes</Link>,
   },
   {
     key: "estrategia",
-    label: <Link to="/categorias/estrategia">Estrategia</Link>,
+    label: <Link to="/404">Estrategia</Link>,
   },
   {
     key: "aventura",
-    label: <Link to="/categorias/aventura">Aventura</Link>,
+    label: <Link to="/404">Aventura</Link>,
   },
 ];
 
@@ -228,7 +228,7 @@ function Layout() {
             <Button className="navbar-dropdown-button">CATEGORÍAS</Button>
           </Dropdown>
 
-          <Link to="/soporte" className="navbar-link">
+          <Link to="/404" className="navbar-link">
             SOPORTE
           </Link>
 
