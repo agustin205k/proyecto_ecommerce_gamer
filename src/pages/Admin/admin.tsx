@@ -24,12 +24,22 @@ function Admin() {
       </p>
 
       <div className="panel-acciones">
-        <button
-          className="btn btn-primario"
-          onClick={() => navigate("/admin/usuarios")}
-        >
-          Administrar Usuarios
-        </button>
+        
+        <div className="panel-acciones-container">
+          <button
+            className="btn btn-primario"
+            onClick={() => navigate("/admin/usuarios")}
+          >
+            Administrar Usuarios
+          </button>
+          <button
+            className="btn btn-primario"
+            onClick={() => navigate("/admin/juegos")}
+          >
+            Administrar Juegos
+          </button>
+        </div>
+        
 
         <button className="btn btn-outline" onClick={handleCerrarSesion}>
           Cerrar sesión

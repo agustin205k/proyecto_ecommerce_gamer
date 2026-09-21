@@ -34,10 +34,6 @@
   --fuente-carousel: "Teko", sans-serif;
 }
 
-body {
-  background-color: var(--color-fondo);
-}
-
 .containerCarousel {
   width: 100%;
   background-color: var(--color-fondo);
