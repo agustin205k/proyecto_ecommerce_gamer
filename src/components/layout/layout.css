@@ -177,13 +177,24 @@
 /* Ant Design AutoComplete Container */
 .search-autocomplete {
   flex: 1;
+  width: 100% !important;
+}
+
+.navbar-search .ant-select {
+  width: 100% !important;
+}
+.navbar-search input {
+  margin-left: 6px;
   width: 100%;
+  min-width: 0;
   border: none;
+  background: transparent;
+  color: var(--color-texto);
+  outline: none;
+  height: 30px;
+  box-sizing: border-box;
 }
-.navbar-search:focus-within {
-  border-color: var(--color-naranja); /* Cambia por 'transparent' si no quieres ningún borde */
-  box-shadow: 0 0 12px rgba(255, 122, 0, 0.12); /* Quita esta línea si no quieres resplandor */
-}
+
 
 
 
@@ -394,55 +405,7 @@
   letter-spacing: 0.8px;
 }
 
-/* =========================================
-   ESTILOS DROPDOWN Y BOTÓN DE CATEGORÍAS
-========================================= */
 
-/* 1. Sobrescribir el botón en Hover, Focus y Click/Active */
-.navbar-dropdown-button.ant-btn:hover,
-.navbar-dropdown-button.ant-btn:focus,
-.navbar-dropdown-button.ant-btn:focus-visible,
-.navbar-dropdown-button.ant-btn:active,
-.ant-dropdown-open .navbar-dropdown-button {
-  background: transparent !important;
-  color: var(--color-naranja-claro) !important;
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
-}
-
-/* 2. Quitar el borde azul de enfoque (outline) nativo */
-.navbar-dropdown-button:focus,
-.navbar-dropdown-button:focus-visible {
-  outline: none !important;
-  border-color: transparent !important;
-}
-
-/* 3. Estilos del menú desplegable (Opciones de Categorías) */
-.ant-dropdown .ant-dropdown-menu {
-  background-color: var(--color-card) !important;
-  border: 1px solid var(--color-borde) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6) !important;
-  padding: 6px !important;
-}
-
-/* Estilo de cada ítem de categoría */
-.ant-dropdown .ant-dropdown-menu-item {
-  color: var(--color-texto-secundario) !important;
-  font-family: var(--fuente-textos) !important;
-  font-size: 0.88rem !important;
-  border-radius: 6px !important;
-  transition: all 0.2s ease !important;
-}
-
-/* Hover y selección de las opciones del menú */
-.ant-dropdown .ant-dropdown-menu-item:hover,
-.ant-dropdown .ant-dropdown-menu-item-active,
-.ant-dropdown .ant-dropdown-menu-item-selected {
-  background-color: rgba(255, 122, 0, 0.12) !important;
-  color: var(--color-dorado-claro) !important;
-}
 .navbar-menu .navbar-dropdown-button::after {
   content: "";
 
@@ -782,14 +745,99 @@
   }
 }
 
+@media (max-width: 1050px){
+  /* ---------- Navbar superior ---------- */
+
+  .navbar-top {
+    min-height: 70px;
+
+    padding: 12px 15px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 12px;
+  }
+
+
+  /* Logo */
+
+  .navbar-logo {
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+
+  .navbar-logo img {
+    height: 32px;
+    width: auto;
+  }
+
+
+  /* Acciones */
+
+  .navbar-actions {
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+  }
+
+
+  /* Buscador */
+
+  .navbar-search {
+    order: 3;
+
+    width: 100%;
+
+    max-width: none;
+
+    flex-basis: 100%;
+  }
+
+
+  /* ---------- Menú ---------- */
+
+  .navbar-menu {
+    gap: 0;
+    justify-content: space-around;
+    padding: 0 10px;
+  }
+
+
+  .navbar-link {
+    font-size: 0.62rem;
+    letter-spacing: 0.3px;
+  }
+
+
+  .navbar-menu .navbar-dropdown-button {
+    font-size: 0.62rem;
+    letter-spacing: 0.3px;
+    padding-left: 4px;
+    padding-right: 4px;
+    line-height: 1;
+    min-height: unset;
+  }
+}
 
 /* =========================
    TABLET
 ========================= */
 
+
 @media (max-width: 768px) {
 
-  .navbar-top {
+  /* .navbar-top {
     gap: 18px;
 
     padding: 12px 20px;
@@ -809,6 +857,8 @@
   .navbar-link {
     font-size: 0.7rem;
   }
+  
+  
 
 
   .footer-container {
@@ -817,7 +867,7 @@
     gap: 35px;
 
     padding: 40px 25px;
-  }
+  } */
 }
 
 
@@ -892,9 +942,7 @@
 
   .navbar-menu {
     gap: 0;
-
     justify-content: space-around;
-
     padding: 0 10px;
   }
 
@@ -902,19 +950,18 @@
   .navbar-link {
     font-size: 0.62rem;
 
-    letter-spacing: 0.3px;
+    letter-spacing: 0;
   }
 
 
   .navbar-menu .navbar-dropdown-button {
     font-size: 0.62rem;
 
-    letter-spacing: 0.3px;
+    letter-spacing: 0;
 
     padding-left: 4px;
     padding-right: 4px;
   }
-
 
   /* ---------- Footer ---------- */
 
@@ -974,3 +1021,71 @@
     padding: 15px;
   }
 }
+
+/* adiciones */
+.ant-dropdown {
+  background-color: transparent !important;
+}
+
+.ant-dropdown .ant-dropdown-menu-item {
+  background-color: var(--color-card);
+  border-radius: 5px !important;
+  color: var(--color-texto-secundario) !important;
+}
+
+.ant-dropdown-menu {
+  background-color: var(--color-card) !important;
+  box-shadow: none !important;
+  border-radius: 5px !important;
+}
+
+.ant-dropdown .ant-dropdown-menu-item:hover {
+  background-color: var(--color-card-hover) !important;
+  border-radius: 5px !important;
+  color: var(--color-naranja) !important;
+}
+
+.navbar-menu .navbar-dropdown-button {
+  position: relative;
+  padding: 20px 4px; 
+  color: var(--color-texto-secundario) !important;
+  background-color: inherit !important;
+  box-shadow: none !important;
+  border: none !important;
+  font-family: var(--fuente-titulos);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.navbar-menu .navbar-dropdown-button::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 0;
+  height: 1.5px;
+  background-color: var(--color-naranja);
+  transition: width 0.3s ease;
+}
+
+.navbar-menu .navbar-dropdown-button:hover {
+  color: var(--color-naranja) !important;
+  background-color: var(--color-card-hover);
+}
+
+.navbar-menu .navbar-dropdown-button:hover::after {
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+

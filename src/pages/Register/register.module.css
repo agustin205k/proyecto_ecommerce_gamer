@@ -145,6 +145,9 @@
   font-size: 1.2rem;
   padding-left: 40px;
 }
+.register__form__contraseña{
+  padding-right: 60px;
+}
 
 .register__form__row:has(.register__form__correo,.register__form__contraseña,.register__form__nombre)::before {
   content: "✉️";
@@ -213,6 +216,22 @@
 
 .texto{
   font-family: var(--fuente-textos);
+}
+
+.iconEye{
+  cursor: pointer;
+  position: absolute;
+  top: 34px;
+  right: 20px;
+  height: 20px;
+  width: 30px; 
+}
+
+.register__form__row .generalError{
+  margin: 0;
+  margin-bottom: 20px;
+  color: var(--color-error);
+  font-size: 18px;
 }
 
 /* register Querys */

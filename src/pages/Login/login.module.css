@@ -278,7 +278,7 @@ form button{
 
 .input-container .input-container__input{
   width: 100%;
-  padding: 30px 10px;
+  padding: 30px 40px 30px 10px;
   font-size: 14px;
 }
 
@@ -316,6 +316,22 @@ form button{
 
 .nexoraLogo__span a{
   color: var(--color-borde-naranja);
+}
+
+.generalError{
+  font-family: var(--fuente-textos);
+  color: var(--color-error);
+}
+
+
+
+.iconEye{
+  cursor: pointer;
+  position: absolute;
+  top: 24px;
+  right: 8px;
+  height: 15px;
+  width: 20px; 
 }
 
 /* .login-option:hover,.loginButton:hover,

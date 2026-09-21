@@ -5,9 +5,11 @@ import { FaInstagram, FaFacebook, FaDiscord } from "react-icons/fa";
 import "./layout.css";
 import logoimg from "../../assets/logo-.png";
 import logoimg2 from "../../assets/ChatGPT Image 16 sept 2026, 09_15_10.png";
-import { Dropdown, Button, AutoComplete, ConfigProvider } from "antd";
+import { Dropdown, Button, AutoComplete, ConfigProvider,message } from "antd";
 import type { MenuProps } from "antd";
 import { useState } from "react";
+import { useUser } from "../../hooks/useUser";
+import { useGame } from "../../hooks/useGame";
 
 interface Juego {
   id: number;
@@ -52,53 +54,73 @@ const opciones = juegos.map((juego) => ({
 const categoriasItems: MenuProps["items"] = [
   {
     key: "accion",
-    label: <Link to="/categorias/accion">Acción</Link>,
+    label: <Link to="/404">Acción</Link>,
   },
   {
     key: "shooter",
-    label: <Link to="/categorias/shooter">Shooter</Link>,
+    label: <Link to="/404">Shooter</Link>,
   },
   {
     key: "rpg",
-    label: <Link to="/categorias/rpg">RPG</Link>,
+    label: <Link to="/404">RPG</Link>,
   },
   {
     key: "terror",
-    label: <Link to="/categorias/terror">Terror</Link>,
+    label: <Link to="/404">Terror</Link>,
   },
   {
     key: "carreras",
-    label: <Link to="/categorias/carreras">Carreras</Link>,
+    label: <Link to="/404">Carreras</Link>,
   },
   {
     key: "deportes",
-    label: <Link to="/categorias/deportes">Deportes</Link>,
+    label: <Link to="/404">Deportes</Link>,
   },
   {
     key: "estrategia",
-    label: <Link to="/categorias/estrategia">Estrategia</Link>,
+    label: <Link to="/404">Estrategia</Link>,
   },
   {
     key: "aventura",
-    label: <Link to="/categorias/aventura">Aventura</Link>,
-  },
-];
-
-const usuarioItems: MenuProps["items"] = [
-  {
-    key: "login",
-    label: <Link to="/login">Iniciar sesión</Link>,
-  },
-  {
-    key: "register",
-    label: <Link to="/register">Registrarse</Link>,
+    label: <Link to="/404">Aventura</Link>,
   },
 ];
 
 function Layout() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  
+  const { usuarioActual, cerrarSesion } = useUser();
+  const { carrito } = useGame();
+
+  const usuarioItems: MenuProps["items"] = usuarioActual
+    ? usuarioActual.rol === "admin"
+      ? [
+          {
+            key: "admin",
+            label: <Link to="/admin">Panel de administrador</Link>,
+          },
+          {
+            key: "logout",
+            label: "Cerrar sesión",
+          },
+        ]
+      : [
+          {
+            key: "logout",
+            label: "Cerrar sesión",
+          },
+        ]
+    : [
+        {
+          key: "login",
+          label: <Link to="/login">Iniciar sesión</Link>,
+        },
+        {
+          key: "register",
+          label: <Link to="/register">Registrarse</Link>,
+        },
+      ];
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (query.trim() !== "") {
@@ -107,7 +129,7 @@ function Layout() {
   };
 
   return (
-    <>   
+    <>
       <header className="navbar">
         <div className="navbar-top">
           <Link to="/" className="navbar-logo">
@@ -134,37 +156,61 @@ function Layout() {
             >
               <form onSubmit={handleSubmit}>
                 <AutoComplete
-                  variant="borderless"
-                    options={opciones}
-                    value={query}
-                    onChange={(value) => setQuery(value)}
+                  options={opciones}
+                  value={query}
+                  onChange={(value) => setQuery(value)}
+                  className="search-autocomplete"
+                  filterOption={(inputValue, option) =>
+                    option?.value
+                      ? option.value
+                          .toString()
+                          .toLowerCase()
+                          .includes(inputValue.toLowerCase())
+                      : false
+                  }
+                >
+                  <input
+                    type="text"
                     placeholder="Buscar juegos..."
-                    className="search-autocomplete"
-                    dropdownStyle={{ backgroundColor: "#171717" }}
-                    filterOption={(inputValue, option) =>
-                      option?.value
-                        ? option.value
-                            .toString()
-                            .toLowerCase()
-                            .includes(inputValue.toLowerCase())
-                        : false
-                    }
-                  />  
+                    maxLength={60}
+                    className="custom-search-input"
+                  />
+                </AutoComplete>
               </form>
-              
             </ConfigProvider>
           </div>
 
           {/* ACCIONES */}
           <div className="navbar-actions">
-            <Link to="/cart" className="navbar-action">
+            <button
+              className="navbar-action"
+              onClick={() => {
+                if (!usuarioActual)
+                  return message.info("Debe iniciar sesión para ver su carrito");
+                navigate("/cart");
+              }}
+            >
               <ShoppingCart />
-              <span className="cart-count">0</span>
-            </Link>
 
-            <Dropdown menu={{ items: usuarioItems }} placement="bottomRight">
-              <Button className="navbar-action">
-                <User />
+              <span className={usuarioActual ? "cart-count" : undefined}>
+                {usuarioActual && carrito.length}
+              </span>
+            </button>
+            <Dropdown
+              menu={{
+                items: usuarioItems,
+                onClick: ({ key }) => {
+                  if (key === "logout") {
+                    cerrarSesion();
+                    navigate("/");
+                  }
+                },
+              }}
+              placement="bottomRight"
+            >
+              <Button 
+               className="navbar-action">
+                <User/>
               </Button>
             </Dropdown>
           </div>
@@ -182,7 +228,7 @@ function Layout() {
             <Button className="navbar-dropdown-button">CATEGORÍAS</Button>
           </Dropdown>
 
-          <Link to="/soporte" className="navbar-link">
+          <Link to="/404" className="navbar-link">
             SOPORTE
           </Link>
 

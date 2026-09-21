@@ -2,8 +2,9 @@ import { createContext } from "react";
 
 export interface Comments{
   user_id:string;
-  comment_id:number;
+  comment_date:string;
   comment:string;
+  review:number;
 }
 
 export interface Game {
@@ -24,7 +25,12 @@ export interface GameContextType {
   getGame: (id: string) => Game | undefined;
   getGames: () => Game[];
   removeGame: (id: string) => void;       
-  updateGame: (game: Game) => void;     
+  updateGame: (game: Game) => void;    
+  
+  carrito: Game[];
+  agregarCarrito: (game: Game) => boolean;
+  eliminarCarrito: (id: string) => void;
+  vaciarCarrito: () => void;
 }
 
 export const GameContext = createContext<GameContextType>({
@@ -44,4 +50,9 @@ export const GameContext = createContext<GameContextType>({
   getGames: () => [],
   removeGame: () => {},
   updateGame: () => {},
+
+   carrito: [],
+  agregarCarrito: () => false,
+  eliminarCarrito: () => {},
+  vaciarCarrito: () => {},
 });
