@@ -1,7 +1,7 @@
 # 🎮 Nexora Gaming
 
-![Nexora Gaming](<img width="1225" height="945" alt="ChatGPT Image 16 sept 2026, 09_15_10" src="https://github.com/user-attachments/assets/48332d1e-8cee-4a71-af34-a756266fb827" />
-)
+![Nexora Gaming]<img width="1225" height="945" alt="ChatGPT Image 16 sept 2026, 09_15_10" src="https://github.com/user-attachments/assets/48332d1e-8cee-4a71-af34-a756266fb827" />
+
 
 ## 📌 Descripción
 
