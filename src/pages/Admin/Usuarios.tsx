@@ -4,7 +4,7 @@ import { UserContext } from "../../context/userContext/userContext";
 import { v4 as uuidv4 } from "uuid";
 import { Modal } from "antd";
 import type { Usuario } from "../../context/userContext/userContext";
-import "./Juegos.css";
+import "./Usuarios.css";
 import { Link } from "react-router-dom";
 
 interface FormularioUsuario {
@@ -300,6 +300,22 @@ function Juegos() {
         className="modal-eliminar"
         title="Eliminar usuario"
         open={usuarioEliminando !== null}
+        styles={{
+          header: {
+            backgroundColor: "var(--color-card)",
+            color: "var(--color-texto)"
+          },
+          body: {
+            backgroundColor: "var(--color-card)",
+            color: "var(--color-texto-secundario)"
+          },
+          footer: {
+            backgroundColor: "var(--color-card)"
+          },
+          container:{
+            backgroundColor: "var(--color-card)"
+          },
+        }}
         onCancel={() => setUsuarioEliminando(null)}
         footer={
           <>
