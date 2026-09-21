@@ -11,46 +11,6 @@ import { useState } from "react";
 import { useUser } from "../../hooks/useUser";
 import { useGame } from "../../hooks/useGame";
 
-/* interface Juego {
-  id: number;
-  nombre: string;
-} */
-
-/* const juegos: Juego[] = [
-  {
-    id: 1,
-    nombre: "Grand Theft Auto V",
-  },
-  {
-    id: 2,
-    nombre: "Grand Theft Auto VI",
-  },
-  {
-    id: 3,
-    nombre: "Minecraft",
-  },
-  {
-    id: 4,
-    nombre: "The Legend of Zelda",
-  },
-  {
-    id: 5,
-    nombre: "EA Sports FC 26",
-  },
-  {
-    id: 6,
-    nombre: "Marvel's Wolverine",
-  },
-  {
-    id: 7,
-    nombre: "Metroid Prime 4: Beyond",
-  },
-];
-
-const opciones = juegos.map((juego) => ({
-  value: juego.nombre,
-})); */
-
 const categoriasItems: MenuProps["items"] = [
   {
     key: "accion",

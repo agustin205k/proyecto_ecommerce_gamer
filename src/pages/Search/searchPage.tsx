@@ -22,14 +22,105 @@ import { Link, useParams } from "react-router-dom";
 import "./searchPage.css";
 import GameCard from "../../components/GameCard/GameCard";
 import { useGame } from "../../hooks/useGame";
+import { useNavigate } from "react-router-dom";
 
 function SearchPage() {
   const {getGames} = useGame(); 
   const {query} = useParams<{query:string}>();
+  const navigate = useNavigate();
 
   const searchFilter = () => {
     const juegos = getGames();
     if (!query) return juegos;
+    if (query === "Accion") {
+      return juegos
+        .map((game) => {
+          // Si el array genre contiene "Accion", score = 0 (van primero)
+          const score = game.genre?.some(
+            (g) => g.toLowerCase() === "accion"
+          )
+            ? 0
+            : 1;
+
+          return { ...game, score };
+        })
+        .sort((a, b) => a.score - b.score);
+    }
+
+    if (query === "Deportes") {
+      return juegos
+        .map((game) => {
+          // Si el array genre contiene "Accion", score = 0 (van primero)
+          const score = game.genre?.some(
+            (g) => g.toLowerCase() === "deportes"
+          )
+            ? 0
+            : 1;
+
+          return { ...game, score };
+        })
+        .sort((a, b) => a.score - b.score);
+    }
+
+    if (query === "RPG") {
+      return juegos
+        .map((game) => {
+          // Si el array genre contiene "Accion", score = 0 (van primero)
+          const score = game.genre?.some(
+            (g) => g.toLowerCase() === "rpg"
+          )
+            ? 0
+            : 1;
+
+          return { ...game, score };
+        })
+        .sort((a, b) => a.score - b.score);
+    }
+
+    if (query === "Terror") {
+      return juegos
+        .map((game) => {
+          // Si el array genre contiene "Accion", score = 0 (van primero)
+          const score = game.genre?.some(
+            (g) => g.toLowerCase() === "terror"
+          )
+            ? 0
+            : 1;
+
+          return { ...game, score };
+        })
+        .sort((a, b) => a.score - b.score);
+    }
+
+    if (query === "Estrategia") {
+      return juegos
+        .map((game) => {
+          // Si el array genre contiene "Accion", score = 0 (van primero)
+          const score = game.genre?.some(
+            (g) => g.toLowerCase() === "estrategia"
+          )
+            ? 0
+            : 1;
+
+          return { ...game, score };
+        })
+        .sort((a, b) => a.score - b.score);
+    }
+
+    if (query === "Aventura") {
+      return juegos
+        .map((game) => {
+          // Si el array genre contiene "Accion", score = 0 (van primero)
+          const score = game.genre?.some(
+            (g) => g.toLowerCase() === "aventura"
+          )
+            ? 0
+            : 1;
+
+          return { ...game, score };
+        })
+        .sort((a, b) => a.score - b.score);
+    }
 
     return juegos
       .map((game) => {
@@ -103,66 +194,57 @@ function SearchPage() {
         <div className="categories-header">
           <div className="categories-title">
             <h2>CATEGORÍAS</h2>
-            {/* <button
-              onClick={newGame}
-            >crearJuego</button>
-            <button
-              onClick={readGames}
-            >leerJuegos</button> */}
-            {/* <button onClick={leerQuery}>
-              h
-            </button> */}
             <p>Encontrá tu próximo juego</p>
           </div>
-          <a href="/categorias" className="btn-see-all">
+          <Link to={"/404"} className="btn-see-all">
             VER TODAS <MoveRight />
-          </a>
+          </Link>
         </div>
 
         <div className="categories-grid">
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Accion"}`)}>
             <div className="category-icon">
               <Swords />
             </div>
             <h3>Acción</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"RPG"}`)}>
             <div className="category-icon">
               <WandSparkles />
             </div>
             <h3>RPG</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Terror"}`)}>
             <div className="category-icon">
               <Ghost />
             </div>
             <h3>Terror</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Carreras"}`)}>
             <div className="category-icon">
               <Car />
             </div>
             <h3>Carreras</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Deportes"}`)}>
             <div className="category-icon">
               <SportShoe />
             </div>
             <h3>Deportes</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Estrategia"}`)}>
             <div className="category-icon">
               <Brain />
             </div>
             <h3>Estrategia</h3>
           </a>
 
-          <a href="#" className="category-card">
+          <a className="category-card" onClick={() => navigate(`/search/${"Aventura"}`)}>
             <div className="category-icon">
               <Compass />
             </div>
@@ -214,9 +296,9 @@ function SearchPage() {
 
           <div className="section-divider"></div>
 
-          <button className="btn-see-all">
-            VER TODOS <MoveRight />
-          </button>
+          <Link to={"/404"} className="btn-see-all">
+            VER TODAS <MoveRight />
+          </Link>
         </div>
         {/* modificacion */}
         <section className="section-card">
