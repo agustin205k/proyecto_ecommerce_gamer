@@ -34,7 +34,7 @@ function Home() {
               <p>Descubrí, elegí y jugá.</p>
               <Link to="/404">
               <button className="btn-carousel">VER CATÁLOGO</button>
-              </Link>,
+              </Link>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@ function Home() {
               <p>Descubrí nuestra selección de juegos de acción.</p>
               <Link to="/404">
               <button className="btn-carousel">VER ACCIÓN</button>
-              </Link>,
+              </Link>
             </div>
           </div>
         </div>
@@ -212,7 +212,7 @@ function Home() {
           <button className="btn-see-all">
             VER TODOS <MoveRight />
           </button>
-          </Link>,
+          </Link>
         </div>
         <section className="section-card">
           {getGames().map((juego) => (
@@ -235,7 +235,7 @@ function Home() {
           <button className="btn-see-all">
             VER TODOS <MoveRight />
           </button>
-          </Link>,
+          </Link>
         </div>
 
         <section className="section-card">

@@ -4,7 +4,8 @@ import { UserContext } from "../../context/userContext/userContext";
 import { v4 as uuidv4 } from "uuid";
 import { Modal } from "antd";
 import type { Usuario } from "../../context/userContext/userContext";
-import "./Usuarios.css";
+import "./Juegos.css";
+import { Link } from "react-router-dom";
 
 interface FormularioUsuario {
   nombre: string;
@@ -14,7 +15,7 @@ interface FormularioUsuario {
   rol: "admin" | "visitante";
 }
 
-function Usuarios() {
+function Juegos() {
   const {
     usuarios,
     usuarioActual,
@@ -24,7 +25,6 @@ function Usuarios() {
   } = useContext(UserContext);
 
   const [usuarioEditando, setUsuarioEditando] = useState<Usuario | null>(null);
-
   const [usuarioEliminando, setUsuarioEliminando] =
     useState<Usuario | null>(null);
 
@@ -39,10 +39,12 @@ function Usuarios() {
     getValues,
     formState: { errors },
   } = useForm<FormularioUsuario>();
-
   return (
     <div className="seccion-panel">
       <header className="panel-header">
+        <Link to={"/admin"} 
+         className="btn btn-primario boton-volver"
+        >&larr; Volver al panel</Link>
         <h1 className="titulo-panel">Administrar Usuarios</h1>
         <div className="linea-divisora"></div>
       </header>
@@ -331,4 +333,4 @@ function Usuarios() {
   );
 }
 
-export default Usuarios;
+export default Juegos;

@@ -32,6 +32,13 @@ function Admin() {
           >
             Administrar Usuarios
           </button>
+
+          <button
+            className="btn btn-primario"
+            onClick={() => navigate("/admin/juegos")}
+          >
+            Administrar Juegos
+          </button>
         </div>
         
 

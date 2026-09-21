@@ -42,7 +42,6 @@ const GameProvider = ({ children }: GameProviderProps) => {
     (function () {
       if (games.length > 0) {
         setLS("games", games);
-        console.log(games);
       }
     })();
   }, [games]);
@@ -61,8 +60,6 @@ const GameProvider = ({ children }: GameProviderProps) => {
 
 
   const addGame = (game: Game) => {
-    console.log(game);
-
     const gameId = uuidv4();
 
     const newGame = {

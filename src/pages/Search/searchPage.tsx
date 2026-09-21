@@ -27,13 +27,21 @@ function SearchPage() {
   const {getGames} = useGame(); 
   const {query} = useParams<{query:string}>();
 
-  const searchFilter = () =>{
-    const filtro = getGames().filter((game) =>
-      game.title.toLowerCase() === query?.toLowerCase()
-    );
-    console.log(filtro);
-    return filtro;
-  }
+  const searchFilter = () => {
+    const juegos = getGames();
+    if (!query) return juegos;
+
+    return juegos
+      .map((game) => {
+        const title = game.title.toLowerCase();
+        const q = query.toLowerCase();
+        let score = 2;
+        if (title.startsWith(q)) score = 0;
+        else if (title.includes(q)) score = 1;
+        return { ...game, score };
+      })
+      .sort((a, b) => a.score - b.score);
+  };
 
   return (
     <>
