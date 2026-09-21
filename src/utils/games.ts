@@ -73,6 +73,40 @@ const defaultGames: Game[] = [
     comments:[]
     
   },
+  {
+    game_id: uuidv4(),
+    title: "Halo Infinite",
+    description: "La legendaria saga de ciencia ficción regresa con acción intensa.",
+    genre: ["Accion", "Shooter"],
+    price: 45000,
+    releaseDate: "2021-12-08",
+    img_portrait: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfOSIMtg9nSmyCTMTV6Pu4oarX6ERvNAXbkLHyJYoktmIdxOLK2lbg4N0&s=10",
+    rating: [4],
+    comments: []
+  },
+
+  {
+    game_id: uuidv4(),
+    title: "Animal Crossing: New Horizons",
+    description: "Construye tu isla paradisíaca y vive a tu ritmo.",
+    genre: ["Simulación", "Aventura"],
+    price: 32000,
+    releaseDate: "2020-03-20",
+    img_portrait: "https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/store/software/switch/70010000027619/9989957eae3a6b545194c42fec2071675c34aadacd65e6b33fdfe7b3b6a86c3a",
+    rating: [5],
+    comments: []
+  },
+  {
+    game_id: uuidv4(),
+    title: "Final Fantasy XVI",
+    description: "Una historia épica de fantasía y batallas intensas.",
+    genre: ["RPG", "Accion"],
+    price: 52000,
+    releaseDate: "2023-06-22",
+    img_portrait: "https://upload.wikimedia.org/wikipedia/en/0/00/Final_Fantasy_XVI_cover_art.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+    rating: [4],
+    comments: []
+  }
 ];
 
 function gamesSeeder() {
