@@ -821,13 +821,14 @@
 
 
   .navbar-menu .navbar-dropdown-button {
-    font-size: 0.62rem;
+    font-size: 0.65rem !important;
     letter-spacing: 0.3px;
     padding-left: 4px;
     padding-right: 4px;
     line-height: 1;
     min-height: unset;
   }
+
 }
 
 /* =========================

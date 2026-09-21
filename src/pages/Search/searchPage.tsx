@@ -16,7 +16,7 @@ import {
   Search,
   MoveRight,
 } from "lucide-react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 /* Local */
 import "./searchPage.css";
@@ -51,7 +51,9 @@ function SearchPage() {
             <div className="info-carousel">
               <h2>TU PRÓXIMA AVENTURA COMIENZA AQUÍ</h2>
               <p>Descubrí, elegí y jugá.</p>
-              <button className="btn-carousel">VER CATÁLOGO</button>
+              <Link to="/404">
+              <button className="btn-carousel">VER CATALOGO</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -61,7 +63,9 @@ function SearchPage() {
             <div className="info-carousel">
               <h2>¿LISTO PARA LA ACCIÓN?</h2>
               <p>Descubrí nuestra selección de juegos de acción.</p>
+              <Link to="/404">
               <button className="btn-carousel">VER ACCIÓN</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -75,7 +79,9 @@ function SearchPage() {
                 Gaming.
               </p>
               <p className="highlight-text">🔥 PRE-REGISTRO ABIERTO</p>
-              <button className="btn-carousel">PRE-REGISTRARME →</button>
+              <Link to="/404">
+              <button className="btn-carousel">PRE-REGISTRARME</button>
+              </Link>
             </div>
           </div>
         </div>
@@ -85,7 +91,9 @@ function SearchPage() {
             <div className="info-carousel">
               <h2>NUEVOS LANZAMIENTOS</h2>
               <p>Descubrí los últimos títulos.</p>
-              <button className="btn-carousel">VER NOVEDADES</button>
+              <Link to="/404">
+              <button className="btn-carousel">NOVEDADES</button>
+              </Link>
             </div>
           </div>
         </div>
