@@ -211,3 +211,9 @@
     font-size: 1.15rem;
   }
 }
+
+/* adiciones */
+.panel-acciones-container{
+  display: flex;
+  gap: 10px;
+}

@@ -185,7 +185,7 @@
 }
 .navbar-search input {
   margin-left: 6px;
-  width: 600px;
+  width: 100%;
   min-width: 0;
   border: none;
   background: transparent;
@@ -745,14 +745,99 @@
   }
 }
 
+@media (max-width: 1050px){
+  /* ---------- Navbar superior ---------- */
+
+  .navbar-top {
+    min-height: 70px;
+
+    padding: 12px 15px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+
+    gap: 12px;
+  }
+
+
+  /* Logo */
+
+  .navbar-logo {
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+
+  .navbar-logo img {
+    height: 32px;
+    width: auto;
+  }
+
+
+  /* Acciones */
+
+  .navbar-actions {
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+  }
+
+
+  /* Buscador */
+
+  .navbar-search {
+    order: 3;
+
+    width: 100%;
+
+    max-width: none;
+
+    flex-basis: 100%;
+  }
+
+
+  /* ---------- Menú ---------- */
+
+  .navbar-menu {
+    gap: 0;
+    justify-content: space-around;
+    padding: 0 10px;
+  }
+
+
+  .navbar-link {
+    font-size: 0.62rem;
+    letter-spacing: 0.3px;
+  }
+
+
+  .navbar-menu .navbar-dropdown-button {
+    font-size: 0.62rem;
+    letter-spacing: 0.3px;
+    padding-left: 4px;
+    padding-right: 4px;
+    line-height: 1;
+    min-height: unset;
+  }
+}
 
 /* =========================
    TABLET
 ========================= */
 
+
 @media (max-width: 768px) {
 
-  .navbar-top {
+  /* .navbar-top {
     gap: 18px;
 
     padding: 12px 20px;
@@ -782,7 +867,7 @@
     gap: 35px;
 
     padding: 40px 25px;
-  }
+  } */
 }
 
 
@@ -857,9 +942,7 @@
 
   .navbar-menu {
     gap: 0;
-
     justify-content: space-around;
-
     padding: 0 10px;
   }
 
@@ -867,20 +950,18 @@
   .navbar-link {
     font-size: 0.62rem;
 
-    letter-spacing: 0.3px;
+    letter-spacing: 0;
   }
 
 
   .navbar-menu .navbar-dropdown-button {
     font-size: 0.62rem;
 
-    letter-spacing: 0.3px;
+    letter-spacing: 0;
 
     padding-left: 4px;
     padding-right: 4px;
   }
-  
-
 
   /* ---------- Footer ---------- */
 
@@ -965,8 +1046,8 @@
 }
 
 .navbar-menu .navbar-dropdown-button {
-  position: relative; /* necesario para ::after */
-  padding: 20px 4px;  /* igual que los links */
+  position: relative;
+  padding: 20px 4px; 
   color: var(--color-texto-secundario) !important;
   background-color: inherit !important;
   box-shadow: none !important;

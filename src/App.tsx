@@ -16,6 +16,7 @@ import Login from "./pages/Login/login";
 import SearchPage from "./pages/Search/searchPage";
 import { UserProvider } from "./context/userContext/UserProvider";
 import RutaProtegida from "./components/RutaProtegida/RutaProtegida";
+import Juegos from "./pages/Admin/Juegos";
 
 function App() {
   return (
@@ -41,6 +42,14 @@ function App() {
                   element={
                     <RutaProtegida>
                       <Usuarios />
+                    </RutaProtegida>
+                  }
+                />
+                <Route
+                  path="admin/juegos"
+                  element={
+                    <RutaProtegida>
+                      <Juegos />
                     </RutaProtegida>
                   }
                 />
