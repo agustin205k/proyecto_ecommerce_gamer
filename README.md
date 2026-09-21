@@ -1,78 +1,179 @@
-# React + TypeScript + Vite
+# 🎮 Nexora Gaming
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Nexora Gaming](public/images/logo.png)
 
-Currently, two official plugins are available:
+## 📌 Descripción
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Nexora Gaming** es una plataforma web de venta de videojuegos desarrollada con React y TypeScript.
 
-## React Compiler
+El proyecto permite a los usuarios explorar un catálogo de videojuegos, buscar títulos, consultar sus detalles, agregar juegos al carrito y gestionar sus compras.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Además, cuenta con un área de administración desde la cual se pueden gestionar los videojuegos disponibles en la plataforma.
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+La interfaz fue diseñada con una estética gamer moderna, utilizando principalmente tonos oscuros, naranja y dorado como colores representativos de la marca.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🎯 Objetivo del proyecto
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+El objetivo es desarrollar una tienda de videojuegos funcional, responsive y fácil de utilizar, aplicando los conocimientos adquiridos durante el desarrollo del proyecto.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+La aplicación cuenta con diferentes funcionalidades para usuarios visitantes y administradores.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+---
 
-```
+## 🚀 Funcionalidades
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+### 👤 Usuarios
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Registro de nuevos usuarios.
+- Inicio y cierre de sesión.
+- Diferenciación entre usuarios visitantes y administradores.
+- Persistencia de la sesión mediante `localStorage`.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🎮 Catálogo
 
-```
+- Visualización de videojuegos disponibles.
+- Búsqueda de videojuegos.
+- Visualización de información de cada juego.
+- Visualización de precio, género, descripción e imagen.
+- Acceso a la página de detalle de cada videojuego.
+
+### 🛒 Carrito
+
+- Agregar videojuegos al carrito.
+- Evitar agregar el mismo videojuego más de una vez.
+- Eliminar videojuegos del carrito.
+- Vaciar el carrito.
+- Visualizar cantidad de juegos.
+- Calcular el subtotal y total de la compra.
+- Confirmación de compra.
+- Carrito independiente para cada usuario.
+
+### ⚙️ Administración
+
+- Acceso restringido para usuarios con rol de administrador.
+- Agregar videojuegos.
+- Editar videojuegos.
+- Eliminar videojuegos.
+- Visualizar los videojuegos disponibles.
+
+### ❌ Página 404
+
+- Página de error personalizada.
+- Diseño acorde a la identidad visual de Nexora Gaming.
+- Acceso para volver al inicio.
+- Manejo de rutas inexistentes.
+- Diseño responsive.
+
+### 📱 Diseño responsive
+
+La interfaz se adapta a:
+
+- 💻 Computadoras
+- 📱 Celulares
+- 📲 Tablets
+
+---
+
+## 🛠️ Tecnologías utilizadas
+
+### Frontend
+
+- React
+- TypeScript
+- Vite
+- React Router
+- CSS
+- Ant Design
+- Lucide React
+- React Icons
+
+### Herramientas
+
+- Git
+- GitHub
+- Visual Studio Code
+- pnpm
+
+### Almacenamiento
+
+Se utiliza `localStorage` para mantener información como:
+
+- Usuarios registrados.
+- Usuario actualmente autenticado.
+- Catálogo de videojuegos.
+- Carrito de cada usuario.
+
+---
+
+## 🎨 Identidad visual
+
+Nexora Gaming utiliza una estética inspirada en videojuegos y tecnología.
+
+### 🎨 Paleta de colores
+
+| Color | Código |
+|------|--------|
+| Fondo | `#0B0B0B` |
+| Fondo secundario | `#111111` |
+| Tarjetas | `#171717` |
+| Blanco | `#FFFFFF` |
+| Texto secundario | `#C9C9C9` |
+| Gris | `#888888` |
+| Naranja | `#FF7A00` |
+| Naranja claro | `#FF9D3D` |
+| Naranja oscuro | `#D95F00` |
+| Dorado | `#D4AF37` |
+| Dorado claro | `#F7D37A` |
+
+### 🔤 Tipografías
+
+- **Orbitron** → títulos y elementos destacados.
+- **Exo 2** → textos generales.
+- **Teko** → elementos destacados y banners.
+
+---
+
+## 🐺 Mascota
+
+La identidad de Nexora Gaming está representada por un **lobo futurista**, utilizado como elemento visual de la marca y en diferentes secciones de la página.
+
+---
+
+## 📂 Estructura del proyecto
+
+```text
+src/
+│
+├── components/
+│   ├── GameCard/
+│   ├── Navbar/
+│   ├── Footer/
+│   └── ...
+│
+├── context/
+│   ├── gameContext/
+│   └── userContext/
+│
+├── hooks/
+│   ├── useGame.ts
+│   └── useUser.ts
+│
+├── pages/
+│   ├── Home/
+│   ├── Detail/
+│   ├── SearchPage/
+│   ├── Cart/
+│   ├── Login/
+│   ├── Register/
+│   ├── Admin/
+│   ├── About/
+│   └── Error404/
+│
+├── utils/
+│   ├── localstorage.ts
+│   └── games.ts
+│
+├── App.tsx
+└── main.tsx
